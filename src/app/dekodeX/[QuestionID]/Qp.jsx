@@ -49,7 +49,13 @@ function Qp() {
   }, [testcases]);
 
   useEffect(() => {
-    fetch(`/dekodeX/api/question/${QuestionID}`)
+    fetch(`/dekodeX/api/question/${QuestionID}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STATIC_AUTH_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         console.log("Response status:", res.status);
         if (!res.ok) {

@@ -103,7 +103,13 @@ const ProblemArena = () => {
     async function fetchQuestions() {
       setLoading(true);
       try {
-        const realRes = await fetch("/dekodeX/api/questionTitles");
+        const realRes = await fetch("/dekodeX/api/questionTitles", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STATIC_AUTH_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
         const realData = await realRes.json();
         const realQuestions = realData.questions || [];
         const locked = problemsData.slice(realQuestions.length, 10);
