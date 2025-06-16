@@ -153,7 +153,7 @@ export async function POST(request, { params }) {
       JSON.stringify({
         id,
         isCorrect,
-        score: submissions[qIndex],
+        score: Math.max(0,submissions[qIndex]),
       }),
       {
         status: 200,
