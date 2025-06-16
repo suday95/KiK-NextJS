@@ -5,8 +5,10 @@ import main from "../../data/animations/main.json";
 import Lottie from "lottie-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Card from "../utils/Card";
+import Link from "next/link";
 
-const Landing = () => {
+export default function Landing() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -177,20 +179,21 @@ const Landing = () => {
   return (
     <div className="flex h-full w-full flex-col overflow-hidden bg-[#01011b]">
       <div className="flex flex-col justify-between p-3 md:flex-row md:pl-10">
+        {/* text only */}
         <div className="p-3 text-center text-lg md:w-1/2 md:p-8 md:text-left">
           <h1 className="text-left font-[Arial] font-semibold text-white">
-            <div className="mb-[-30px] text-[50px] md:text-[65px]">
+            <div className="mb-[-30px] text-[55px] md:text-[65px]">
               Welcome to
             </div>
-            <span className="bg-gradient-to-br from-[#11E3FB] via-[#5BE6FF] to-[#B5F6FD] bg-clip-text text-center text-[60px] font-bold text-transparent md:text-[80px]">
+            <span className="bg-gradient-to-br from-[#11E3FB] via-[#5BE6FF] to-[#B5F6FD] bg-clip-text text-center text-[65px] font-bold text-transparent md:text-[75px]">
               KodeinKGP
             </span>
           </h1>
-          <p className="font-poppins pt-10 pb-10 text-left text-lg leading-loose font-normal text-[#979898]">
-            “The Web as I envisaged it, we have not seen it yet. The future is
-            still so much bigger than the past”
+          <p className="font-poppins pt-5 pb-5 text-left text-lg leading-loose font-normal text-[#979898]">
+            "The Web as I envisaged it, we have not seen it yet. The future is
+            still so much bigger than the past"
           </p>
-          <p className="font-poppins text-left text-sm leading-loose font-normal text-white">
+          <p className="font-poppins text-sm text-left leading-loose font-normal text-white">
             A student-run society that aims to spread awareness and educate
             students about the potential of Web 3.0 and future technologies. We
             host workshops and hackathons to give students hands-on experience
@@ -203,8 +206,23 @@ const Landing = () => {
             rapidly-evolving technologies of our time.
           </p>
         </div>
-        <div className="relative bottom-8 mt-20 w-full md:mt-0 md:w-1/2">
-          <Lottie animationData={main} className="" />
+
+        <div className="mt-10 mb-10 md:mb-0 flex flex-col items-center justify-center md:mt-0 md:w-1/2">
+          {/* <Lottie
+            animationData={main}
+            className="w-[80%] md:w-full max-w-[500px]"
+          /> */}
+
+          {/* enlarge Card to roughly match Lottie size */}
+          
+          <div className="mx-auto w-[90%] max-w-[600px] px-4 md:w-full md:px-0">
+            <Link href="/auth"><Card /></Link>
+          </div>
+          <h2 className="mt-5 mx-auto bg-gradient-to-r from-[#00EAFF] via-[#4DD9FF] to-[#AAF0FF] bg-clip-text text-lg md:text-4xl font-bold text-transparent">
+            Conquer The Arena
+            <br />
+            Join <span className="bg-gradient-to-r from-[#00ffd9] via-[#00eaff] to-[#00ffd9] bg-clip-text text-lg md:text-4xl font-bold text-transparent">dekodeX</span> Now
+          </h2>
         </div>
       </div>
       <div className="bottom-bar flex flex-col items-start justify-between gap-8 px-8 pb-[60px] text-left md:flex-row md:gap-16 md:px-[60px]">
@@ -235,6 +253,4 @@ const Landing = () => {
       </div>
     </div>
   );
-};
-
-export default Landing;
+}

@@ -65,7 +65,7 @@ function Navbar() {
             >
               <span className="group relative mx-[25px] flex flex-col items-center text-[1.2rem]">
                 <Link
-                  className="bg-gradient-to-br pb-[15px] tracking-wide text-white no-underline transition-colors duration-300"
+                  className="bg-gradient-to-br pb-[15px] font-bold tracking-wide text-white no-underline transition-colors duration-300"
                   href="/"
                 >
                   Home
@@ -107,7 +107,7 @@ function Navbar() {
             >
               <span className="group relative mx-[25px] flex flex-col items-center text-[1.2rem]">
                 <Link
-                  className="bg-gradient-to-br pb-[15px] tracking-wide text-white no-underline transition-colors duration-300"
+                  className="bg-gradient-to-br pb-[15px] font-bold tracking-wide text-white no-underline transition-colors duration-300"
                   href="/pds"
                 >
                   PDS_Bank
@@ -124,7 +124,7 @@ function Navbar() {
             >
               <span className="group relative mx-[25px] flex flex-col items-center text-[1.2rem]">
                 <Link
-                  className="bg-gradient-to-br pb-[15px] tracking-wide text-white no-underline transition-colors duration-300"
+                  className="bg-gradient-to-br pb-[15px] font-bold tracking-wide text-white no-underline transition-colors duration-300"
                   href="/articles"
                 >
                   Articles
@@ -141,7 +141,7 @@ function Navbar() {
             >
               <span className="group relative mx-[25px] flex flex-col items-center text-[1.2rem]">
                 <Link
-                  className="bg-gradient-to-br pb-[15px] tracking-wide text-white no-underline transition-colors duration-300"
+                  className="bg-gradient-to-br pb-[15px] font-bold tracking-wide text-white no-underline transition-colors duration-300"
                   href="/teams"
                 >
                   Teams
@@ -158,7 +158,7 @@ function Navbar() {
             >
               <span className="group relative mx-[25px] flex flex-col items-center text-[1.2rem]">
                 <Link
-                  className="bg-gradient-to-br pb-[15px] tracking-wide text-white no-underline transition-colors duration-300"
+                  className="bg-gradient-to-br pb-[15px] font-bold tracking-wide text-white no-underline transition-colors duration-300"
                   href="/events"
                 >
                   Events
