@@ -36,8 +36,6 @@ export default function Leaderboard() {
             toast.success(
               `Welcome back, ${data.currentUser.username}! Your current score is ${data.currentUser.score}.`
             );
-          } else {
-            toast.info("You are not on the leaderboard yet.");
           }
           return;
         }
