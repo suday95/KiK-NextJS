@@ -90,7 +90,7 @@ function Navbar() {
                     filter: "drop-shadow(0 0 5px rgba(34, 211, 238, 0.5))",
                   }}
                 >
-                  deKodeX
+                  dekodeX
                 </Link>
                 {/* Data flow indicators */}
                 <span className="absolute top-0 left-1/4 h-1 w-1 animate-ping rounded-full bg-cyan-400 opacity-100 transition-opacity duration-300"></span>

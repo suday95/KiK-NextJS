@@ -32,7 +32,7 @@ export default function Leaderboard() {
         } else {
           setTopData(data.paginatedLeaderboard);
           setCurrentUserLeaderboardInfo(data.currentUser);
-          if (data.currentUser && data.currentUser.username != 'Anonymous') {
+          if (data.currentUser && data.currentUser.username != "Anonymous") {
             toast.success(
               `Welcome back, ${data.currentUser.username}! Your current score is ${data.currentUser.score}.`
             );

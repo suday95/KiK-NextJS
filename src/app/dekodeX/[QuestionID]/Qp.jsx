@@ -35,6 +35,8 @@ function Qp() {
   const { user, loggedIn } = useAuth();
   const [answer, setAnswer] = useState("");
   const [testcaseUrl, setTestcaseUrl] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
   useEffect(() => {
     fetch("/testcases.json")
       .then((res) => res.json())
@@ -209,6 +211,71 @@ function Qp() {
         {questionData.testcases && (
           <div className="flex flex-row items-center gap-2">
             <GetInput testcaseUrl={testcaseUrl} />
+
+            {/* Question Mark Button (Instructions) */}
+            <div className="relative">
+              <button
+                className="cursor-pointer rounded-full bg-[#218ACB] p-2 transition-colors hover:bg-cyan-600"
+                aria-label="Instructions"
+                onClick={() => window.open("/instructions.pdf", "_blank")}
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              {showTooltip && (
+                <div className="absolute left-1/2 z-10 mt-2 -translate-x-1/2 transform rounded bg-neutral-900 p-2 text-gray-100 shadow-lg">
+                  <p className="text-sm">Instructions</p>
+                </div>
+              )}
+            </div>
+
+            {/* Query Button with Dropdown */}
+            <div className="group relative">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex cursor-pointer items-center rounded-full bg-[#218ACB] p-2 transition-colors hover:bg-cyan-600"
+                aria-label="Contact support"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
+                  <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
+                </svg>
+              </button>
+
+              {/* Dropdown with contact */}
+              {isOpen && (
+                <div className="absolute right-0 z-10 mt-2 rounded-md bg-neutral-800 py-1 shadow-lg">
+                  <div className="border-b px-4 py-2 text-sm text-white">
+                    Contact us
+                  </div>
+                  <a
+                    href="https://mail.google.com/mail/u/0/?fs=1&to=kodeinkgp@gmail.com&su=dekodeX+Queries&body=Hello,+I+have+a+question+regarding&tf=cm"
+                    target="_blank"
+                    className="block px-4 py-2 text-sm text-white hover:bg-neutral-700"
+                  >
+                    kodeinkgp@gmail.com
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
