@@ -52,7 +52,9 @@ const SignUp = () => {
     e.preventDefault();
     setLoader(true);
 
-    const token = document.querySelector('input[name="cf-turnstile-response"]')?.value;
+    const token = document.querySelector(
+      'input[name="cf-turnstile-response"]'
+    )?.value;
 
     if (!token) {
       toast.error("Please complete the CAPTCHA.");
@@ -106,7 +108,11 @@ const SignUp = () => {
         return;
       }
 
-      const userCred = await createUserWithEmailAndPassword(auth, email, password);
+      const userCred = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCred.user;
       const uid = user.uid;
       const initSubmissions = Array(10).fill(0);
@@ -120,7 +126,9 @@ const SignUp = () => {
         emailVerified: user.emailVerified,
       });
 
-      toast.success("Registration successful! Please check your email to verify your account.");
+      toast.success(
+        "Registration successful! Please check your email to verify your account."
+      );
       setUsername("");
       setEmail("");
       setPassword("");
@@ -129,9 +137,11 @@ const SignUp = () => {
       console.error("Registration error:", err);
       let errorMessage = "Registration failed. Please try again.";
       if (err.code === "auth/email-already-in-use") {
-        errorMessage = "This email is already in use. Please sign in or use a different email.";
+        errorMessage =
+          "This email is already in use. Please sign in or use a different email.";
       } else if (err.code === "auth/weak-password") {
-        errorMessage = "Password is too weak. Please choose a stronger password.";
+        errorMessage =
+          "Password is too weak. Please choose a stronger password.";
       } else if (err.code === "auth/invalid-email") {
         errorMessage = "Invalid email address.";
       } else if (err.code === "auth/operation-not-allowed") {

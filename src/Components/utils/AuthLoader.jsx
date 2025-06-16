@@ -1,7 +1,7 @@
 export default function AuthLoader() {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-60"
+      className="bg-opacity-60 fixed inset-0 z-50 flex items-center justify-center"
       style={{ backgroundColor: "rgb(1, 1, 27)" }}
     >
       <svg
@@ -11,7 +11,13 @@ export default function AuthLoader() {
         fill="none"
       >
         <defs>
-          <linearGradient id="spinnerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient
+            id="spinnerGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
             <stop offset="0%" stopColor="#218ACB" />
             <stop offset="50%" stopColor="#0CC5DA" />
             <stop offset="100%" stopColor="#11E3FB" />

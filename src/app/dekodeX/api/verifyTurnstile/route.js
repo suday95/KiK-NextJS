@@ -9,11 +9,14 @@ export async function POST(req) {
     formData.append("secret", process.env.NEXT_PUBLIC_RECAPTCHA_SERVER_KEY);
     formData.append("response", token);
 
-    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: formData,
-    });
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formData,
+      }
+    );
 
     const data = await response.json();
 
@@ -27,6 +30,9 @@ export async function POST(req) {
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
     console.error("Turnstile verification failed:", err);
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

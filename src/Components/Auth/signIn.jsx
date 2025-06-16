@@ -54,7 +54,9 @@ const SignIn = () => {
     e.preventDefault();
     setLoader(true);
 
-    const token = document.querySelector('input[name="cf-turnstile-response"]')?.value;
+    const token = document.querySelector(
+      'input[name="cf-turnstile-response"]'
+    )?.value;
 
     if (!token) {
       toast.error("Please complete the CAPTCHA.");
@@ -95,7 +97,11 @@ const SignIn = () => {
     }
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, identifierEmail, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        identifierEmail,
+        password
+      );
       const user = userCredential.user;
 
       if (!user.emailVerified) {
@@ -162,7 +168,7 @@ const SignIn = () => {
           </button>
         </div>
 
-        <div ref={captchaContainerRef} className="w-full flex justify-center" />
+        <div ref={captchaContainerRef} className="flex w-full justify-center" />
 
         <button
           type="submit"
