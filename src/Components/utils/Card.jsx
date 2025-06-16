@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 function Card() {
   return (
     <>
@@ -63,7 +65,7 @@ function Card() {
 
       {/* wrapper now owns border & shadow */}
       <div
-        className="group z-10 relative box-border w-[100%] overflow-hidden"
+        className="group relative z-10 box-border w-[100%] overflow-hidden"
         style={{
           aspectRatio: "674/381",
           boxShadow:
@@ -85,7 +87,7 @@ function Card() {
               dekodeX
             </span>
           </div>
-          <div className=" mt-0 md:mt-3  flex-col p-5 hidden md:flex">
+          <div className="mt-0 hidden flex-col p-5 md:mt-3 md:flex">
             <p className="text-center text-xs md:text-sm lg:text-base">
               Step into the arena of logic, speed, and precision. dekodeX is a
               thrilling coding event that brings together sharp minds to solve
@@ -94,22 +96,28 @@ function Card() {
               time to shine. Are you ready to deKode the impossible?
             </p>
             <div className="mt-3 flex flex-row items-center justify-start gap-2">
-              <img
-                src="deKodeX/calendar.png"
+              <Image
+                src="/deKodeX/calendar.png"
                 alt="calendar"
+                width={24}
+                height={24}
                 className="h-6 w-6 bg-transparent"
               />
-              <span className="text-white text-xs md:text-sm lg:text-base">
+              <span className="text-xs text-white md:text-sm lg:text-base">
                 Date : 18/06/2025 - 27/06/2025
               </span>
             </div>
             <div className="mt-3 flex flex-row items-center justify-start gap-2">
-              <img
-                src="deKodeX/format.png"
+              <Image
+                src="/deKodeX/format.png"
                 alt="format"
+                width={24}
+                height={24}
                 className="h-6 w-6 bg-transparent"
               />
-              <span className="text-white text-xs md:text-sm lg:text-base">Format : Solo</span>
+              <span className="text-xs text-white md:text-sm lg:text-base">
+                Format : Solo
+              </span>
             </div>
             <span className="mt-5 bg-[linear-gradient(93deg,_#11E3FB_22.8%,_#0CC5DA_48.35%,_#218ACB_93.9%)] bg-clip-text text-center text-xl font-bold text-transparent">
               Click to Register
@@ -128,10 +136,14 @@ function Card() {
           className="fade-wipe pointer-events-none absolute z-30"
           style={{ top: "-1px", right: "-1px", bottom: "-1px", left: "-1px" }}
         >
-          <img
+          <Image
             src="/theme.png"
             alt="deKodeX Theme"
+            fill
             className="h-full w-full object-cover object-center"
+            priority
+            quality={90}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       </div>
