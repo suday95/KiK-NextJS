@@ -41,10 +41,59 @@ const ProblemArena = () => {
   const [loading, setLoading] = useState(true);
   const [unlockedProblems, setUnlockedProblems] = useState([]);
   const [lockedProblems, setLockedProblems] = useState([]);
+  const [currentTime, setCurrentTime] = useState(new Date());
   const { user, loggedIn } = useAuth();
+  const formatTime = (ms) => {
+    if (ms <= 0) return "Loading...";
+    const seconds = Math.floor(ms / 1000);
+    const totalHours = Math.floor(seconds / 3600);
+    // If hours > 24, show days
+    if (totalHours >= 24) {
+      const days = Math.floor(totalHours / 24);
+      const hours = totalHours % 24;
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+
+      const d = String(days).padStart(2, "0");
+      const h = String(hours).padStart(2, "0");
+      const m = String(minutes).padStart(2, "0");
+      const s = String(secs).padStart(2, "0");
+
+      return `${d} day ${h} hr ${m} min ${s} sec`;
+    } else {
+      // Original format for less than 24 hours
+      const h = String(totalHours).padStart(2, "0");
+      const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+      const s = String(seconds % 60).padStart(2, "0");
+
+      return `${h} hr ${m} min ${s} sec`;
+    }
+  };
+
   const getSubmissionIndex = (questionId) => {
     return parseInt(questionId.replace("q", "")) - 1;
   };
+  const getTimeUntilUnlock = (dateString) => {
+    const now = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const nowIST = new Date(now.getTime() + istOffset);
+    const unlock = new Date(dateString + "T00:00:00.000Z");
+    const unlockIST = new Date(unlock.getTime());
+
+    return unlockIST.getTime() - nowIST.getTime();
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date();
+      const istOffset = 5.5 * 60 * 60 * 1000;
+      const istTime = new Date(now.getTime() + istOffset);
+      setCurrentTime(istTime);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -316,18 +365,21 @@ const ProblemArena = () => {
 
         {/* Open Problems Section */}
         <div className="mb-6 sm:mb-8">
-          <h2
-            className="mb-3 bg-[linear-gradient(to_right,_#218ACB_0%,_#11E3FB_33%,_#218ACB_66%,_#11E3FB_100%)] bg-clip-text text-xl font-bold text-transparent sm:mb-4 sm:text-2xl"
-            style={{
-              background:
-                "linear-gradient(92.46deg, #218ACB 0%, #11E3FB 33.33%, #218ACB 66.67%, #11E3FB 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              width: "auto",
-            }}
-          >
-            Open
-          </h2>
+          {lockedProblems.length < 10 && (
+            <h2
+              className="mb-3 bg-[linear-gradient(to_right,_#218ACB_0%,_#11E3FB_33%,_#218ACB_66%,_#11E3FB_100%)] bg-clip-text text-xl font-bold text-transparent sm:mb-4 sm:text-2xl"
+              style={{
+                background:
+                  "linear-gradient(92.46deg, #218ACB 0%, #11E3FB 33.33%, #218ACB 66.67%, #11E3FB 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                width: "auto",
+              }}
+            >
+              Open
+            </h2>
+          )}
+
           <div className="space-y-2">
             {loading ? (
               <LoadingSkeleton />
@@ -377,37 +429,55 @@ const ProblemArena = () => {
 
         {/* Yet to Reveal Section */}
         <div>
-          <h2 className="mb-3 bg-[linear-gradient(to_right,_#218ACB_0%,_#11E3FB_33%,_#218ACB_66%,_#11E3FB_100%)] bg-clip-text text-xl font-bold text-transparent sm:mb-4 sm:text-2xl">
-            Yet to Reveal
-          </h2>
+          {lockedProblems.length > 0 && (
+            <h2 className="mb-3 bg-[linear-gradient(to_right,_#218ACB_0%,_#11E3FB_33%,_#218ACB_66%,_#11E3FB_100%)] bg-clip-text text-xl font-bold text-transparent sm:mb-4 sm:text-2xl">
+              Yet to Reveal
+            </h2>
+          )}
           <div className="space-y-2">
             {loading ? (
               <div className="">
                 <LoadingSkeleton />
               </div>
             ) : (
-              lockedProblems.map((problem) => (
-                <div
-                  key={problem.id}
-                  className="group flex cursor-not-allowed items-center justify-between rounded bg-[linear-gradient(90.27deg,rgba(255,255,255,0.24)_0%,rgba(115,115,115,0.12)_100%)] p-3 transition-colors duration-200 sm:p-4"
-                >
-                  <div className="flex min-w-0 flex-1 items-center space-x-2 sm:space-x-4">
-                    <Lock className="h-4 w-4 flex-shrink-0 text-cyan-400 sm:h-5 sm:w-5" />
-                    <span className="w-6 flex-shrink-0 text-base font-bold text-cyan-400 sm:w-8 sm:text-lg">
-                      {parseInt(problem.id.replace(/^q/, "")) < 10 ? "0" : ""}
-                      {problem.id.replace(/^q/, "")}
-                    </span>
-                    <span className="block min-w-0 truncate bg-[linear-gradient(187.84deg,#218ACB_9.42%,#0CC5DA_69.83%,#11E3FB_130.23%)] bg-clip-text text-base font-medium text-transparent opacity-60 blur-sm sm:text-lg">
-                      {problem.title}
+              lockedProblems.map((problem) => {
+                const timeUntilUnlock = problem.unlockDate
+                  ? getTimeUntilUnlock(problem.unlockDate)
+                  : 0;
+                const countdownText = problem.unlockDate
+                  ? formatTime(timeUntilUnlock)
+                  : "Coming Soon";
+
+                return (
+                  <div
+                    key={problem.id}
+                    className="group flex cursor-not-allowed items-center justify-between rounded bg-[linear-gradient(90.27deg,rgba(255,255,255,0.24)_0%,rgba(115,115,115,0.12)_100%)] p-3 transition-colors duration-200 sm:p-4"
+                  >
+                    <div className="flex min-w-0 flex-1 items-center space-x-2 sm:space-x-4">
+                      <Lock className="h-4 w-4 flex-shrink-0 text-cyan-400 sm:h-5 sm:w-5" />
+                      <span className="w-6 flex-shrink-0 text-base font-bold text-cyan-400 sm:w-8 sm:text-lg">
+                        {parseInt(problem.id.replace(/^q/, "")) < 10 ? "0" : ""}
+                        {problem.id.replace(/^q/, "")}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        {/* Timer display - not blurred */}
+                        <span className="block font-['Montserrat'] text-base font-medium text-[#11E3FB]">
+                          {countdownText}
+                        </span>
+                        {/* Original title - blurred and hidden behind timer */}
+                        <span className="absolute block truncate bg-[linear-gradient(187.84deg,#218ACB_9.42%,#0CC5DA_69.83%,#11E3FB_130.23%)] bg-clip-text text-base font-medium text-transparent opacity-0 blur-sm sm:text-lg">
+                          {problem.title}
+                        </span>
+                      </div>
+                    </div>
+                    <span className="ml-2 flex-shrink-0 text-base font-bold text-[#218ACB] blur-sm sm:text-lg">
+                      {"<"}
+                      {problem.points}
+                      {"/>"}
                     </span>
                   </div>
-                  <span className="ml-2 flex-shrink-0 text-base font-bold text-[#218ACB] blur-sm sm:text-lg">
-                    {"<"}
-                    {problem.points}
-                    {"/>"}
-                  </span>
-                </div>
-              ))
+                );
+              })
             )}
           </div>
         </div>

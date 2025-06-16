@@ -162,10 +162,36 @@ body {
     0 0 20px rgba(33, 138, 203, 0.2),
     0 0 40px rgba(33, 138, 203, 0.1);
 }
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+/* WebKit browsers (Chrome, Safari, newer Edge) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+.no-scrollbar::-webkit-scrollbar-track {
+  display: none !important;
+  background: transparent !important;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  display: none !important;
+  background: transparent !important;
+}
+
+.no-scrollbar::-webkit-scrollbar-corner {
+  display: none !important;
+  background: transparent !important;
+}
+
+/* Additional fallbacks for stubborn browsers */
+.no-scrollbar {
+  scrollbar-color: transparent transparent; /* Firefox fallback */
 }
