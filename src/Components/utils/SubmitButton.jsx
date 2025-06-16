@@ -31,6 +31,7 @@ function SubmitButton({ email, answer, id }) {
       const res = await fetch(`/dekodeX/api/submit/${id}`, {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_STATIC_AUTH_TOKEN}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, answer }),
