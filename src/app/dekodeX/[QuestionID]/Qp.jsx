@@ -112,7 +112,7 @@ function Qp() {
               WebkitTextFillColor: "transparent",
               letterSpacing: 0,
               width: "100%",
-              maxWidth: 379,
+              maxWidth: 450,
               height: "auto",
               display: "flex",
               alignItems: "center",
