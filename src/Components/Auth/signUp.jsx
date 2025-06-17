@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection, runTransaction } from "firebase/firestore";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 import Script from "next/script";
@@ -125,6 +125,42 @@ const SignUp = () => {
         submissions: initSubmissions,
         emailVerified: user.emailVerified,
       });
+
+      const leaderboardRef = doc(collection(db, "leaderboard"), "users");
+
+      await runTransaction(db, async (transaction) => {
+
+        const leaderboardSnap = await transaction.get(leaderboardRef);
+
+        if (!leaderboardSnap.exists) {
+          transaction.set(leaderboardRef, {
+            users: [
+              {
+                email: email,
+                name: username || "Anonymous",
+                totalPts: 0,
+              },
+            ],
+          });
+          return;
+        }
+
+        const leaderboardData = leaderboardSnap.data();
+        const usersArray = leaderboardData.users || [];
+
+        const alreadyExists = usersArray.some((user) => user.email === email);
+        if (!alreadyExists) {
+          usersArray.push({
+            email: email,
+            name: username || "Anonymous",
+            totalPts: 0,
+          });
+
+          transaction.update(leaderboardRef, { users: usersArray });
+          // console.log("User added to leaderboard");
+        }
+      });
+
 
       toast.success(
         "Registration successful! Please check your email to verify your account."

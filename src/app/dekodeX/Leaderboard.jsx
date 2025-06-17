@@ -17,6 +17,7 @@ export default function Leaderboard() {
   const [topData, setTopData] = useState([]);
 
   const itemsPerPage = 10;
+  // console.log("leaderboard",user?.email);
 
   useEffect(() => {
     async function getTopScorerData() {
@@ -25,6 +26,7 @@ export default function Leaderboard() {
           `../../dekodeX/api/leaderboard/1?email=${encodeURIComponent(user?.email)}`
         );
         const data = await res.json();
+        
 
         if (data.status == 500) {
           toast.error("Internal Server Error. Please try again later.");
@@ -84,6 +86,7 @@ export default function Leaderboard() {
           return;
         } else {
           setTotalUsers(data.leaderboardSize);
+          // console.log(data.leaderboardSize);
           setTotalPages(Math.ceil(data.leaderboardSize / itemsPerPage));
           return;
         }

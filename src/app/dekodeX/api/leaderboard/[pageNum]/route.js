@@ -3,13 +3,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
   try {
-    const snapshot = await db.collection("users").get();
     const { pageNum } = await params;
 
     const { searchParams } = new URL(request.url);
     const email = searchParams.get("email");
-
-    console.log(email);
 
     if (!pageNum || isNaN(pageNum) || pageNum < 1) {
       return NextResponse.json(
@@ -18,52 +15,44 @@ export async function GET(request, { params }) {
       );
     }
 
-    const users = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    const leaderboardRef = db.collection("leaderboard").doc("users");
+    const leaderboardSnap = await leaderboardRef.get();
 
-    if (users.length === 0) {
-      return NextResponse.json({ message: "No users found" }, { status: 200 });
+    if (!leaderboardSnap.exists) {
+      return NextResponse.json(
+        { error: "Leaderboard not found" },
+        { status: 404 }
+      );
     }
+
+    const users = leaderboardSnap.data().users || [];
+    // console.log(users)
+
+    // Sort by totalPts descending
+    const sortedLeaderboard = [...users].sort((a, b) => b.totalPts - a.totalPts);
 
     const pageSize = 10;
     const startIndex = (pageNum - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    const fullLeaderboard = Object.entries(users)
-      .map(([userId, userData]) => ({
-        userId,
-        email: userData.email,
-        name: userData.username || "Anonymous",
-        score: userData.submissions
-          ? userData.submissions.reduce((sum, val) => sum + val, 0)
-          : 0,
-      }))
-      .sort((a, b) => b.score - a.score);
 
-    const userRanking = fullLeaderboard.findIndex(
-      (entry) => entry.email === email
-    );
+    const userRanking = sortedLeaderboard.findIndex((user) => user.email === email);
+    const currUser = sortedLeaderboard[userRanking];
 
-    const currUser = fullLeaderboard.find((entry) => entry.email === email);
-
-    const rankedLeaderboard = fullLeaderboard.map((entry, index) => ({
-      ...entry,
-      email: "secret",
+    const rankedLeaderboard = sortedLeaderboard.map((user, index) => ({
+      name: user.name || "Anonymous",
+      score: user.totalPts || 0,
       rank: index + 1,
+      email: "secret", // anonymize
     }));
 
     const paginatedLeaderboard = rankedLeaderboard.slice(startIndex, endIndex);
 
-    // console.log(currUser.username, currUser.score, userRanking);
-
-    // console.log(leaderboard);
     return NextResponse.json(
       {
         paginatedLeaderboard,
         currentUser: {
           username: currUser ? currUser.name : "Anonymous",
-          score: currUser ? Math.max(0, currUser.score) : 0,
+          score: currUser ? Math.max(0, currUser.totalPts) : 0,
           rank: userRanking !== -1 ? userRanking + 1 : null,
         },
       },

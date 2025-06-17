@@ -149,6 +149,40 @@ export async function POST(request, { params }) {
 
     await userRef.update({ submissions });
 
+    // --- Calculate total points after update ---
+    const totalPts = submissions.reduce((sum, val) => sum + Math.max(0, val), 0);
+
+    // --- Update leaderboard/main ---
+    const leaderboardRef = db.collection("leaderboard").doc("users");
+    await db.runTransaction(async (transaction) => {
+      const leaderboardSnap = await transaction.get(leaderboardRef);
+
+      if (!leaderboardSnap.exists) {
+        throw new Error("Leaderboard document not found");
+      }
+
+      const leaderboardData = leaderboardSnap.data();
+      const usersArray = leaderboardData.users || [];
+
+      // Find user in array
+      const userIndex = usersArray.findIndex((u) => u.email === email);
+
+      if (userIndex !== -1) {
+        // Update existing user's score
+        usersArray[userIndex].totalPts = totalPts;
+      } else {
+        // Add user if not found (safety net)
+        usersArray.push({
+          email: email,
+          name: userData.username || "Anonymous",
+          totalPts: totalPts,
+        });
+      }
+
+      transaction.update(leaderboardRef, { users: usersArray });
+    });
+
+
     return new Response(
       JSON.stringify({
         id,
