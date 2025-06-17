@@ -26,7 +26,6 @@ export default function Leaderboard() {
           `../../dekodeX/api/leaderboard/1?email=${encodeURIComponent(user?.email)}`
         );
         const data = await res.json();
-        
 
         if (data.status == 500) {
           toast.error("Internal Server Error. Please try again later.");

@@ -5,7 +5,13 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-import { doc, getDoc, setDoc, collection, runTransaction } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  runTransaction,
+} from "firebase/firestore";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 import Script from "next/script";
@@ -129,7 +135,6 @@ const SignUp = () => {
       const leaderboardRef = doc(collection(db, "leaderboard"), "users");
 
       await runTransaction(db, async (transaction) => {
-
         const leaderboardSnap = await transaction.get(leaderboardRef);
 
         if (!leaderboardSnap.exists) {
@@ -160,7 +165,6 @@ const SignUp = () => {
           // console.log("User added to leaderboard");
         }
       });
-
 
       toast.success(
         "Registration successful! Please check your email to verify your account."

@@ -164,7 +164,7 @@ const ProblemArena = () => {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [unlockedProblems.length, lockedProblems.length]);
+  }, []);
 
   // Modal JSX
   const modalContent = (

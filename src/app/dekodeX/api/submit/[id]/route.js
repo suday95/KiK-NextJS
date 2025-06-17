@@ -150,7 +150,10 @@ export async function POST(request, { params }) {
     await userRef.update({ submissions });
 
     // --- Calculate total points after update ---
-    const totalPts = submissions.reduce((sum, val) => sum + Math.max(0, val), 0);
+    const totalPts = submissions.reduce(
+      (sum, val) => sum + Math.max(0, val),
+      0
+    );
 
     // --- Update leaderboard/main ---
     const leaderboardRef = db.collection("leaderboard").doc("users");
@@ -181,7 +184,6 @@ export async function POST(request, { params }) {
 
       transaction.update(leaderboardRef, { users: usersArray });
     });
-
 
     return new Response(
       JSON.stringify({

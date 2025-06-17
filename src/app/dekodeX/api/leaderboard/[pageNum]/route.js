@@ -29,13 +29,17 @@ export async function GET(request, { params }) {
     // console.log(users)
 
     // Sort by totalPts descending
-    const sortedLeaderboard = [...users].sort((a, b) => b.totalPts - a.totalPts);
+    const sortedLeaderboard = [...users].sort(
+      (a, b) => b.totalPts - a.totalPts
+    );
 
     const pageSize = 10;
     const startIndex = (pageNum - 1) * pageSize;
     const endIndex = startIndex + pageSize;
 
-    const userRanking = sortedLeaderboard.findIndex((user) => user.email === email);
+    const userRanking = sortedLeaderboard.findIndex(
+      (user) => user.email === email
+    );
     const currUser = sortedLeaderboard[userRanking];
 
     const rankedLeaderboard = sortedLeaderboard.map((user, index) => ({
