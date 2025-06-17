@@ -75,29 +75,32 @@ const ProblemArena = () => {
   };
   const getGreeting = () => {
     const now = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
-    const istTime = new Date(now.getTime() + istOffset);
-    const hour = istTime.getHours();
+    const timeInIST = now.toLocaleTimeString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour12: false,
+    });
+    const hour = parseInt(timeInIST.split(":")[0]);
     if (hour < 12) return "Good Morning";
     if (hour < 18) return "Good Afternoon";
     return "Good Evening";
   };
   const getTimeUntilUnlock = (dateString) => {
     const now = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000;
-    const nowIST = new Date(now.getTime() + istOffset);
-    const unlock = new Date(dateString + "T00:00:00.000Z");
-    const unlockIST = new Date(unlock.getTime());
 
-    return unlockIST.getTime() - nowIST.getTime();
+    // Create a date for midnight IST on the unlock date
+    // We need to be careful here - we want midnight IST, not midnight local time
+    const unlockDateIST = new Date(dateString + "T00:00:00+05:30"); // Explicitly set IST timezone
+
+    return unlockDateIST.getTime() - now.getTime();
   };
 
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
-      const istOffset = 5.5 * 60 * 60 * 1000;
-      const istTime = new Date(now.getTime() + istOffset);
-      setCurrentTime(istTime);
+      // Set current time in IST
+      setCurrentTime(
+        new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
+      );
     }, 1000);
 
     return () => clearInterval(timer);
@@ -139,13 +142,12 @@ const ProblemArena = () => {
 
     function shouldStartPolling() {
       const now = new Date();
-      const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
-      const istTime = new Date(now.getTime() + istOffset);
-      return (
-        istTime.getHours() === 23 &&
-        istTime.getMinutes() === 59 &&
-        istTime.getSeconds() >= 50
-      );
+      const timeInIST = now.toLocaleTimeString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        hour12: false,
+      });
+      const [hours, minutes, seconds] = timeInIST.split(":").map(Number);
+      return hours === 23 && minutes === 59 && seconds >= 50;
     }
 
     // Start immediate fetch once
@@ -159,12 +161,12 @@ const ProblemArena = () => {
       }
 
       // After 12:01 AM IST stop polling completely
-      const istTime = new Date(now.getTime() + 5.5 * 60 * 60 * 1000);
-      if (
-        istTime.getHours() === 0 &&
-        istTime.getMinutes() === 0 &&
-        istTime.getSeconds() <= 10
-      ) {
+      const timeInIST = now.toLocaleTimeString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        hour12: false,
+      });
+      const [hours, minutes, seconds] = timeInIST.split(":").map(Number);
+      if (hours === 0 && minutes === 0 && seconds <= 10) {
         clearInterval(intervalId);
       }
     }, 1000);

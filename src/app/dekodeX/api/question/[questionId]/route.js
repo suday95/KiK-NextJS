@@ -23,16 +23,8 @@ export async function GET(request, { params }) {
     const questionData = questionDoc.data();
 
     // Use IST timezone for consistency
-    const utcToday = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
-    const istDate = new Date(utcToday.getTime() + istOffset);
-
-    const today =
-      istDate.getFullYear() +
-      "-" +
-      String(istDate.getMonth() + 1).padStart(2, "0") +
-      "-" +
-      String(istDate.getDate()).padStart(2, "0");
+    const now = new Date();
+    const today = now.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" }); // en-CA gives YYYY-MM-DD format
 
     const questionDate = questionData.date;
     console.log(today);
