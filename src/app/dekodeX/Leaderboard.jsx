@@ -235,7 +235,7 @@ export default function Leaderboard() {
               </div>
             )}
 
-            <div className="mt-8 mb-4 flex items-center justify-center gap-2">
+            <div className="mt-8 mb-4 flex items-center justify-center gap-1">
               <div
                 onClick={() => setCurrentPage(currentPage - 1)}
                 className={`relative border-[3px] border-transparent bg-[linear-gradient(108.74deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.06)_100%)] px-3 py-1 shadow-[0_0_50px_-25px_rgba(0,0,0,0.5)] backdrop-blur-[100px] [border-image-slice:1] [border-image-source:linear-gradient(108.74deg,rgba(33,138,203,0.6)_0%,rgba(255,255,255,0.54)_36.46%,rgba(255,255,255,0.3)_73.96%,rgba(17,227,251,0.6)_100%)] hover:bg-gray-300 ${currentPage === 1 ? "pointer-events-none opacity-50" : ""}`}
@@ -245,33 +245,87 @@ export default function Leaderboard() {
 
               {[...Array(totalPages)].map((_, index) => {
                 const pageNumber = index + 1;
+
+                // Always show first page
+                if (pageNumber === 1) {
+                  return (
+                    <div
+                      key={pageNumber}
+                      onClick={() => setCurrentPage(pageNumber)}
+                      className={`relative cursor-pointer border-[3px] border-transparent bg-[linear-gradient(108.74deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.06)_100%)] px-3 py-1 shadow-[0_0_50px_-25px_rgba(0,0,0,0.5)] backdrop-blur-[100px] [border-image-slice:1] [border-image-source:linear-gradient(108.74deg,rgba(33,138,203,0.6)_0%,rgba(255,255,255,0.54)_36.46%,rgba(255,255,255,0.3)_73.96%,rgba(17,227,251,0.6)_100%)] hover:bg-gray-300 ${currentPage === pageNumber ? "bg-gray-300" : ""}`}
+                    >
+                      {pageNumber}
+                    </div>
+                  );
+                }
+
+                // Ellipsis after first page if needed
+                if (pageNumber === 2 && currentPage > 3) {
+                  return (
+                    <span key="start-ellipsis" className="px-2 select-none">
+                      ...
+                    </span>
+                  );
+                }
+
+                // Current page (not first or last)
                 if (
-                  pageNumber === 1 ||
-                  pageNumber === totalPages ||
-                  (pageNumber >= currentPage - 1 &&
-                    pageNumber <= currentPage + 1)
+                  pageNumber === currentPage &&
+                  pageNumber !== 1 &&
+                  pageNumber !== totalPages
                 ) {
                   return (
                     <div
                       key={pageNumber}
                       onClick={() => setCurrentPage(pageNumber)}
-                      className={`relative cursor-pointer border-[3px] border-transparent bg-[linear-gradient(108.74deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.06)_100%)] px-3 py-1 shadow-[0_0_50px_-25px_rgba(0,0,0,0.5)] backdrop-blur-[100px] [border-image-slice:1] [border-image-source:linear-gradient(108.74deg,rgba(33,138,203,0.6)_0%,rgba(255,255,255,0.54)_36.46%,rgba(255,255,255,0.3)_73.96%,rgba(17,227,251,0.6)_100%)] hover:bg-gray-300 ${
-                        currentPage === pageNumber ? "bg-gray-300" : ""
-                      }`}
+                      className={`relative cursor-pointer border-[3px] border-transparent bg-gray-300 bg-[linear-gradient(108.74deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.06)_100%)] px-3 py-1 shadow-[0_0_50px_-25px_rgba(0,0,0,0.5)] backdrop-blur-[100px] [border-image-slice:1] [border-image-source:linear-gradient(108.74deg,rgba(33,138,203,0.6)_0%,rgba(255,255,255,0.54)_36.46%,rgba(255,255,255,0.3)_73.96%,rgba(17,227,251,0.6)_100%)] hover:bg-gray-300`}
                     >
                       {pageNumber}
                     </div>
                   );
-                } else if (
-                  pageNumber === currentPage - 2 ||
-                  pageNumber === currentPage + 2
+                }
+
+                // Next page (not last)
+                if (
+                  pageNumber === currentPage + 1 &&
+                  pageNumber !== totalPages
                 ) {
                   return (
-                    <span key={pageNumber} className="px-2">
+                    <div
+                      key={pageNumber}
+                      onClick={() => setCurrentPage(pageNumber)}
+                      className={`relative cursor-pointer border-[3px] border-transparent bg-[linear-gradient(108.74deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.06)_100%)] px-3 py-1 shadow-[0_0_50px_-25px_rgba(0,0,0,0.5)] backdrop-blur-[100px] [border-image-slice:1] [border-image-source:linear-gradient(108.74deg,rgba(33,138,203,0.6)_0%,rgba(255,255,255,0.54)_36.46%,rgba(255,255,255,0.3)_73.96%,rgba(17,227,251,0.6)_100%)] hover:bg-gray-300`}
+                    >
+                      {pageNumber}
+                    </div>
+                  );
+                }
+
+                // Ellipsis before last page if needed
+                if (
+                  pageNumber === totalPages - 1 &&
+                  currentPage < totalPages - 2
+                ) {
+                  return (
+                    <span key="end-ellipsis" className="px-2 select-none">
                       ...
                     </span>
                   );
                 }
+
+                // Always show last page
+                if (pageNumber === totalPages) {
+                  return (
+                    <div
+                      key={pageNumber}
+                      onClick={() => setCurrentPage(pageNumber)}
+                      className={`relative cursor-pointer border-[3px] border-transparent bg-[linear-gradient(108.74deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.06)_100%)] px-3 py-1 shadow-[0_0_50px_-25px_rgba(0,0,0,0.5)] backdrop-blur-[100px] [border-image-slice:1] [border-image-source:linear-gradient(108.74deg,rgba(33,138,203,0.6)_0%,rgba(255,255,255,0.54)_36.46%,rgba(255,255,255,0.3)_73.96%,rgba(17,227,251,0.6)_100%)] hover:bg-gray-300 ${currentPage === pageNumber ? "bg-gray-300" : ""}`}
+                    >
+                      {pageNumber}
+                    </div>
+                  );
+                }
+
                 return null;
               })}
 
