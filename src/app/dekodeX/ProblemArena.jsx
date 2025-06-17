@@ -74,7 +74,10 @@ const ProblemArena = () => {
     return parseInt(questionId.replace("q", "")) - 1;
   };
   const getGreeting = () => {
-    const hour = new Date().getHours();
+    const now = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
+    const istTime = new Date(now.getTime() + istOffset);
+    const hour = istTime.getHours();
     if (hour < 12) return "Good Morning";
     if (hour < 18) return "Good Afternoon";
     return "Good Evening";
@@ -136,10 +139,12 @@ const ProblemArena = () => {
 
     function shouldStartPolling() {
       const now = new Date();
+      const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
+      const istTime = new Date(now.getTime() + istOffset);
       return (
-        now.getHours() === 23 &&
-        now.getMinutes() === 59 &&
-        now.getSeconds() >= 50
+        istTime.getHours() === 23 &&
+        istTime.getMinutes() === 59 &&
+        istTime.getSeconds() >= 50
       );
     }
 
@@ -153,11 +158,12 @@ const ProblemArena = () => {
         fetchQuestions();
       }
 
-      // After 12:01 AM stop polling completely
+      // After 12:01 AM IST stop polling completely
+      const istTime = new Date(now.getTime() + 5.5 * 60 * 60 * 1000);
       if (
-        now.getHours() === 0 &&
-        now.getMinutes() === 0 &&
-        now.getSeconds() <= 10
+        istTime.getHours() === 0 &&
+        istTime.getMinutes() === 0 &&
+        istTime.getSeconds() <= 10
       ) {
         clearInterval(intervalId);
       }
@@ -207,25 +213,6 @@ const ProblemArena = () => {
               Submit your answers directly on the problem page. View sample
               input/output and get your problem input.
             </p>
-          </div>
-
-          <div className="rounded-lg bg-purple-50 p-3 dark:bg-purple-900/20">
-            <h3 className="mb-2 text-sm font-semibold text-purple-800 dark:text-purple-300">
-              🏆 Scoring System
-            </h3>
-            <div className="space-y-1 text-xs text-purple-700 sm:text-sm dark:text-purple-200">
-              <p>
-                • <strong>Correctness:</strong> Full points for passing all test
-                cases
-              </p>
-              <p>
-                • <strong>Speed Bonus:</strong> Earlier submissions earn higher
-                scores
-              </p>
-              <p>
-                • <strong>Penalty:</strong> Wrong submissions reduce final score
-              </p>
-            </div>
           </div>
 
           <div className="rounded-lg bg-orange-50 p-3 dark:bg-orange-900/20">
