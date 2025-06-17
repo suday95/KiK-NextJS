@@ -73,6 +73,12 @@ const ProblemArena = () => {
   const getSubmissionIndex = (questionId) => {
     return parseInt(questionId.replace("q", "")) - 1;
   };
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good Morning";
+    if (hour < 18) return "Good Afternoon";
+    return "Good Evening";
+  };
   const getTimeUntilUnlock = (dateString) => {
     const now = new Date();
     const istOffset = 5.5 * 60 * 60 * 1000;
@@ -291,7 +297,11 @@ const ProblemArena = () => {
                 width: "auto",
               }}
             >
-              Problem Arena
+              <span className="text-base font-semibold sm:text-lg lg:text-xl">
+                {loggedIn ? `${getGreeting()}, ${user?.username}` : ""}
+              </span>
+              <br />
+              Welcome to Problem Arena
             </h1>
             <div className="flex items-center gap-1 sm:gap-2">
               <button

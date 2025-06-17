@@ -193,7 +193,7 @@ export default function Landing() {
             "The Web as I envisaged it, we have not seen it yet. The future is
             still so much bigger than the past"
           </p>
-          <p className="font-poppins text-sm text-left leading-loose font-normal text-white">
+          <p className="font-poppins text-left text-sm leading-loose font-normal text-white">
             A student-run society that aims to spread awareness and educate
             students about the potential of Web 3.0 and future technologies. We
             host workshops and hackathons to give students hands-on experience
@@ -207,21 +207,27 @@ export default function Landing() {
           </p>
         </div>
 
-        <div className="mt-10 mb-10 md:mb-0 flex flex-col items-center justify-center md:mt-0 md:w-1/2">
+        <div className="mt-10 mb-10 flex flex-col items-center justify-center md:mt-0 md:mb-0 md:w-1/2">
           {/* <Lottie
             animationData={main}
             className="w-[80%] md:w-full max-w-[500px]"
           /> */}
 
           {/* enlarge Card to roughly match Lottie size */}
-          
+
           <div className="mx-auto w-[90%] max-w-[600px] px-4 md:w-full md:px-0">
-            <Link href="/auth"><Card /></Link>
+            <Link href="/auth">
+              <Card />
+            </Link>
           </div>
-          <h2 className="mt-5 mx-auto bg-gradient-to-r from-[#00EAFF] via-[#4DD9FF] to-[#AAF0FF] bg-clip-text text-lg md:text-4xl font-bold text-transparent">
+          <h2 className="mx-auto mt-5 bg-gradient-to-r from-[#00EAFF] via-[#4DD9FF] to-[#AAF0FF] bg-clip-text text-lg font-bold text-transparent md:text-4xl">
             Conquer The Arena
             <br />
-            Join <span className="bg-gradient-to-r from-[#00ffd9] via-[#00eaff] to-[#00ffd9] bg-clip-text text-lg md:text-4xl font-bold text-transparent">dekodeX</span> Now
+            Join{" "}
+            <span className="bg-gradient-to-r from-[#00ffd9] via-[#00eaff] to-[#00ffd9] bg-clip-text text-lg font-bold text-transparent md:text-4xl">
+              dekodeX
+            </span>{" "}
+            Now
           </h2>
         </div>
       </div>

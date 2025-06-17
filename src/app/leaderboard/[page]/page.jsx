@@ -282,7 +282,7 @@ export default function LeaderboardPage({ params }) {
           <button
             id="floatingReturnBtn"
             onClick={redirectToDekodeX}
-            className="animate-float fixed right-2 bottom-4 z-[9999] flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-4 py-2 text-white shadow-2xl backdrop-blur-xl transition-transform hover:-translate-y-1 hover:scale-110 md:right-8 md:bottom-8"
+            className="animate-float fixed right-2 bottom-4 z-[9999] flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-4 py-2 text-white shadow-2xl backdrop-blur-xl transition-transform hover:-translate-y-1 hover:scale-110 max-md:right-0 max-md:bottom-207 max-md:scale-70 md:right-8 md:bottom-8"
             aria-label="Return"
           >
             <span className="font-semibold">Return</span>
