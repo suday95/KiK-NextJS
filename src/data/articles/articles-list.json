@@ -1,5 +1,11 @@
 [
   {
+    "title": "Neural Network — The Brains Behind AI",
+    "pubDate": "Apr 11,2025",
+    "link": "https://medium.com/@kodeinkgp/neural-network-the-brains-behind-ai-01929230d869",
+    "img": "/article/neuralNetwork.jpg"
+  },
+  {
     "title": "Adaptive AI: A Learning Model That Learns!",
     "pubDate": "Dec 24,2024",
     "link": "https://medium.com/@kodeinkgp/62c367dc0784",
@@ -21,7 +27,7 @@
     "title": "Demystifying Consensus Mechanisms",
     "pubDate": "Aug 26, 2024",
     "link": "https://medium.com/@kodeinkgp/demystifying-consensus-mechanisms-c06555eced1f",
-    "img": "https://openledger.info/insights/wp-content/uploads/2019/01/consensus-blockchain-948x640.png"
+    "img": "/article/consensus.webp"
   },
   {
     "title": "Mastering Reinforcement Learning: A Guide for Students",
@@ -33,7 +39,7 @@
     "title": "Unraveling Sora: OpenAI’s Quirky Genius",
     "pubDate": "Mar 23, 2024",
     "link": "https://medium.com/@kodeinkgp/unraveling-sora-openais-quirky-genius-b0af944a98d2",
-    "img": "https://assets.eweek.com/uploads/2024/04/ew_20240426-openai-sora-overview-696x447.png"
+    "img": "/article/unravelingSora.webp"
   },
   {
     "title": "Exploring Machine Learning with Scikit-Learn: A Comprehensive Overview",
