@@ -41,7 +41,7 @@ const Auth = () => {
       router.push("/dekodeX");
     } else if (user && !user.emailVerified) {
       toast.warn(
-        "Please verify your email to continue. A verification link has been sent to your inbox. You may need to refresh after verifying."
+        "Please verify your email to continue. A verification link has been sent to your inbox. You may need to refresh after verifying. Also check the spam folder as well"
       );
     }
   }, [loggedIn, user, router]);
