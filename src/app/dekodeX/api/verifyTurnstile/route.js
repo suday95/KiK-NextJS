@@ -6,7 +6,7 @@ export async function POST(req) {
     const token = body.token;
 
     const formData = new URLSearchParams();
-    formData.append("secret", process.env.NEXT_PUBLIC_RECAPTCHA_SERVER_KEY);
+    formData.append("secret", process.env.RECAPTCHA_SERVER_KEY);
     formData.append("response", token);
 
     const response = await fetch(

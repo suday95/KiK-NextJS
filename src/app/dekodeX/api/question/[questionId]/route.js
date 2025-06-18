@@ -27,7 +27,6 @@ export async function GET(request, { params }) {
     const today = now.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" }); // en-CA gives YYYY-MM-DD format
 
     const questionDate = questionData.date;
-    console.log(today);
     if (questionDate > today) {
       return NextResponse.json(
         { error: "Question is not yet available" },

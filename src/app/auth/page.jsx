@@ -29,7 +29,6 @@ const Auth = () => {
         await updateDoc(userDocRef, {
           emailVerified: true,
         });
-        console.log("emailVerified status updated successfully!");
       } catch (error) {
         console.error("Error updating emailVerified status:", error);
       }

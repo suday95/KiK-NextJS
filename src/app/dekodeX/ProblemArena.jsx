@@ -6,6 +6,7 @@ import { NotepadText } from "lucide-react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useAuth } from "@/contexts/authContext";
+import { useAuthToken } from "../../hooks/useAuthToken";
 
 const LoadingSkeleton = () => {
   return (
@@ -43,6 +44,7 @@ const ProblemArena = () => {
   const [lockedProblems, setLockedProblems] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date());
   const { user, loggedIn } = useAuth();
+  const { token: authToken } = useAuthToken();
   const formatTime = (ms) => {
     if (ms <= 0) return "Loading...";
     const seconds = Math.floor(ms / 1000);
@@ -115,10 +117,15 @@ const ProblemArena = () => {
     async function fetchQuestions() {
       setLoading(true);
       try {
+        if (!authToken) {
+          setLoading(false);
+          return;
+        }
+
         const realRes = await fetch("/dekodeX/api/questionTitles", {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STATIC_AUTH_TOKEN}`,
+            Authorization: `Bearer ${authToken}`,
             "Content-Type": "application/json",
           },
         });
@@ -172,7 +179,7 @@ const ProblemArena = () => {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [authToken]);
 
   // Modal JSX
   const modalContent = (

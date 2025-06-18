@@ -78,7 +78,6 @@ export default function LeaderboardPage({ params }) {
           toast.error("Internal Server Error. Please try again later.");
           return;
         } else {
-          console.log("Total Users Data:", data);
           setTotalUsers(data.leaderboardSize);
           setTotalPages(Math.ceil(data.leaderboardSize / itemsPerPage));
           return;

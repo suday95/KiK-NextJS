@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from "react";
 import Loader from "./loader";
 import { toast, ToastContainer } from "react-toastify";
+import { useAuthToken } from "../../hooks/useAuthToken";
 
 function SubmitButton({ email, answer, id }) {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const { token: authToken, loading: tokenLoading } = useAuthToken();
 
   useEffect(() => {
     if (disabled) {
@@ -26,12 +28,19 @@ function SubmitButton({ email, answer, id }) {
       return;
     }
 
+    if (!authToken) {
+      toast.error(
+        "Authentication token not available. Please refresh the page."
+      );
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch(`/dekodeX/api/submit/${id}`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_STATIC_AUTH_TOKEN}`,
+          Authorization: `Bearer ${authToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, answer }),
@@ -39,12 +48,10 @@ function SubmitButton({ email, answer, id }) {
 
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        console.log("Error response:", data);
         toast.error(data.error || "Submission failed. Please try again.");
         return;
       }
 
-      console.log("Success response:", data);
       if (data.isCorrect) {
         toast.success("Submission accepted!");
       } else {

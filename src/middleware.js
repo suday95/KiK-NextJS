@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export function middleware(request) {
-  const staticAuthToken = process.env.NEXT_PUBLIC_STATIC_AUTH_TOKEN;
+  const staticAuthToken = process.env.STATIC_AUTH_TOKEN;
 
   if (!staticAuthToken) {
     console.error(
@@ -41,18 +41,31 @@ export function middleware(request) {
 
   const token = authHeader.split(" ")[1];
 
+  // Check if it's the direct static token (for server-to-server communication)
   if (token === staticAuthToken) {
-    console.log(`Authorized access to ${request.nextUrl.pathname}`);
     return NextResponse.next();
-  } else {
-    console.warn(
-      `Forbidden access attempt to ${request.nextUrl.pathname}: Invalid static token.`
-    );
-    return NextResponse.json(
-      { message: "Forbidden. Invalid token provided." },
-      { status: 403 }
-    );
   }
+
+  // Check if it's a session token (for client-side requests)
+  try {
+    const sessionData = JSON.parse(Buffer.from(token, "base64").toString());
+    if (
+      sessionData.token === staticAuthToken &&
+      sessionData.expires > Date.now()
+    ) {
+      return NextResponse.next();
+    }
+  } catch (error) {
+    // Invalid session token format
+  }
+
+  console.warn(
+    `Forbidden access attempt to ${request.nextUrl.pathname}: Invalid or expired token.`
+  );
+  return NextResponse.json(
+    { message: "Forbidden. Invalid or expired token provided." },
+    { status: 403 }
+  );
 }
 
 export const config = {

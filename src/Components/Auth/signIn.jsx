@@ -54,6 +54,16 @@ const SignIn = () => {
     e.preventDefault();
     setLoader(true);
 
+    // Trim whitespace from identifier
+    const trimmedIdentifier = identifier.trim();
+
+    // Validate trimmed input is not empty
+    if (!trimmedIdentifier) {
+      toast.error("Username/Email cannot be empty or contain only spaces.");
+      setLoader(false);
+      return;
+    }
+
     const token = document.querySelector(
       'input[name="cf-turnstile-response"]'
     )?.value;
@@ -78,11 +88,13 @@ const SignIn = () => {
       return;
     }
 
-    let identifierEmail = identifier;
+    let identifierEmail = trimmedIdentifier;
 
-    if (!identifier.includes("@")) {
+    if (!trimmedIdentifier.includes("@")) {
       try {
-        const usernameDoc = await getDoc(doc(db, "usernames", identifier));
+        const usernameDoc = await getDoc(
+          doc(db, "usernames", trimmedIdentifier)
+        );
         if (!usernameDoc.exists()) {
           toast.error("Username not found");
           setLoader(false);

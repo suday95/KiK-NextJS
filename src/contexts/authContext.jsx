@@ -28,7 +28,6 @@ export function AuthProvider({ children }) {
             ...userData,
             emailVerified: currentUser.emailVerified,
           };
-          console.log("User Data:", updatedUserData);
           setUser(updatedUserData);
           return;
         } else {
@@ -54,14 +53,6 @@ export function AuthProvider({ children }) {
     user,
     loggedIn: !!user && user.emailVerified,
   };
-
-  // Debug logging
-  console.log("Auth Context Debug:", {
-    user: user
-      ? { ...user, email: user.email, emailVerified: user.emailVerified }
-      : null,
-    loggedIn: !!user && user.emailVerified,
-  });
 
   return (
     <AuthContext.Provider value={value}>

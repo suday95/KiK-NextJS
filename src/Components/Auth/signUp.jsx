@@ -58,6 +58,23 @@ const SignUp = () => {
     e.preventDefault();
     setLoader(true);
 
+    // Trim whitespace from inputs
+    const trimmedUsername = username.trim();
+    const trimmedEmail = email.trim();
+
+    // Validate trimmed inputs are not empty
+    if (!trimmedUsername) {
+      toast.error("Username cannot be empty or contain only spaces.");
+      setLoader(false);
+      return;
+    }
+
+    if (!trimmedEmail) {
+      toast.error("Email cannot be empty or contain only spaces.");
+      setLoader(false);
+      return;
+    }
+
     const token = document.querySelector(
       'input[name="cf-turnstile-response"]'
     )?.value;
@@ -88,7 +105,7 @@ const SignUp = () => {
       return;
     }
 
-    if (username.length < 3 || username.length > 20) {
+    if (trimmedUsername.length < 3 || trimmedUsername.length > 20) {
       toast.error("Username must be between 3 and 20 characters.");
       setLoader(false);
       return;
@@ -100,79 +117,111 @@ const SignUp = () => {
       return;
     }
 
-    if (!checkMail(email)) {
+    if (!checkMail(trimmedEmail)) {
       toast.error("Please enter a valid email address.");
       setLoader(false);
       return;
     }
 
     try {
-      const usernameDoc = await getDoc(doc(db, "usernames", username));
-      if (usernameDoc.exists()) {
-        toast.error("Username already taken.");
-        setLoader(false);
-        return;
-      }
-
+      // First create the Firebase Auth account to check email uniqueness
       const userCred = await createUserWithEmailAndPassword(
         auth,
-        email,
+        trimmedEmail,
         password
       );
       const user = userCred.user;
       const uid = user.uid;
       const initSubmissions = Array(10).fill(0);
 
-      await sendEmailVerification(user);
-      await setDoc(doc(db, "usernames", username), { uid, email });
-      await setDoc(doc(db, "users", uid), {
-        username,
-        email,
-        submissions: initSubmissions,
-        emailVerified: user.emailVerified,
-      });
+      try {
+        // Use transaction to ensure username uniqueness atomically
+        await runTransaction(db, async (transaction) => {
+          const usernameDoc = await transaction.get(
+            doc(db, "usernames", trimmedUsername)
+          );
 
-      const leaderboardRef = doc(collection(db, "leaderboard"), "users");
+          if (usernameDoc.exists()) {
+            throw new Error("USERNAME_TAKEN");
+          }
 
-      await runTransaction(db, async (transaction) => {
-        const leaderboardSnap = await transaction.get(leaderboardRef);
-
-        if (!leaderboardSnap.exists) {
-          transaction.set(leaderboardRef, {
-            users: [
-              {
-                email: email,
-                name: username || "Anonymous",
-                totalPts: 0,
-              },
-            ],
+          // Atomically create both documents
+          transaction.set(doc(db, "usernames", trimmedUsername), {
+            uid,
+            email: trimmedEmail,
           });
-          return;
-        }
-
-        const leaderboardData = leaderboardSnap.data();
-        const usersArray = leaderboardData.users || [];
-
-        const alreadyExists = usersArray.some((user) => user.email === email);
-        if (!alreadyExists) {
-          usersArray.push({
-            email: email,
-            name: username || "Anonymous",
-            totalPts: 0,
+          transaction.set(doc(db, "users", uid), {
+            username: trimmedUsername,
+            email: trimmedEmail,
+            submissions: initSubmissions,
+            emailVerified: user.emailVerified,
           });
+        });
 
-          transaction.update(leaderboardRef, { users: usersArray });
-          // console.log("User added to leaderboard");
+        await sendEmailVerification(user);
+
+        // Add to leaderboard
+        const leaderboardRef = doc(collection(db, "leaderboard"), "users");
+
+        await runTransaction(db, async (transaction) => {
+          const leaderboardSnap = await transaction.get(leaderboardRef);
+
+          if (!leaderboardSnap.exists) {
+            transaction.set(leaderboardRef, {
+              users: [
+                {
+                  email: trimmedEmail,
+                  name: trimmedUsername || "Anonymous",
+                  totalPts: 0,
+                },
+              ],
+            });
+            return;
+          }
+
+          const leaderboardData = leaderboardSnap.data();
+          const usersArray = leaderboardData.users || [];
+
+          const alreadyExists = usersArray.some(
+            (user) => user.email === trimmedEmail
+          );
+          if (!alreadyExists) {
+            usersArray.push({
+              email: trimmedEmail,
+              name: trimmedUsername || "Anonymous",
+              totalPts: 0,
+            });
+
+            transaction.update(leaderboardRef, { users: usersArray });
+            // console.log("User added to leaderboard");
+          }
+        });
+
+        toast.success(
+          "Registration successful! Please check your email to verify your account. If you don't see it, check your spam folder."
+        );
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setCnfPassword("");
+      } catch (transactionError) {
+        // Handle username already taken in transaction
+        if (transactionError.message === "USERNAME_TAKEN") {
+          // Delete the Firebase Auth account since username is taken
+          await user.delete();
+          toast.error(
+            "Username already taken. Please choose a different username."
+          );
+        } else {
+          // Other transaction errors
+          await user.delete();
+          toast.error(
+            "Registration failed due to a database error. Please try again."
+          );
         }
-      });
-
-      toast.success(
-        "Registration successful! Please check your email to verify your account."
-      );
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setCnfPassword("");
+        setLoader(false);
+        return;
+      }
     } catch (err) {
       console.error("Registration error:", err);
       let errorMessage = "Registration failed. Please try again.";

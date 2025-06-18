@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import GetInput from "@/Components/utils/GetInput";
 import DekodeXLoading from "@/Components/dekodeX_Loader/Loader";
+import { useAuthToken } from "../../../hooks/useAuthToken";
 
 // Import highlight.js theme
 import "highlight.js/styles/atom-one-dark.css";
@@ -33,6 +34,7 @@ function Qp() {
   const { QuestionID } = params;
   const [questionData, setQuestionData] = useState(null);
   const { user, loggedIn } = useAuth();
+  const { token: authToken } = useAuthToken();
   const [answer, setAnswer] = useState("");
   const [testcaseUrl, setTestcaseUrl] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -51,15 +53,16 @@ function Qp() {
   }, [testcases]);
 
   useEffect(() => {
+    if (!authToken) return;
+
     fetch(`/dekodeX/api/question/${QuestionID}`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STATIC_AUTH_TOKEN}`,
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
     })
       .then((res) => {
-        console.log("Response status:", res.status);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
@@ -71,7 +74,7 @@ function Qp() {
       .catch((err) => {
         console.error("Error fetching question:", err);
       });
-  }, [QuestionID]);
+  }, [QuestionID, authToken]);
 
   if (!questionData) {
     return (
