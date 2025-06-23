@@ -37,14 +37,17 @@ function SubmitButton({ email, answer, id }) {
 
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/submit/${id}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, answer }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/submit/${id}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, answer }),
+        }
+      );
 
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {

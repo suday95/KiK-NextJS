@@ -55,13 +55,16 @@ function Qp() {
   useEffect(() => {
     if (!authToken) return;
 
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/question/${QuestionID}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/question/${QuestionID}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);

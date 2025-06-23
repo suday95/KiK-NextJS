@@ -85,11 +85,14 @@ const SignUp = () => {
       return;
     }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/verifyTurnstile`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/verifyTurnstile`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      }
+    );
 
     const data = await res.json();
 
