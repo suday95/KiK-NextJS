@@ -116,9 +116,9 @@ export default function LeaderboardPage({ params }) {
               Leaderboard
             </h2>
 
-            <div className="mb-8 flex items-end gap-2">
+            <div className="mb-8 flex items-end">
               {topData[1] && (
-                <div className="flex h-[160px] w-[100px] flex-col items-center justify-end rounded-tl-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-md">
+                <div className="flex h-[160px] w-[130px] flex-col items-center justify-end rounded-tl-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-md">
                   <div className="relative mb-2 h-16 w-16">
                     <img
                       src={`https://robohash.org/${encodeURIComponent(topData[1].name)}?set=set1`}
@@ -139,7 +139,7 @@ export default function LeaderboardPage({ params }) {
               )}
 
               {topData[0] && (
-                <div className="flex h-[200px] w-[120px] flex-col items-center justify-end rounded-tl-xl rounded-tr-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-lg">
+                <div className="flex h-[200px] w-[140px] flex-col items-center justify-end rounded-tl-xl rounded-tr-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-lg">
                   <div className="relative mb-2 h-20 w-20">
                     <img
                       src={`https://robohash.org/${encodeURIComponent(topData[0].name)}?set=set1`}
@@ -165,7 +165,7 @@ export default function LeaderboardPage({ params }) {
               )}
 
               {topData[2] && (
-                <div className="flex h-[140px] w-[100px] flex-col items-center justify-end rounded-tr-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-md">
+                <div className="flex h-[140px] w-[120px] flex-col items-center justify-end rounded-tr-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-md">
                   <div className="relative mb-2 h-16 w-16">
                     <img
                       src={`https://robohash.org/${encodeURIComponent(topData[2].name)}?set=set1`}
@@ -187,7 +187,7 @@ export default function LeaderboardPage({ params }) {
             </div>
           </div>
 
-          <ul className="space-y-1">
+          <ul className="space-y-1 pr-5 pl-1">
             {fetchedLeaderboardData.map((leaderboardEntry, idx) => (
               <li
                 key={idx}
