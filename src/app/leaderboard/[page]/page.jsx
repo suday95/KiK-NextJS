@@ -21,7 +21,7 @@ export default function LeaderboardPage({ params }) {
     async function getTopScorerData() {
       try {
         const res = await fetch(
-          `../../dekodeX/api/leaderboard/1?email=${encodeURIComponent(user?.email)}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/leaderboard/1?email=${encodeURIComponent(user?.email)}`
         );
         const data = await res.json();
 
@@ -48,7 +48,7 @@ export default function LeaderboardPage({ params }) {
 
     async function getLeaderboardData() {
       try {
-        const res = await fetch(`../../dekodeX/api/leaderboard/${currentPage}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/leaderboard/${currentPage}`);
         const data = await res.json();
 
         if (data.status === 500) {
@@ -71,7 +71,7 @@ export default function LeaderboardPage({ params }) {
   useEffect(() => {
     async function getTotalUsers() {
       try {
-        const res = await fetch("../../dekodeX/api/leaderboard");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/leaderboard`);
         const data = await res.json();
 
         if (data.status === 500) {

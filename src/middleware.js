@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 
 export function middleware(request) {
   const staticAuthToken = process.env.STATIC_AUTH_TOKEN;
+  const origin = request.headers.get("origin");
 
-  // Define allowed origins (replace with your actual domains)
+  // Define allowed origins
   const allowedOrigins = [
     "https://kodeinkgpnew.netlify.app",
     "https://kodeinkgp.in",
@@ -11,7 +12,6 @@ export function middleware(request) {
     "http://localhost:3001", // for development
   ];
 
-  const origin = request.headers.get("origin");
   const isAllowedOrigin = !origin || allowedOrigins.includes(origin);
 
   if (!staticAuthToken) {
@@ -24,7 +24,7 @@ export function middleware(request) {
     );
   }
 
-  // Handle preflight OPTIONS requests
+  // Handle preflight OPTIONS requests - only allow from permitted origins
   if (request.method === "OPTIONS") {
     if (isAllowedOrigin) {
       return new NextResponse(null, {
@@ -41,7 +41,7 @@ export function middleware(request) {
     }
   }
 
-  // Helper function to add CORS headers
+  // Helper function to add CORS headers only for allowed origins
   function addCorsHeaders(response) {
     if (isAllowedOrigin) {
       response.headers.set("Access-Control-Allow-Origin", origin || "*");
@@ -63,25 +63,46 @@ export function middleware(request) {
     "/dekodeX/api/submit",
   ];
 
+  const publicPaths = [
+    "/dekodeX/api/auth",
+    "/dekodeX/api/leaderboard",
+    "/dekodeX/api/verifyTurnstile",
+  ];
+
   const isProtectedPath = protectedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path)
   );
+
+  const isPublicPath = publicPaths.some((path) =>
+    request.nextUrl.pathname.startsWith(path)
+  );
+
+  // For public paths, just add CORS and continue (no auth required)
+  if (isPublicPath) {
+    // Still check domain restriction for security
+    if (origin && !isAllowedOrigin) {
+      return addCorsHeaders(
+        NextResponse.json(
+          { message: "Forbidden. Domain not allowed." },
+          { status: 403 }
+        )
+      );
+    }
+    return addCorsHeaders(NextResponse.next());
+  }
+
+  // For non-API paths, just continue
   if (!isProtectedPath) {
     return addCorsHeaders(NextResponse.next());
   }
 
   // Check if origin is allowed for protected paths
   if (origin && !isAllowedOrigin) {
-    return NextResponse.json(
-      { message: "Forbidden. Domain not allowed." },
-      {
-        status: 403,
-        headers: {
-          "Access-Control-Allow-Origin": origin,
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        },
-      }
+    return addCorsHeaders(
+      NextResponse.json(
+        { message: "Forbidden. Domain not allowed." },
+        { status: 403 }
+      )
     );
   }
 
@@ -91,16 +112,11 @@ export function middleware(request) {
     console.warn(
       `Unauthorized access attempt to ${request.nextUrl.pathname}: Missing or malformed Authorization header.`
     );
-    return NextResponse.json(
-      { message: "Unauthorized. Missing or invalid Authorization header." },
-      {
-        status: 401,
-        headers: {
-          "Access-Control-Allow-Origin": origin || "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        },
-      }
+    return addCorsHeaders(
+      NextResponse.json(
+        { message: "Unauthorized. Missing or invalid Authorization header." },
+        { status: 401 }
+      )
     );
   }
 
@@ -126,16 +142,11 @@ export function middleware(request) {
   console.warn(
     `Forbidden access attempt to ${request.nextUrl.pathname}: Invalid or expired token.`
   );
-  return NextResponse.json(
-    { message: "Forbidden. Invalid or expired token provided." },
-    {
-      status: 403,
-      headers: {
-        "Access-Control-Allow-Origin": origin || "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
-    }
+  return addCorsHeaders(
+    NextResponse.json(
+      { message: "Forbidden. Invalid or expired token provided." },
+      { status: 403 }
+    )
   );
 }
 
@@ -144,5 +155,8 @@ export const config = {
     "/dekodeX/api/question/:path*",
     "/dekodeX/api/questionTitles/:path*",
     "/dekodeX/api/submit/:path*",
+    "/dekodeX/api/auth/:path*",
+    "/dekodeX/api/leaderboard/:path*",
+    "/dekodeX/api/verifyTurnstile/:path*",
   ],
 };

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "login":"firebase login"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",

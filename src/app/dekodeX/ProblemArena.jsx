@@ -122,7 +122,7 @@ const ProblemArena = () => {
           return;
         }
 
-        const realRes = await fetch("/dekodeX/api/questionTitles", {
+        const realRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/questionTitles`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${authToken}`,

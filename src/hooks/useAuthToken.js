@@ -22,7 +22,7 @@ export function useAuthToken() {
         }
 
         // Fetch new session token
-        const response = await fetch("/dekodeX/api/auth", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/auth`, {
           method: "POST",
         });
 
@@ -57,7 +57,7 @@ export function useAuthToken() {
     localStorage.removeItem("dekodex_session_expiry");
 
     try {
-      const response = await fetch("/dekodeX/api/auth", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/auth`, {
         method: "POST",
       });
 

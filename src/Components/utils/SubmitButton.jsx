@@ -37,7 +37,7 @@ function SubmitButton({ email, answer, id }) {
 
     setLoading(true);
     try {
-      const res = await fetch(`/dekodeX/api/submit/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/submit/${id}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${authToken}`,

@@ -55,7 +55,7 @@ function Qp() {
   useEffect(() => {
     if (!authToken) return;
 
-    fetch(`/dekodeX/api/question/${QuestionID}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/question/${QuestionID}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${authToken}`,
