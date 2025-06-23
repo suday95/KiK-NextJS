@@ -3,6 +3,17 @@ import { NextResponse } from "next/server";
 export function middleware(request) {
   const staticAuthToken = process.env.STATIC_AUTH_TOKEN;
 
+  // Define allowed origins (replace with your actual domains)
+  const allowedOrigins = [
+    "https://kodeinkgpnew.netlify.app",
+    "https://kodeinkgp.in",
+    "http://localhost:3000", // for development
+    "http://localhost:3001", // for development
+  ];
+
+  const origin = request.headers.get("origin");
+  const isAllowedOrigin = !origin || allowedOrigins.includes(origin);
+
   if (!staticAuthToken) {
     console.error(
       "SERVER ERROR: STATIC_AUTH_TOKEN is not set in environment variables. Please check your .env.local file."
@@ -11,6 +22,39 @@ export function middleware(request) {
       { message: "Server configuration error. Please try again later." },
       { status: 500 }
     );
+  }
+
+  // Handle preflight OPTIONS requests
+  if (request.method === "OPTIONS") {
+    if (isAllowedOrigin) {
+      return new NextResponse(null, {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": origin || "*",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Max-Age": "86400",
+        },
+      });
+    } else {
+      return new NextResponse(null, { status: 403 });
+    }
+  }
+
+  // Helper function to add CORS headers
+  function addCorsHeaders(response) {
+    if (isAllowedOrigin) {
+      response.headers.set("Access-Control-Allow-Origin", origin || "*");
+      response.headers.set(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+      );
+      response.headers.set(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization"
+      );
+    }
+    return response;
   }
 
   const protectedPaths = [
@@ -22,9 +66,23 @@ export function middleware(request) {
   const isProtectedPath = protectedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path)
   );
-
   if (!isProtectedPath) {
-    return NextResponse.next();
+    return addCorsHeaders(NextResponse.next());
+  }
+
+  // Check if origin is allowed for protected paths
+  if (origin && !isAllowedOrigin) {
+    return NextResponse.json(
+      { message: "Forbidden. Domain not allowed." },
+      {
+        status: 403,
+        headers: {
+          "Access-Control-Allow-Origin": origin,
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        },
+      }
+    );
   }
 
   const authHeader = request.headers.get("Authorization");
@@ -35,15 +93,21 @@ export function middleware(request) {
     );
     return NextResponse.json(
       { message: "Unauthorized. Missing or invalid Authorization header." },
-      { status: 401 }
+      {
+        status: 401,
+        headers: {
+          "Access-Control-Allow-Origin": origin || "*",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        },
+      }
     );
   }
 
   const token = authHeader.split(" ")[1];
-
   // Check if it's the direct static token (for server-to-server communication)
   if (token === staticAuthToken) {
-    return NextResponse.next();
+    return addCorsHeaders(NextResponse.next());
   }
 
   // Check if it's a session token (for client-side requests)
@@ -53,7 +117,7 @@ export function middleware(request) {
       sessionData.token === staticAuthToken &&
       sessionData.expires > Date.now()
     ) {
-      return NextResponse.next();
+      return addCorsHeaders(NextResponse.next());
     }
   } catch (error) {
     // Invalid session token format
@@ -64,7 +128,14 @@ export function middleware(request) {
   );
   return NextResponse.json(
     { message: "Forbidden. Invalid or expired token provided." },
-    { status: 403 }
+    {
+      status: 403,
+      headers: {
+        "Access-Control-Allow-Origin": origin || "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    }
   );
 }
 
