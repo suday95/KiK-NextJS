@@ -63,18 +63,46 @@ export function middleware(request) {
     "/dekodeX/api/submit",
   ];
 
+  const publicPaths = [
+    "/dekodeX/api/auth",
+    "/dekodeX/api/leaderboard",
+    "/dekodeX/api/verifyTurnstile",
+  ];
+
   const isProtectedPath = protectedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path)
   );
+
+  const isPublicPath = publicPaths.some((path) =>
+    request.nextUrl.pathname.startsWith(path)
+  );
+
+  // For public paths, just add CORS and continue (no auth required)
+  if (isPublicPath) {
+    // Still check domain restriction for security
+    if (origin && !isAllowedOrigin) {
+      return addCorsHeaders(
+        NextResponse.json(
+          { message: "Forbidden. Domain not allowed." },
+          { status: 403 }
+        )
+      );
+    }
+    return addCorsHeaders(NextResponse.next());
+  }
+
+  // For non-API paths, just continue
   if (!isProtectedPath) {
     return addCorsHeaders(NextResponse.next());
   }
 
   // Check if origin is allowed for protected paths
   if (origin && !isAllowedOrigin) {
-    return NextResponse.json(
-      { message: "Forbidden. Domain not allowed." },
-      { status: 403 }
+    return addCorsHeaders(
+      NextResponse.json(
+        { message: "Forbidden. Domain not allowed." },
+        { status: 403 }
+      )
     );
   }
 
@@ -127,5 +155,8 @@ export const config = {
     "/dekodeX/api/question/:path*",
     "/dekodeX/api/questionTitles/:path*",
     "/dekodeX/api/submit/:path*",
+    "/dekodeX/api/auth/:path*",
+    "/dekodeX/api/leaderboard/:path*",
+    "/dekodeX/api/verifyTurnstile/:path*",
   ],
 };
