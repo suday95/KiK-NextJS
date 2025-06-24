@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { X } from "lucide-react";
 
 export default function TechEventModal({
-  title = "DekodeX",
+  title = "dekodeX",
   subtitle = "Apply for certificate",
   children,
   onClose,
