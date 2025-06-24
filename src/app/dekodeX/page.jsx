@@ -15,7 +15,7 @@ import { useAuthToken } from "@/hooks/useAuthToken";
 async function checkCertificate(email, token) {
   try {
     const res = await fetch(
-      `${window.location.origin}/dekodeX/api/certificate/check?email=${encodeURIComponent(email)}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/certificate/check?email=${encodeURIComponent(email)}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -121,7 +121,7 @@ export default function Layout() {
                   setIsSubmitting(true);
                   try {
                     const res = await fetch(
-                      `${window.location.origin}/dekodeX/api/certificate/apply`,
+                      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/certificate/apply`,
                       {
                         method: "POST",
                         headers: {
