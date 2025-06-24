@@ -46,26 +46,22 @@ export default function Layout() {
   const { token: authToken } = useAuthToken();
 
   useEffect(() => {
-    if (loggedIn) {
-      const modalShowed = localStorage.getItem("modalShowed");
-      if (modalShowed !== "true") {
-        setShowModal(true);
-        localStorage.setItem("modalShowed", "true");
-      }
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    async function fetchStatus() {
-      if (loggedIn && user?.email) {
+    async function checkStatusAndModal() {
+      if (loggedIn && user?.email && authToken) {
         setLoading(true);
         const exists = await checkCertificate(user.email, authToken);
         setHasCert(exists);
         setLoading(false);
+
+        const modalShowed = localStorage.getItem("modalShowed");
+        if (modalShowed !== "true" && !exists) {
+          setShowModal(true);
+          localStorage.setItem("modalShowed", "true");
+        }
       }
     }
-    fetchStatus();
-  }, [loggedIn, user?.email]);
+    checkStatusAndModal();
+  }, [loggedIn, user?.email, authToken]);
 
   const handleAuthAction = async () => {
     if (loggedIn) {
