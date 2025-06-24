@@ -14,15 +14,15 @@ import Modal from "./Modal";
 async function checkCertificate(email) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/certificate/check`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/certificate/check?email=${encodeURIComponent(email)}`
     );
 
     if (!res.ok) {
       throw new Error(`HTTP error! Status: ${res.status}`);
     }
+
     const data = await res.json();
-    // data.entries is the array
-    return data.entries.some((e) => e.email === email);
+    return data.exists === true;
   } catch (err) {
     console.error("Error checking certificate:", err);
     return false;
