@@ -159,7 +159,7 @@ export default function Leaderboard() {
                         1.
                       </div>
                     </div>
-                    <p className="font-bold  text-yellow-400">
+                    <p className="font-bold text-yellow-400">
                       {topData[0].name.split(" ")[0]}
                     </p>
                     <p className="font-extrabold text-yellow-400">
@@ -192,7 +192,7 @@ export default function Leaderboard() {
               </div>
             </div>
 
-            <ul className="space-y-1 pr-5 pl-2 ">
+            <ul className="space-y-1 pr-5 pl-2">
               {fetchedLeaderboardData.map((user, idx) => (
                 <li
                   key={user.rank}
@@ -220,7 +220,7 @@ export default function Leaderboard() {
             {loggedIn && currentUserLeaderboardInfo && (
               <div
                 key={currentUserLeaderboardInfo.rank}
-                className="mt-4 ml-4 flex items-center space-x-4 bg-[#11E3FB] mr-5 px-4 text-black shadow-lg transition-transform duration-200 hover:scale-[1.01]"
+                className="mt-4 mr-5 ml-4 flex items-center space-x-4 bg-[#11E3FB] px-4 text-black shadow-lg transition-transform duration-200 hover:scale-[1.01]"
               >
                 <span className="w-6 text-right text-lg font-bold group-hover:text-black">
                   {currentUserLeaderboardInfo.rank}.
