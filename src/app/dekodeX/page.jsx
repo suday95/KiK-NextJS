@@ -35,7 +35,7 @@ export default function Layout() {
         <div className="bg-700 w-full rounded-lg p-6 text-white shadow-lg xl:w-[75%]">
           <ProblemArena />
         </div>
-        <div className="bg-400 hidden xl:w-[33%] rounded-lg p-6 text-white shadow-lg xl:block">
+        <div className="bg-400 hidden rounded-lg p-6 text-white shadow-lg xl:block xl:w-[33%]">
           <Leaderboard />
         </div>
       </div>
