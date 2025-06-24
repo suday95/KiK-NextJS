@@ -118,77 +118,80 @@ export default function Leaderboard() {
               >
                 Leaderboard
               </h2>
-              <div className="flex items-end justify-center rounded-xl p-4">
-                {/* Second Place */}
-                {topData[1] && (
-                  <div className="flex h-[160px] w-[125px] flex-col items-center justify-end rounded-tl-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-md">
-                    <div className="relative mb-2 h-16 w-16">
-                      <img
-                        src={`https://robohash.org/${encodeURIComponent(topData[1].name)}?set=set1`}
-                        alt={topData[1].name}
-                        className="h-full w-full rounded-full border-4 border-gray-200"
-                      />
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 transform rounded-full border bg-white px-2 py-[2px] text-xs font-bold text-black">
-                        2.
+              {/* Fixed podium container with proper constraints */}
+              <div className="mx-auto w-full max-w-md px-4">
+                <div className="flex items-end justify-center">
+                  {/* Second Place */}
+                  {topData[1] && (
+                    <div className="flex h-[160px] w-[100px] flex-col items-center justify-end rounded-tl-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-md sm:w-[125px]">
+                      <div className="relative mb-2 h-12 w-12 sm:h-16 sm:w-16">
+                        <img
+                          src={`https://robohash.org/${encodeURIComponent(topData[1].name)}?set=set1`}
+                          alt={topData[1].name}
+                          className="h-full w-full rounded-full border-4 border-gray-200"
+                        />
+                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 transform rounded-full border bg-white px-2 py-[2px] text-xs font-bold text-black">
+                          2.
+                        </div>
                       </div>
+                      <p className="w-full truncate px-1 text-center text-xs font-semibold text-white sm:text-sm">
+                        {topData[1].name.split(" ")[0]}
+                      </p>
+                      <p className="text-xs font-bold text-white sm:text-sm">
+                        {topData[1].score}
+                      </p>
                     </div>
-                    <p className="text-sm font-semibold text-white">
-                      {topData[1].name.split(" ")[0]}
-                    </p>
-                    <p className="text-sm font-bold text-white">
-                      {topData[1].score}
-                    </p>
-                  </div>
-                )}
+                  )}
 
-                {/* First Place */}
-                {topData[0] && (
-                  <div className="flex h-[200px] w-[150px] flex-col items-center justify-end rounded-tl-xl rounded-tr-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-lg">
-                    <div className="relative mb-2 h-20 w-20">
-                      <img
-                        src={`https://robohash.org/${encodeURIComponent(topData[0].name)}?set=set1`}
-                        alt={topData[0].name}
-                        className="h-full w-full rounded-full border-4 border-yellow-400"
-                      />
-                      <img
-                        src="/dekodeX/crown.png"
-                        alt="Crown"
-                        className="absolute -top-7 left-1/2 w-10 -translate-x-1/2 transform"
-                      />
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 transform rounded-full border border-black bg-yellow-400 px-2 py-[2px] text-xs font-bold text-black">
-                        1.
+                  {/* First Place */}
+                  {topData[0] && (
+                    <div className="flex h-[200px] w-[120px] flex-col items-center justify-end rounded-tl-xl rounded-tr-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-lg sm:w-[150px]">
+                      <div className="relative mb-2 h-16 w-16 sm:h-20 sm:w-20">
+                        <img
+                          src={`https://robohash.org/${encodeURIComponent(topData[0].name)}?set=set1`}
+                          alt={topData[0].name}
+                          className="h-full w-full rounded-full border-4 border-yellow-400"
+                        />
+                        <img
+                          src="/dekodeX/crown.png"
+                          alt="Crown"
+                          className="absolute -top-7 left-1/2 w-8 -translate-x-1/2 transform sm:w-10"
+                        />
+                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 transform rounded-full border border-black bg-yellow-400 px-2 py-[2px] text-xs font-bold text-black">
+                          1.
+                        </div>
                       </div>
+                      <p className="w-full truncate px-1 text-center font-bold text-yellow-400">
+                        {topData[0].name.split(" ")[0]}
+                      </p>
+                      <p className="font-extrabold text-yellow-400">
+                        {topData[0].score}
+                      </p>
                     </div>
-                    <p className="font-bold text-yellow-400">
-                      {topData[0].name.split(" ")[0]}
-                    </p>
-                    <p className="font-extrabold text-yellow-400">
-                      {topData[0].score}
-                    </p>
-                  </div>
-                )}
+                  )}
 
-                {/* Third Place */}
-                {topData[2] && (
-                  <div className="flex h-[140px] w-[125px] flex-col items-center justify-end rounded-tr-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-md">
-                    <div className="relative mb-2 h-16 w-16">
-                      <img
-                        src={`https://robohash.org/${encodeURIComponent(topData[2].name)}?set=set1`}
-                        alt={topData[1].name}
-                        className="h-full w-full rounded-full border-4 border-[#B87333]"
-                      />
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 transform rounded-full border bg-orange-400 px-2 py-[2px] text-xs font-bold text-black">
-                        3.
+                  {/* Third Place */}
+                  {topData[2] && (
+                    <div className="flex h-[140px] w-[100px] flex-col items-center justify-end rounded-tr-xl bg-gradient-to-b from-[rgba(17,227,251,0.9)] to-[rgba(255,255,255,0.2)] py-4 shadow-md sm:w-[125px]">
+                      <div className="relative mb-2 h-12 w-12 sm:h-16 sm:w-16">
+                        <img
+                          src={`https://robohash.org/${encodeURIComponent(topData[2].name)}?set=set1`}
+                          alt={topData[2].name}
+                          className="h-full w-full rounded-full border-4 border-[#B87333]"
+                        />
+                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 transform rounded-full border bg-orange-400 px-2 py-[2px] text-xs font-bold text-black">
+                          3.
+                        </div>
                       </div>
+                      <p className="w-full truncate px-1 text-center text-xs font-semibold text-orange-400 sm:text-sm">
+                        {topData[2].name.split(" ")[0]}
+                      </p>
+                      <p className="text-xs font-bold text-orange-400 sm:text-sm">
+                        {topData[2].score}
+                      </p>
                     </div>
-                    <p className="text-sm font-semibold text-orange-400">
-                      {topData[2].name.split(" ")[0]}
-                    </p>
-                    <p className="text-sm font-bold text-orange-400">
-                      {topData[2].score}
-                    </p>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
 
