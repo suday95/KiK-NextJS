@@ -10,11 +10,17 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/backend/firebase";
 import { toast } from "react-toastify";
 import Modal from "./Modal";
+import { useAuthToken } from "@/hooks/useAuthToken";
 
-async function checkCertificate(email) {
+async function checkCertificate(email, token) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/certificate/check?email=${encodeURIComponent(email)}`
+      `${window.location.origin}/dekodeX/api/certificate/check?email=${encodeURIComponent(email)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     if (!res.ok) {
@@ -37,12 +43,23 @@ export default function Layout() {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { token: authToken } = useAuthToken();
+
+  useEffect(() => {
+    if (loggedIn) {
+      const modalShowed = localStorage.getItem("modalShowed");
+      if (modalShowed !== "true") {
+        setShowModal(true);
+        localStorage.setItem("modalShowed", "true");
+      }
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
     async function fetchStatus() {
       if (loggedIn && user?.email) {
         setLoading(true);
-        const exists = await checkCertificate(user.email);
+        const exists = await checkCertificate(user.email, authToken);
         setHasCert(exists);
         setLoading(false);
       }
@@ -104,10 +121,11 @@ export default function Layout() {
                   setIsSubmitting(true);
                   try {
                     const res = await fetch(
-                      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/certificate/apply`,
+                      `${window.location.origin}/dekodeX/api/certificate/apply`,
                       {
                         method: "POST",
                         headers: {
+                          Authorization: `Bearer ${authToken}`,
                           "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
@@ -152,7 +170,7 @@ export default function Layout() {
                   className={`mt-4 w-full rounded-lg px-4 py-2 transition ${
                     isSubmitting
                       ? "cursor-not-allowed bg-gray-400 text-gray-700"
-                      : "cursor-pointer bg-green-600 text-white hover:bg-green-700"
+                      : "cursor-pointer border border-cyan-400 px-8 py-2 font-mono text-xs font-bold tracking-widest uppercase shadow-[0_0_10px_rgba(6,182,212,0.3)] transition-all hover:border-cyan-200 hover:bg-blue-950 hover:shadow-[0_0_15px_rgba(6,182,212,0.5)]"
                   }`}
                 >
                   Submit Application
