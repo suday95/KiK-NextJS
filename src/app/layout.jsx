@@ -50,13 +50,13 @@ export default function RootLayout({ children }) {
             referrerPolicy="no-referrer" />
       </head>
       <body className="antialiased">
-        {/* <AuthProvider> */}
+        <AuthProvider>
       
-          {/* <Navbar /> */}
+          <Navbar />
           {children}
           <Footer />
          
-        {/* </AuthProvider> */}
+        </AuthProvider>
       </body>
     </html>
   );
