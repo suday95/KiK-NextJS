@@ -109,7 +109,7 @@ export default function Leaderboard() {
             <div className="flex w-full flex-col items-center justify-center p-3">
               <div className="flex items-center justify-center">
                 <h2
-                  className="mb-4 text-[1.5rem] font-bold mr-2"
+                  className="mr-2 mb-4 text-[1.5rem] font-bold"
                   style={{
                     background:
                       "linear-gradient(92.46deg, #218ACB 0%, #11E3FB 33.33%, #218ACB 66.67%, #11E3FB 100%)",
@@ -117,7 +117,7 @@ export default function Leaderboard() {
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  Final 
+                  Final
                 </h2>
                 <h2
                   className="mb-4 text-[1.5rem] font-bold"
@@ -128,7 +128,7 @@ export default function Leaderboard() {
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  Leaderboard 
+                  Leaderboard
                 </h2>
               </div>
 
