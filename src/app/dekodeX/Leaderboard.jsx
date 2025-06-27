@@ -107,17 +107,31 @@ export default function Leaderboard() {
         {fetchedLeaderboardData && totalUsers >= 10 ? (
           <div className="">
             <div className="flex w-full flex-col items-center justify-center p-3">
-              <h2
-                className="mb-4 text-[2rem] font-bold"
-                style={{
-                  background:
-                    "linear-gradient(92.46deg, #218ACB 0%, #11E3FB 33.33%, #218ACB 66.67%, #11E3FB 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Leaderboard
-              </h2>
+              <div className="flex items-center justify-center">
+                <h2
+                  className="mb-4 text-[1.5rem] font-bold mr-2"
+                  style={{
+                    background:
+                      "linear-gradient(92.46deg, #218ACB 0%, #11E3FB 33.33%, #218ACB 66.67%, #11E3FB 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Final 
+                </h2>
+                <h2
+                  className="mb-4 text-[1.5rem] font-bold"
+                  style={{
+                    background:
+                      "linear-gradient(92.46deg, #218ACB 0%, #11E3FB 33.33%, #218ACB 66.67%, #11E3FB 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Leaderboard 
+                </h2>
+              </div>
+
               {/* Fixed podium container with proper constraints */}
               <div className="mx-auto w-full max-w-md px-4">
                 <div className="flex items-end justify-center">
