@@ -21,7 +21,7 @@ const CategoryBadge = ({ category, primary = false }) => {
 
 const ArticleCard = ({ article, index, onHover }) => (
   <div className="flex justify-center group" onMouseEnter={() => onHover(index)} onMouseLeave={() => onHover(null)}>
-    <a className="relative flex flex-col h-[450px] w-[380px] max-sm:w-full max-sm:max-w-[350px] overflow-hidden rounded-2xl bg-[#01011B] border border-cyan-500/30 transition-all duration-500 hover:border-cyan-400/80 hover:shadow-[0_20px_50px_rgba(6,182,212,0.3)] hover:scale-[1.02] hover:-translate-y-1 hover:bg-cyan-500/5" href={article.link} target="_blank" rel="noopener noreferrer">
+    <a className="relative flex flex-col h-[450px] w-[380px] max-sm:w-full max-sm:max-w-[350px] overflow-hidden rounded-2xl bg-slate-800/40 border border-cyan-500/40 transition-all duration-500 hover:border-cyan-400/90 hover:shadow-[0_20px_50px_rgba(6,182,212,0.4)] hover:scale-[1.02] hover:-translate-y-1 hover:bg-cyan-500/8" href={article.link} target="_blank" rel="noopener noreferrer">
       <div className="relative w-full h-[200px] overflow-hidden rounded-t-2xl">
         <img src={article.img} alt={article.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-cyan-900/40" />
@@ -30,18 +30,18 @@ const ArticleCard = ({ article, index, onHover }) => (
         <div className="flex-1">
           <h3 className="text-lg font-bold text-white leading-tight mb-3 min-h-[3.5rem]">{article.title}</h3>
           <div className="flex items-center gap-3 mb-3 flex-wrap">
-            <div className="flex items-center gap-1 text-xs text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded-full border border-cyan-500/20">
+            <div className="flex items-center gap-1 text-xs text-cyan-400 bg-cyan-500/15 px-2 py-1 rounded-full border border-cyan-500/30">
               <Calendar size={12} />
               <span>{article.pubDate}</span>
             </div>
             {article.categories?.slice(0, 2).map((cat, i) => (
-              <div key={i} className="flex items-center gap-1 text-xs text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded-full border border-cyan-500/20">
+              <div key={i} className="flex items-center gap-1 text-xs text-cyan-400 bg-cyan-500/15 px-2 py-1 rounded-full border border-cyan-500/30">
                 {React.createElement(getCategoryIcon(cat), { size: 12 })}
                 <span>{cat}</span>
               </div>
             ))}
           </div>
-          <p className="text-gray-400 text-sm leading-relaxed overflow-hidden line-clamp-3">
+          <p className="text-gray-300 text-sm leading-relaxed overflow-hidden line-clamp-3">
             {article.description?.length > 120 ? `${article.description.substring(0, 120)}...` : article.description}
           </p>
         </div>
@@ -57,31 +57,31 @@ const ArticleCard = ({ article, index, onHover }) => (
 );
 
 const FeaturedCard = ({ article }) => (
-  <div className="mb-12 flex justify-center px-6">
+  <div className="mb-16 flex justify-center px-6">
     <div className="w-full max-w-6xl flex items-center gap-6 max-lg:flex-col max-lg:gap-4">
-      <div className="w-70 h-70 max-lg:hidden flex-shrink-0 absolute left-6">
+      <div className="w-48 h-48 max-lg:hidden flex-shrink-0">
         <img src="/article/image.svg" alt="Insights" className="w-full h-full object-contain" />
       </div>
-      <h2 className="text-[32px] max-lg:text-[28px] max-md:text-[24px] font-bold text-white whitespace-nowrap max-lg:whitespace-normal ml-32 max-lg:ml-0" style={{ fontFamily: 'Kaisei Opti, serif' }}>Latest Insights:</h2>
-      <a className="group relative flex h-[240px] max-md:h-auto max-md:flex-col flex-1 overflow-hidden rounded-2xl bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 transition-all duration-300 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-1 hover:bg-cyan-500/5" href={article?.link} target="_blank" rel="noopener noreferrer">
+      <h2 className="text-[24px] max-lg:text-[28px] max-md:text-[24px] font-bold text-white whitespace-nowrap max-lg:whitespace-normal" style={{ fontFamily: 'Kaisei Opti, serif' }}>Latest Insights:</h2>
+      <a className="group relative flex h-[240px] max-md:h-auto max-md:flex-col flex-1 overflow-hidden rounded-2xl bg-cyan-900/30 backdrop-blur-md border border-cyan-400/60 shadow-2xl shadow-cyan-500/30 transition-all duration-300 hover:border-cyan-300/80 hover:shadow-3xl hover:shadow-cyan-400/40 hover:-translate-y-1 hover:bg-cyan-800/40" href={article?.link} target="_blank" rel="noopener noreferrer">
         <div className="w-[40%] max-md:w-full h-full max-md:h-[200px] overflow-hidden">
           <img className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src={article?.img} alt={article?.title} />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20 group-hover:to-cyan-900/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-cyan-900/20 group-hover:to-cyan-800/30" />
         </div>
         
         <div className="absolute top-0 right-0 z-10 overflow-hidden">
-          <div className="bg-cyan-500/90 backdrop-blur text-white text-xs font-bold px-4 py-2 transform translate-x-3 -translate-y-1 rotate-[5deg] shadow-lg border border-cyan-400/30 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:rotate-0">
+          <div className="bg-cyan-400/95 backdrop-blur text-white text-xs font-bold px-4 py-2 transform translate-x-3 -translate-y-1 rotate-[5deg] shadow-xl border border-cyan-300/50 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:rotate-0">
             NEW
           </div>
         </div>
         
         <div className="flex-1 p-5 flex flex-col justify-between">
           <div>
-            <div className="mb-2 flex items-center gap-2 text-cyan-400 text-xs font-medium">
+            <div className="mb-2 flex items-center gap-2 text-cyan-300 text-xs font-medium">
               <Calendar size={12} />
               {article?.pubDate}
             </div>
-            <h3 className="mb-3 text-[16px] max-md:text-[14px] leading-[20px] max-md:leading-[18px] font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
+            <h3 className="mb-3 text-[16px] max-md:text-[14px] leading-[20px] max-md:leading-[18px] font-bold text-white group-hover:text-cyan-200 transition-colors duration-300">
               {article?.title?.length > 70 ? `${article.title.substring(0, 70)}...` : article?.title}
             </h3>
             <div className="mb-3 flex gap-[4px] flex-wrap">
@@ -89,10 +89,10 @@ const FeaturedCard = ({ article }) => (
             </div>
           </div>
           <div>
-            <p className="text-[11px] leading-[15px] text-gray-400 mb-3">
+            <p className="text-[11px] leading-[15px] text-cyan-100/80 mb-3">
               {article?.description?.length > 150 ? `${article.description.substring(0, 150)}...` : article?.description}
             </p>
-            <div className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-xs transition-all duration-300 group-hover:translate-x-1">
+            <div className="inline-flex items-center gap-2 text-cyan-200 hover:text-cyan-100 font-medium text-xs transition-all duration-300 group-hover:translate-x-1">
               Read More <ExternalLink size={12} />
             </div>
           </div>
@@ -160,7 +160,7 @@ const Articles = () => {
 
       <FeaturedCard article={data[0]} />
 
-      <div className="w-full px-6 max-sm:px-4 mb-8">
+      <div className="w-full px-6 max-sm:px-4 mb-12">
         <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
           <div className="flex flex-wrap gap-3 max-sm:gap-2 max-sm:justify-center">
             {allCategories.map((category) => (
@@ -182,7 +182,7 @@ const Articles = () => {
         <div className="bg-transparent rounded-2xl p-8 max-sm:p-4">
           <div className="h-[700px] max-md:h-[600px] max-sm:h-[500px] overflow-y-auto pr-4 max-sm:pr-2 scroll-smooth custom-scrollbar">
             {filteredArticles.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-sm:gap-6 pb-4 justify-items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-sm:gap-6 pb-4 justify-items-center pt-4">
                 {filteredArticles.map((article, index) => (
                   <ArticleCard key={index} article={article} index={index} onHover={setHoveredCard} />
                 ))}
