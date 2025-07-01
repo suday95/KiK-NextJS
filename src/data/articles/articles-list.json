@@ -4,7 +4,7 @@
     "pubDate": "Apr 11,2025",
     "link": "https://medium.com/@kodeinkgp/neural-network-the-brains-behind-ai-01929230d869",
     "img": "/article/neuralNetwork.jpg",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "Explore the fundamental concepts of neural networks and understand how they form the core architecture behind modern artificial intelligence systems."
   },
   {
@@ -12,7 +12,7 @@
     "pubDate": "Dec 24,2024",
     "link": "https://medium.com/@kodeinkgp/62c367dc0784",
     "img": "/article/adaptiveAI.png",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "Discover the revolutionary concept of adaptive AI systems that continuously learn and evolve, pushing the boundaries of traditional ML models."
   },
   {
@@ -20,7 +20,7 @@
     "pubDate": "Nov 28,2024",
     "link": "https://medium.com/@kodeinkgp/618a73775bb6",
     "img": "/article/blockchain_layers.jpg",
-    "categories": ["Blockchain","Web3"],
+    "categories": ["Blockchain", "Web3"],
     "description": "Deep dive into the hierarchical structure of blockchain technology, understanding each layer's role in creating secure and decentralized systems."
   },
   {
@@ -28,7 +28,7 @@
     "pubDate": "Oct 7,2024",
     "link": "https://medium.com/@kodeinkgp/38ce4d26e2e5",
     "img": "/article/gemini.jpg",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "Analysis of Google's Gemini 1.5 Flash model, examining its technical architecture,breakthrough capabilities in AI."
   },
   {
@@ -36,7 +36,7 @@
     "pubDate": "Aug 26, 2024",
     "link": "https://medium.com/@kodeinkgp/demystifying-consensus-mechanisms-c06555eced1f",
     "img": "/article/consensus.webp",
-    "categories": ["Blockchain","Web3"],
+    "categories": ["Blockchain", "Web3"],
     "description": "Understand the various consensus mechanisms that power blockchain networks, from Proof of Work to Proof of Stake and beyond."
   },
   {
@@ -44,7 +44,7 @@
     "pubDate": "Aug 7, 2024",
     "link": "https://medium.com/@kodeinkgp/mastering-reinforcement-learning-a-guide-for-students-81387d19fe15",
     "img": "https://miro.medium.com/v2/resize:fit:4918/1*Y0TDuXNyywjqqr5l5GkMQQ.png",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "A comprehensive student guide to reinforcement learning, covering key concepts, algorithms, and practical applications in AI development."
   },
   {
@@ -52,7 +52,7 @@
     "pubDate": "Mar 23, 2024",
     "link": "https://medium.com/@kodeinkgp/unraveling-sora-openais-quirky-genius-b0af944a98d2",
     "img": "/article/unravelingSora.webp",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "Explore OpenAI's Sora video generation model, analyzing its innovative approach to creating realistic videos from text prompts and its implications for AI."
   },
   {
@@ -60,7 +60,7 @@
     "pubDate": "Jan 22, 2024",
     "link": "https://medium.com/@kodeinkgp/exploring-machine-learning-with-scikit-learn-a-comprehensive-overview-01d609f4db3b",
     "img": "https://d3f1iyfxxz8i1e.cloudfront.net/courses/course_image_variant/da615a681b8d_w240.webp",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "Complete guide to ML implementation using Scikit-Learn, covering algorithms, preprocessing, model selection, and evaluation techniques."
   },
   {
@@ -68,7 +68,7 @@
     "pubDate": "Jan 10, 2024",
     "link": "https://medium.com/@kodeinkgp/deep-dive-series-article-on-ensemble-learning-b8d9ece9045c",
     "img": "https://images.prismic.io/encord/4fda620b-ac6c-45dc-ba17-f0d68bc7888f_What+is+Ensemble+Learning_.png?auto=compress%2Cformat&fit=max",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "In-depth exploration of ensemble learning methods, including bagging, boosting, and stacking techniques to improve ML model performance."
   },
   {
@@ -76,7 +76,7 @@
     "pubDate": "Dec 28, 2023",
     "link": "https://coinsbench.com/project-solidity-a-beginners-guide-on-writing-your-first-smart-contract-project-750229be5a2a",
     "img": "https://i0.wp.com/securitygrind.com/wp-content/uploads/2021/04/solidity-feat.jpg?fit=233%2C250&ssl=1",
-    "categories": ["Blockchain","Web3"],
+    "categories": ["Blockchain", "Web3"],
     "description": "Step-by-step beginner's tutorial for creating your first smart contract using Solidity, covering setup, coding, and deployment on the blockchain."
   },
   {
@@ -84,7 +84,7 @@
     "pubDate": "Dec 7, 2023",
     "link": "https://medium.com/@kodeinkgp/supervised-learning-a-comprehensive-guide-7032b34d5097",
     "img": "https://cdn.prod.website-files.com/5d7b77b063a9066d83e1209c/6158dd5a9eb8a3708b09ee09_3H_KVVErj5hhg3x-6GhSIV7bGYANnhCRyu8LIMmc1179ccxk0B2ZTohkg5o9F8sLioBfeAdVzIJ_H-gsy9jJd5kkLecm6kR6abq5PVA363yILJaF5C7ugbxH0Qye1wYm4aYK0NOR%3Ds0.png",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "Complete guide to supervised learning, covering classification and regression algorithms, training techniques, and real-world applications."
   },
   {
@@ -92,7 +92,7 @@
     "pubDate": "Dec 4, 2023",
     "link": "https://coinsbench.com/welcome-to-solidity-an-interactive-expedition-into-the-world-of-smart-contracts-8e219ea304a4",
     "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpyQHN_xq7Mg-Z2cNZQAqX8oEUlgR12zTSkQ&s",
-    "categories": ["Blockchain","Web3"],
+    "categories": ["Blockchain", "Web3"],
     "description": "Interactive introduction to Solidity programming language, exploring smart contract development fundamentals and blockchain application creation."
   },
   {
@@ -100,7 +100,7 @@
     "pubDate": "Oct 17, 2023",
     "link": "https://medium.com/@kodeinkgp/from-chaos-to-clarity-navigating-data-preprocessing-and-the-secrets-of-exploratory-data-analysis-41b452997d00",
     "img": "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*EAdEKK0tM6rsm-YZ",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "Master the essential techniques of data preprocessing and exploratory data analysis to transform raw data into ML-ready datasets."
   },
   {
@@ -108,7 +108,7 @@
     "pubDate": "Sept 4, 2023",
     "link": "https://medium.com/@kodeinkgp/python-a-serpentine-journey-into-ai-ml-and-dl-6aa806c4572b",
     "img": "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*54Ae1vSharSEU_KftcbMkg.png",
-    "categories": ["AI","ML"],
+    "categories": ["AI", "ML"],
     "description": "Comprehensive journey through Python programming for AI, ML, and deep learning, covering essential libraries and practical implementations."
   }
 ]
