@@ -1,6 +1,7 @@
 import Founders from "./Founders";
 import Heads from "./Heads.jsx";
 import OldHeads from "./OldHeads.jsx";
+import Teams from "./teams.jsx";
 
 const Page = () => {
   return (
@@ -28,6 +29,14 @@ const Page = () => {
           </h3>
           <div className="mt-6 flex w-full justify-center">
             <OldHeads />
+          </div>
+        </div>
+        <div className="grid w-full grid-cols-1 items-center justify-items-center">
+          <h3 className="text-[2.5rem] text-[#3dc4d4]">
+            <strong>Our Teams</strong>
+          </h3>
+          <div className="mt-6 flex w-full justify-center">
+            <Teams />
           </div>
         </div>
       </div>

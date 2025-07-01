@@ -25,7 +25,8 @@ const OldHeads = () => {
                 rel="noreferrer"
                 className="text-[20px] text-[#3dc4d4] transition-colors hover:text-[#4ff4fd]"
               >
-                <Facebook size={20} />
+                {/* <Facebook size={20} /> */}
+                <i className="fa-brands fa-facebook size-[20px]"></i>
               </a>
             )}
             {head.mailid && (
@@ -35,7 +36,8 @@ const OldHeads = () => {
                 rel="noreferrer"
                 className="text-[20px] text-[#3dc4d4] transition-colors hover:text-[#4ff4fd]"
               >
-                <Mail size={20} />
+                {/* <Mail size={20} /> */}
+                <i className="fa-solid fa-envelope text-[20px]"></i>
               </a>
             )}
             {head.instagram && (
@@ -45,7 +47,8 @@ const OldHeads = () => {
                 rel="noreferrer"
                 className="text-[20px] text-[#3dc4d4] transition-colors hover:text-[#4ff4fd]"
               >
-                <Instagram size={20} />
+                {/* <Instagram size={20} /> */}
+                <i className="fab fa-instagram text-[20px]"></i>
               </a>
             )}
             {head.linkedin && (
@@ -55,7 +58,8 @@ const OldHeads = () => {
                 rel="noreferrer"
                 className="text-[20px] text-[#3dc4d4] transition-colors hover:text-[#4ff4fd]"
               >
-                <Linkedin size={20} />
+                {/* <Linkedin size={20} /> */}
+                <i className="fab fa-linkedin text-[20px]"></i>
               </a>
             )}
             {head.github && (
@@ -65,7 +69,8 @@ const OldHeads = () => {
                 rel="noreferrer"
                 className="text-[20px] text-[#3dc4d4] transition-colors hover:text-[#4ff4fd]"
               >
-                <Github size={20} />
+                {/* <Github size={20} /> */}
+                <i className="fa-brands fa-github size-[20px]"></i>
               </a>
             )}
           </div>
