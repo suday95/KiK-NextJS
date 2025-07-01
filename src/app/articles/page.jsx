@@ -1,100 +1,404 @@
-import React from "react";
+"use client";
+
+import React, { useState, useMemo } from "react";
+import {
+  Brain,
+  Code2,
+  Coins,
+  Smartphone,
+  Shield,
+  TrendingUp,
+  Cpu,
+  Globe,
+  Database,
+  Zap,
+  Settings,
+  Star,
+  Search,
+  Calendar,
+  ExternalLink,
+} from "lucide-react";
 import LottieWrapper from "./LottieWrapper";
 import data from "../../data/articles/articles-list.json";
-import { Poppins, Montserrat } from "next/font/google";
 
-const poppins = Poppins({ subsets: ["latin"], weight: "600" });
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-montserrat",
-  display: "swap",
-});
+const categoryIcons = {
+  AI: Brain,
+  "Machine Learning": Brain,
+  "Web Development": Code2,
+  Frontend: Code2,
+  Backend: Database,
+  Blockchain: Coins,
+  Cryptocurrency: Coins,
+  Mobile: Smartphone,
+  Security: Shield,
+  DevOps: Settings,
+  Cloud: Globe,
+  Performance: Zap,
+  Trending: TrendingUp,
+  Hardware: Cpu,
+  All: Star,
+};
 
-const Articles = () => {
-  const cards = data.map((info, index) => (
-    <div key={index} className="">
-      <a
-        className="relative flex h-[140px] w-[min(31vw,550px)] overflow-hidden rounded-[2.5vw] border-4 border-transparent bg-[rgba(54,54,54,0.4)] transition duration-150 hover:border-[#3dc4d4] hover:bg-[#39394080] hover:shadow-[0_0_12px_#3dc4d4] max-[1300px]:w-[50vw] max-[800px]:block max-[800px]:h-[420px] max-[800px]:w-full max-[800px]:justify-center max-[550px]:h-[380px] max-[550px]:w-[17.5rem] max-[550px]:rounded-[5vw] xl:w-[min(31vw,550px)]"
-        href={info.link}
-        target="_blank"
-      >
+const getCategoryIcon = (category) => categoryIcons[category] || Settings;
+
+const CategoryBadge = ({ category, primary = false }) => {
+  const Icon = getCategoryIcon(category);
+  return (
+    <span
+      className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold ${primary ? "border border-cyan-400/30 bg-cyan-500/90 text-white shadow-xl backdrop-blur" : "bg-slate-700/60 text-slate-300"}`}
+    >
+      <Icon size={12} />
+      {category}
+    </span>
+  );
+};
+
+const ArticleCard = ({ article, index, onHover }) => (
+  <div
+    className="group flex justify-center"
+    onMouseEnter={() => onHover(index)}
+    onMouseLeave={() => onHover(null)}
+  >
+    <a
+      className="relative flex h-[450px] w-[380px] flex-col overflow-hidden rounded-2xl border border-cyan-500/40 bg-slate-800/40 transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] hover:border-cyan-400/90 hover:bg-cyan-500/8 hover:shadow-[0_20px_50px_rgba(6,182,212,0.4)] max-sm:w-full max-sm:max-w-[350px]"
+      href={article.link}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div className="relative h-[200px] w-full overflow-hidden rounded-t-2xl">
         <img
-          src={info.img}
-          alt=""
-          className="relative h-full w-[150px] self-center max-[800px]:h-[45%] max-[800px]:w-full max-[550px]:h-[50%]"
+          src={article.img}
+          alt={article.title}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="ml-[10px] flex w-[65%] flex-col justify-center gap-[10px] px-2">
-          <p className="absolute top-[15px] z-10 text-[13px] leading-[22px] font-semibold text-[#11e3fb] not-italic max-[1300px]:text-[15px] max-[800px]:top-[230px] max-[800px]:text-[17px] max-[550px]:top-[200px] max-[550px]:text-[13px]">
-            {info.pubDate}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-cyan-900/40" />
+      </div>
+      <div className="flex h-[250px] flex-col justify-between p-6">
+        <div className="flex-1">
+          <h3 className="mb-3 min-h-[3.5rem] text-lg leading-tight font-bold text-white">
+            {article.title}
+          </h3>
+          <div className="mb-3 flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-1 rounded-full border border-cyan-500/30 bg-cyan-500/15 px-2 py-1 text-xs text-cyan-400">
+              <Calendar size={12} />
+              <span>{article.pubDate}</span>
+            </div>
+            {article.categories?.slice(0, 2).map((cat, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-1 rounded-full border border-cyan-500/30 bg-cyan-500/15 px-2 py-1 text-xs text-cyan-400"
+              >
+                {React.createElement(getCategoryIcon(cat), { size: 12 })}
+                <span>{cat}</span>
+              </div>
+            ))}
+          </div>
+          <p className="line-clamp-3 overflow-hidden text-sm leading-relaxed text-gray-300">
+            {article.description?.length > 120
+              ? `${article.description.substring(0, 120)}...`
+              : article.description}
           </p>
-          <p className="absolute top-[40px] z-10 pr-[15px] font-['Montserrat'] text-[17px] leading-[28px] font-semibold text-white not-italic max-[800px]:top-[260px] max-[800px]:w-full max-[800px]:pr-[30px] max-[800px]:text-[22px] max-[800px]:leading-normal max-[550px]:top-[230px] max-[550px]:text-[19px]">
-            {info.title}
-          </p>
+        </div>
+        <div className="absolute right-4 bottom-4 z-50 translate-y-2 transform opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          <div className="flex items-center gap-2 rounded-full border border-cyan-400/50 bg-cyan-500 px-4 py-2 text-sm font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-cyan-400 hover:shadow-xl">
+            <span>Read now</span>
+            <ExternalLink size={14} />
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+);
+
+const FeaturedCard = ({ article }) => (
+  <div className="mb-16 flex justify-center px-6">
+    <div className="flex w-full max-w-6xl items-center gap-6 max-lg:flex-col max-lg:gap-4">
+      <div className="h-48 w-48 flex-shrink-0 max-lg:hidden">
+        <img
+          src="/article/image.svg"
+          alt="Insights"
+          className="h-full w-full object-contain"
+        />
+      </div>
+      <h2
+        className="text-[24px] font-bold whitespace-nowrap text-white max-lg:text-[28px] max-lg:whitespace-normal max-md:text-[24px]"
+        style={{ fontFamily: "Kaisei Opti, serif" }}
+      >
+        Latest Insights:
+      </h2>
+      <a
+        className="group hover:shadow-3xl relative flex h-[240px] flex-1 overflow-hidden rounded-2xl border border-cyan-400/60 bg-cyan-900/30 shadow-2xl shadow-cyan-500/30 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/80 hover:bg-cyan-800/40 hover:shadow-cyan-400/40 max-md:h-auto max-md:flex-col"
+        href={article?.link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div className="h-full w-[40%] overflow-hidden max-md:h-[200px] max-md:w-full">
+          <img
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            src={article?.img}
+            alt={article?.title}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-cyan-900/20 group-hover:to-cyan-800/30" />
+        </div>
+
+        <div className="absolute top-0 right-0 z-10 overflow-hidden">
+          <div className="translate-x-3 -translate-y-1 rotate-[5deg] transform border border-cyan-300/50 bg-cyan-400/95 px-4 py-2 text-xs font-bold text-white shadow-xl backdrop-blur transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:rotate-0">
+            NEW
+          </div>
+        </div>
+
+        <div className="flex flex-1 flex-col justify-between p-5">
+          <div>
+            <div className="mb-2 flex items-center gap-2 text-xs font-medium text-cyan-300">
+              <Calendar size={12} />
+              {article?.pubDate}
+            </div>
+            <h3 className="mb-3 text-[16px] leading-[20px] font-bold text-white transition-colors duration-300 group-hover:text-cyan-200 max-md:text-[14px] max-md:leading-[18px]">
+              {article?.title?.length > 70
+                ? `${article.title.substring(0, 70)}...`
+                : article?.title}
+            </h3>
+            <div className="mb-3 flex flex-wrap gap-[4px]">
+              {article?.categories?.map((cat, i) => (
+                <CategoryBadge key={i} category={cat} primary />
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="mb-3 text-[11px] leading-[15px] text-cyan-100/80">
+              {article?.description?.length > 150
+                ? `${article.description.substring(0, 150)}...`
+                : article?.description}
+            </p>
+            <div className="inline-flex items-center gap-2 text-xs font-medium text-cyan-200 transition-all duration-300 group-hover:translate-x-1 hover:text-cyan-100">
+              Read More <ExternalLink size={12} />
+            </div>
+          </div>
         </div>
       </a>
     </div>
-  ));
+  </div>
+);
+
+const Articles = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [hoveredCard, setHoveredCard] = useState(null);
+
+  const allCategories = useMemo(() => {
+    const categories = new Set();
+    data.forEach((article) =>
+      article.categories?.forEach((cat) => categories.add(cat))
+    );
+    return ["All", ...Array.from(categories)];
+  }, []);
+
+  const filteredArticles = useMemo(() => {
+    return data.slice(1).filter((article) => {
+      const matchesSearch = article.title
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      const matchesCategory =
+        selectedCategory === "All" ||
+        article.categories?.includes(selectedCategory);
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchQuery, selectedCategory]);
+
+  // Floating bubbles (only in lower sections)
+  const floatingBubbles = [
+    { w: 36, h: 35, b: "25%", l: "8%", d: "2s", dur: "7s" },
+    { w: 60, h: 58, b: "15%", r: "20%", d: "0.5s", dur: "9s" },
+    { w: 38, h: 36, t: "55%", r: "12%", d: "2.2s", dur: "8.5s" },
+    { w: 66, h: 64, b: "8%", l: "45%", d: "1.2s", dur: "9.5s" },
+  ];
+
   return (
-    <div className="flex flex-col bg-[#01011b]">
-      {/* article heading  */}
-      <div className="mb-0 flex flex-row max-[1300px]:mb-20 max-[800px]:flex-col">
-        <div className="flex w-[55vw] flex-col justify-between self-center max-[800px]:w-[90vw]">
+    <div
+      className="relative flex min-h-screen flex-col"
+      style={{ backgroundColor: "#01011B" }}
+    >
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Floating bubbles */}
+        {floatingBubbles.map((b, i) => (
           <div
-            className={`ml-[2.5vw] font-semibold ${poppins.className} animate-gradient-shift flex self-center bg-gradient-to-r from-[#11e3fb] via-[#b5f6fd] to-[#5be6ff] [background-size:300%_auto] bg-clip-text [background-position:0%_50%] pl-0 text-[4rem] leading-[100px] tracking-[0.1rem] text-transparent sm:text-[6rem] sm:leading-[120px] md:self-start md:pl-[3rem] lg:text-[7rem] xl:text-[8rem]`}
-          >
-            Articles
-          </div>
-          <div
-            className={`self-start text-white ${montserrat.className} mt-14 pl-24 font-light max-[800px]:pl-12 max-[500px]:mt-6 max-[500px]:pl-0 max-[500px]:text-center`}
-          >
-            <div className="mb-4 text-[2rem] leading-tight max-[1300px]:text-[1.8rem] max-[550px]:text-[1.2rem]">
-              Your Gateway to AI, Web Dev, and Blockchain
+            key={`float-${i}`}
+            className="floating-circle absolute rounded-full border border-cyan-500/20 bg-cyan-500/10"
+            style={{
+              width: `${b.w}px`,
+              height: `${b.h}px`,
+              top: b.t,
+              left: b.l,
+              right: b.r,
+              bottom: b.b,
+              animationDelay: b.d,
+              animationDuration: b.dur,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="mb-12 px-6 max-sm:px-4">
+        <div className="mx-auto flex max-w-7xl items-center max-lg:flex-col max-lg:text-center">
+          <div className="flex flex-1 flex-col items-center justify-center max-lg:mb-8">
+            <div className="text-center">
+              <div
+                className="text-[96px] leading-tight font-bold tracking-wide text-cyan-400 max-lg:text-[72px] max-md:text-[56px] max-sm:text-[48px]"
+                style={{
+                  fontFamily: "Istok Web, sans-serif",
+                  filter: "drop-shadow(0 0 20px rgba(135, 206, 235, 0.2))",
+                }}
+              >
+                Articles
+              </div>
+              <div className="mt-6 text-white">
+                <div
+                  className="mb-3 text-[38px] font-bold whitespace-nowrap text-white max-lg:text-[32px] max-lg:whitespace-normal max-md:text-[28px] max-sm:text-[24px]"
+                  style={{
+                    fontFamily: "Kaisei Opti, serif",
+                    lineHeight: "1.2",
+                  }}
+                >
+                  Empowering You to Build the Future
+                </div>
+                <p
+                  className="text-[20px] font-bold text-white max-lg:text-[18px] max-md:text-[16px]"
+                  style={{ fontFamily: "Kaisei Opti, serif" }}
+                >
+                  Mastering AI, Full-Stack Magic & Blockchain Breakthrough
+                </p>
+              </div>
             </div>
-            <p className="text-2xl font-thin max-[1300px]:text-[1.2rem] max-[550px]:text-[1rem]">
-              Explore cutting-edge trends and insights shaping the future of
-              technology.
-            </p>
           </div>
-        </div>
-        <div className="w-[35vw] self-start max-[800px]:w-[50vw] max-[800px]:self-center max-[550px]:w-[70vw]">
-          <LottieWrapper />
+          <div className="flex flex-1 justify-center">
+            <div className="h-[400px] w-[400px] max-[800px]:h-[300px] max-[800px]:w-[300px] max-[550px]:h-[200px] max-[550px]:w-[200px]">
+              <LottieWrapper />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* article card  */}
-      <div className="flex w-[95vw] justify-center gap-[2vw] self-center max-[800px]:flex-col max-[800px]:items-center max-[550px]:overflow-x-hidden">
-        {/* big card  */}
-        <div className="relative">
-          <div className="h-[475px] w-[25vw] max-w-[420px] min-w-[330px] rounded-[2.5vw] px-3 pt-0.5">
-            <a
-              className="group relative block h-full w-full overflow-hidden rounded-[2.5vw] bg-[#39394080] transition-all duration-150 hover:border-4 hover:border-[#3dc4d4] hover:shadow-[0_0_12px_#3dc4d4]"
-              href={data[0].link}
-              target="_blank"
-            >
-              <img
-                className="relative h-[45%] w-full"
-                src={data[0].img}
-                alt=""
-              />
+      <FeaturedCard article={data[0]} />
 
-              <div className="absolute top-4 -left-8 flex w-10 rotate-[-45deg] justify-center bg-green-700 px-16 py-2 text-center text-xs font-bold text-white shadow-md">
-                New
-              </div>
-              <div className="absolute top-[230px] pl-2 text-[17px] font-semibold text-[#11e3fb]">
-                {data[0].pubDate}
-              </div>
-              <p className="absolute top-[260px] ml-2 font-['Montserrat'] text-[22px] leading-normal font-semibold text-white">
-                {data[0].title}
-              </p>
-            </a>
+      <div className="mb-12 w-full px-6 max-sm:px-4">
+        <div className="flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
+          <div className="flex flex-wrap gap-3 max-sm:justify-center max-sm:gap-2">
+            {allCategories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-medium transition-all duration-200 max-sm:px-4 max-sm:py-2 max-sm:text-xs ${selectedCategory === category ? "border-cyan-500/50 bg-cyan-500/20 text-cyan-400 shadow-lg shadow-cyan-500/20" : "border-cyan-500/30 bg-transparent text-cyan-400 hover:border-cyan-500/50 hover:bg-cyan-500/10"}`}
+              >
+                {React.createElement(getCategoryIcon(category), { size: 16 })}
+                <span className="max-sm:hidden">{category}</span>
+                <span className="sm:hidden">
+                  {category.length > 6
+                    ? category.substring(0, 6) + ".."
+                    : category}
+                </span>
+              </button>
+            ))}
+          </div>
+          <div className="relative w-full max-sm:min-w-0 lg:w-auto lg:min-w-[350px]">
+            <input
+              type="text"
+              placeholder="Search article..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-full border border-cyan-500/30 bg-transparent px-4 py-3 pl-12 text-white placeholder-gray-400 transition-all duration-200 focus:border-cyan-500/50 focus:shadow-lg focus:shadow-cyan-500/20 focus:outline-none"
+            />
+            <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform text-gray-400" />
           </div>
         </div>
-        {/* small card  */}
-        <div className="mb-[40px] flex max-h-[480px] w-[min(70vw,1250px)] flex-wrap justify-center gap-[25px] overflow-y-auto rounded-[2.5vw] px-[1px] pt-[3px] pb-[6px] max-[800px]:max-h-none max-[800px]:w-[21rem] max-[800px]:px-[12px] max-[800px]:pt-0 max-[800px]:pb-0 max-[550px]:w-[19rem] max-[550px]:pt-[10px]">
-          {cards.slice(1)}
+      </div>
+
+      <div className="w-full px-6 max-sm:px-4">
+        <div className="rounded-2xl bg-transparent p-8 max-sm:p-4">
+          <div className="custom-scrollbar h-[700px] overflow-y-auto scroll-smooth pr-4 max-md:h-[600px] max-sm:h-[500px] max-sm:pr-2">
+            {filteredArticles.length > 0 ? (
+              <div className="grid grid-cols-1 justify-items-center gap-10 pt-4 pb-4 max-sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {filteredArticles.map((article, index) => (
+                  <ArticleCard
+                    key={index}
+                    article={article}
+                    index={index}
+                    onHover={setHoveredCard}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="flex h-full items-center justify-center">
+                <p className="text-lg text-gray-400 max-sm:text-center">
+                  No articles found matching your criteria.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @import url("https://fonts.googleapis.com/css2?family=Istok+Web:wght@700&family=Kaisei+Opti:wght@700&display=swap");
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(30, 41, 59, 0.3);
+          border-radius: 10px;
+          margin: 8px 0;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: linear-gradient(135deg, #06b6d4, #0891b2);
+          border-radius: 10px;
+          border: 2px solid rgba(30, 41, 59, 0.3);
+          transition: all 0.3s ease;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(135deg, #0891b2, #0e7490);
+          border: 2px solid rgba(6, 182, 212, 0.2);
+          box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+        }
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: #06b6d4 rgba(30, 41, 59, 0.3);
+        }
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+        .line-clamp-4 {
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+        }
+
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px) translateX(0px) rotate(0deg);
+            opacity: 0.6;
+          }
+          25% {
+            transform: translateY(-20px) translateX(10px) rotate(5deg);
+            opacity: 0.8;
+          }
+          50% {
+            transform: translateY(-10px) translateX(-15px) rotate(-3deg);
+            opacity: 1;
+          }
+          75% {
+            transform: translateY(-25px) translateX(8px) rotate(7deg);
+            opacity: 0.7;
+          }
+        }
+
+        .floating-circle {
+          animation: float infinite ease-in-out;
+          backdrop-filter: blur(1px);
+          box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
+        }
+      `}</style>
     </div>
   );
 };
