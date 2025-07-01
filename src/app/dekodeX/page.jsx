@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Leaderboard from "./Leaderboard";
 import ProblemArena from "./ProblemArena";
 import Link from "next/link";
@@ -9,10 +9,59 @@ import { useAuth } from "@/contexts/authContext";
 import { signOut } from "firebase/auth";
 import { auth } from "@/backend/firebase";
 import { toast } from "react-toastify";
+import Modal from "./Modal";
+import { useAuthToken } from "@/hooks/useAuthToken";
+
+async function checkCertificate(email, token) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/certificate/check?email=${encodeURIComponent(email)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data.exists === true;
+  } catch (err) {
+    console.error("Error checking certificate:", err);
+    return false;
+  }
+}
 
 export default function Layout() {
-  const { loggedIn } = useAuth();
+  const { user, loggedIn } = useAuth();
   const router = useRouter();
+  const [hasCert, setHasCert] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { token: authToken } = useAuthToken();
+
+  useEffect(() => {
+    async function checkStatusAndModal() {
+      if (loggedIn && user?.email && authToken) {
+        setLoading(true);
+        const exists = await checkCertificate(user.email, authToken);
+        setHasCert(exists);
+        setLoading(false);
+
+        const modalShowed = localStorage.getItem("modalShowed");
+        if (modalShowed !== "true" && !exists) {
+          setShowModal(true);
+          localStorage.setItem("modalShowed", "true");
+        }
+      }
+    }
+    checkStatusAndModal();
+  }, [loggedIn, user?.email, authToken]);
 
   const handleAuthAction = async () => {
     if (loggedIn) {
@@ -39,6 +88,97 @@ export default function Layout() {
           <Leaderboard />
         </div>
       </div>
+      {loggedIn ? (
+        <div className="p-6">
+          <h1 className="mb-4 text-2xl font-bold">Certificate Application</h1>
+          {hasCert === false && (
+            <button
+              className="cursor-pointer rounded border border-cyan-400 bg-neutral-800 px-4 py-2 text-white shadow-md transition-colors hover:border-cyan-300 hover:bg-cyan-600 hover:shadow-cyan-500/30"
+              onClick={() => setShowModal(true)}
+            >
+              Apply for Certificate
+            </button>
+          )}
+
+          {hasCert === true && (
+            <p className="text-green-700">
+              You have already applied for a certificate.
+            </p>
+          )}
+
+          {hasCert === null && <p>Checking your certificate status...</p>}
+
+          {showModal && (
+            <Modal onClose={() => setShowModal(false)}>
+              <h2 className="mb-4 text-xl font-semibold">Enter Your Name</h2>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setIsSubmitting(true);
+                  try {
+                    const res = await fetch(
+                      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dekodeX/api/certificate/apply`,
+                      {
+                        method: "POST",
+                        headers: {
+                          Authorization: `Bearer ${authToken}`,
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          email: user.email,
+                          name: name || null,
+                        }),
+                      }
+                    );
+
+                    if (!res.ok) {
+                      throw new Error(
+                        `Failed to apply for certificate: ${res.status}`
+                      );
+                    }
+
+                    setShowModal(false);
+                    setHasCert(true);
+                    toast.success("Certificate application submitted!");
+                  } catch (err) {
+                    console.error("Error submitting certificate:", err);
+                    toast.error(
+                      err.message ||
+                        "Something went wrong. Please try again later."
+                    );
+                    setIsSubmitting(false);
+                  }
+                }}
+              >
+                <label className="mb-2 block">
+                  Name:
+                  <input
+                    type="text"
+                    required
+                    className="mt-1 block w-full border-0 border-b-1 border-gray-300 bg-transparent px-2 py-1 transition-colors focus:border-blue-500 focus:outline-none"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    disabled={isSubmitting}
+                  />
+                </label>
+                <button
+                  type="submit"
+                  className={`mt-4 w-full rounded-lg px-4 py-2 transition ${
+                    isSubmitting
+                      ? "cursor-not-allowed bg-gray-400 text-gray-700"
+                      : "cursor-pointer border border-cyan-400 px-8 py-2 font-mono text-xs font-bold tracking-widest uppercase shadow-[0_0_10px_rgba(6,182,212,0.3)] transition-all hover:border-cyan-200 hover:bg-blue-950 hover:shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                  }`}
+                >
+                  Submit Application
+                </button>
+              </form>
+            </Modal>
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
+
       <button
         id="floatingAuthBtn"
         onClick={handleAuthAction}

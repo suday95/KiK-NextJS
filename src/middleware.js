@@ -61,6 +61,8 @@ export function middleware(request) {
     "/dekodeX/api/question",
     "/dekodeX/api/questionTitles",
     "/dekodeX/api/submit",
+    "/dekodeX/api/certificate/apply",
+    "/dekodeX/api/certificate/check",
   ];
 
   const publicPaths = [
@@ -158,5 +160,7 @@ export const config = {
     "/dekodeX/api/auth/:path*",
     "/dekodeX/api/leaderboard/:path*",
     "/dekodeX/api/verifyTurnstile/:path*",
+    "/dekodeX/api/certificate/apply/:path*",
+    "/dekodeX/api/certificate/check/:path*",
   ],
 };

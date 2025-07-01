@@ -1,10 +1,8 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import dataJ from "../../../data/qna/programming-questions.json";
+import dataJ from "../../../data/qna/lab-questions.json";
 
 export default function LabQuestion() {
   const [flag, setFlag] = useState(false);
@@ -12,37 +10,42 @@ export default function LabQuestion() {
   const [question, setQuestion] = useState("");
   const [solution, setSolution] = useState("");
 
-  const params = useParams();
-  const topic = params?.topic;
-  const subTopic = params?.subTopic;
-  const ind = parseInt(params?.ind);
+  const { topic, subTopic, ind: indStr } = useParams();
+  const ind = parseInt(indStr, 10);
 
   useEffect(() => {
     if (!topic || isNaN(ind)) return;
 
     let arr = [];
+
     if (topic === "labTest") {
-      const topicArray = [
-        "initialBasics",
-        "loops",
-        "ArrayAndStrings",
-        "functionsAndRecursions",
-        "structuresAndPointers",
-        "sortingAnd2dArrays",
-        "linkedList",
-      ];
-      topicArray.forEach((t) => {
-        arr = arr.concat(dataJ[t][2].Elements);
+      // flatten _all_ lab questions across every chapter & subtopic
+      Object.values(dataJ).forEach((chapterArray) => {
+        chapterArray.forEach((chapter) => {
+          if (chapter.type === "lab" && chapter.Subtopics) {
+            Object.values(chapter.Subtopics).forEach((qList) => {
+              arr = arr.concat(qList);
+            });
+          }
+        });
       });
     } else {
-      arr = dataJ[topic]?.[0]?.Elements || [];
+      // look up exactly the one chapter you asked for
+      const chapterArray = dataJ[topic];
+      if (Array.isArray(chapterArray)) {
+        const chapter = chapterArray[0];
+        const qList = chapter?.Subtopics?.[subTopic];
+        if (Array.isArray(qList)) {
+          arr = qList;
+        }
+      }
     }
 
     if (arr[ind]) {
       setQuestion(arr[ind].Question);
       setSolution(arr[ind].Answer);
     }
-  }, [topic, ind]);
+  }, [topic, subTopic, ind]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(solution);
@@ -80,7 +83,6 @@ export default function LabQuestion() {
               padding: "1.5rem",
               margin: "0rem",
               backgroundColor: "#282a36",
-              // borderRadius: '10px',
             }}
             wrapLongLines={true}
           >
