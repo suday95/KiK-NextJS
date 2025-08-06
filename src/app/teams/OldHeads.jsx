@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Linkedin, Github, Mail } from "lucide-react";
 import Head from "../../data/teams/OldHeads.json";
+import Image from "next/image";
 
 const OldHeads = () => {
   function eachHead(head) {
@@ -10,9 +11,11 @@ const OldHeads = () => {
       >
         <div className="relative z-[2] flex w-full flex-col items-center space-y-6 group-hover:[transform:translateZ(20px)]">
           <div className="relative mt-6 flex w-full flex-col items-center">
-            <img
+            <Image
               src={head.image_url}
               alt={head.name}
+              height={250}
+              width={200}
               className="h-[250px] w-[200px] object-cover"
             />
           </div>
