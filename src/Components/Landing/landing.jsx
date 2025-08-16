@@ -208,14 +208,14 @@ export default function Landing() {
         </div>
 
         <div className="mt-10 mb-10 flex flex-col items-center justify-center md:mt-0 md:mb-0 md:w-1/2">
-          {/* <Lottie
+          <Lottie
             animationData={main}
             className="w-[80%] md:w-full max-w-[500px]"
-          /> */}
+          />
 
           {/* enlarge Card to roughly match Lottie size */}
 
-          <div className="mx-auto w-[90%] max-w-[600px] px-4 md:w-full md:px-0">
+          {/* <div className="mx-auto w-[90%] max-w-[600px] px-4 md:w-full md:px-0">
             <Link href="/auth">
               <Card />
             </Link>
@@ -228,7 +228,7 @@ export default function Landing() {
               dekodeX
             </span>{" "}
             Now
-          </h2>
+          </h2>*/}
         </div>
       </div>
       <div className="bottom-bar flex flex-col items-start justify-between gap-8 px-8 pb-[60px] text-left md:flex-row md:gap-16 md:px-[60px]">
