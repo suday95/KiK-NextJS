@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Linkedin, Github, Mail } from "lucide-react";
 import Head from "../../data/teams/Heads.json";
+import Image from "next/image";
 
 const Heads = () => {
   function eachHead(head) {
@@ -13,9 +14,12 @@ const Heads = () => {
             <strong>{head.role}</strong>
           </h4>
           <div className="relative flex w-full flex-col items-center">
-            <img
+            <Image
               src={head.image_url}
               alt={head.name}
+              width={200}
+              height={250}
+              priority={true}
               className="h-[250px] w-[200px] object-cover"
             />
           </div>

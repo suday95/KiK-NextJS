@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      new URL("https://github.com/kodeinkgp/Photos/blob/main/**?raw=true"),
+      new URL("https://**.githubusercontent.com/**"),
+      new URL("https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/**?raw=true")
+    ]
+  }
+};
 
 export default nextConfig;

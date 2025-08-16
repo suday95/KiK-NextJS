@@ -16,6 +16,7 @@ import { Facebook, Instagram, Linkedin, Github, Mail } from "lucide-react";
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // import { faFacebook, faInstagram ,faLinkedin,faGithub} from '@fortawesome/free-brands-svg-icons';
 // import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import Image from "next/image";
 
 const SelectedTeam = (props) => {
   let number = props.id - 1;
@@ -33,9 +34,12 @@ const SelectedTeam = (props) => {
         >
           <div className="relative z-[2] flex w-full flex-col items-center space-y-6 group-hover:[transform:translateZ(20px)]">
             <div className="relative mt-6 flex w-full flex-col items-center">
-              <img
+              <Image
                 src={head.image_url}
                 alt={head.name}
+                width={200}
+                height={250}
+                priority={true}
                 className="h-[250px] w-[200px] object-cover"
               />
             </div>
