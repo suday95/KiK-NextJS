@@ -14,28 +14,6 @@
 
     {
       "id": 2,
-      "name": "Anshumaan Mishra",
-      "team": "AI & Metaverse and Events Team",
-      "facebook": "",
-      "mailid": "anshumaanmishra.24@kgpian.iitkgp.ac.in",
-      "instagram": "https://www.instagram.com/anshumaan.mishra.02/#",
-      "linkedin": "www.linkedin.com/in/anshumaan-mishra-694016321",
-      "github": "https://github.com/AnshumaanMishra",
-      "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/AnshumaanMishra.jpg?raw=true"
-    },
-    {
-      "id": 3,
-      "name": "Ark Sanvi",
-      "team": "Events Team",
-      "facebook": "",
-      "mailid": "ark.24@kgpian.iitkgp.ac.in",
-      "instagram": "https://www.instagram.com/arksanvi?igsh=N3Q3YzhzenhmczY1",
-      "linkedin": "https://www.linkedin.com/in/ark-sanvi-434002238?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      "github": "https://github.com/ArkSanvi",
-      "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Ark_Sanvi.jpeg?raw=true"
-    },
-    {
-      "id": 4,
       "name": "Babul Pradhan",
       "team": "Events Team",
       "facebook": "",
@@ -46,7 +24,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Babul_Pradhan.jpg?raw=true"
     },
     {
-      "id": 5,
+      "id": 3,
       "name": "Kaustav De",
       "team": "Events Team",
       "facebook": "",
@@ -57,7 +35,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Kaustav_De.jpg?raw=true"
     },
     {
-      "id": 6,
+      "id": 4,
       "name": "Rohit Bej",
       "team": "Events Team",
       "facebook": "https://www.facebook.com/rohit.bej.92",
@@ -68,7 +46,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Rohit_Bej.jpg?raw=true"
     },
     {
-      "id": 7,
+      "id": 5,
       "name": "Rupesh Vinayak",
       "team": "Blockchain Team, Events Team",
       "facebook": "https://www.facebook.com/share/1FbpKWuV8P/",
@@ -79,7 +57,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Rupesh%20Vinayak.jpg?raw=true"
     },
     {
-      "id": 8,
+      "id": 6,
       "name": "Sathvika RK",
       "team": "Blockchain Team, Events team ",
       "facebook": "https://www.facebook.com/share/18JAZenhXc/",
@@ -90,7 +68,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/SATHVIKA_RK.jpg?raw=true"
     },
     {
-      "id": 9,
+      "id": 7,
       "name": "Shreyash Prashant Yadav",
       "team": "Events Team",
       "facebook": "",
@@ -101,7 +79,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Shreyash%20Yadav.jpg?raw=true"
     },
     {
-      "id": 10,
+      "id": 8,
       "name": "Shrirang Patel",
       "team": "Events Team",
       "facebook": "",
@@ -112,7 +90,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Shrirang_Patel.jpg?raw=true"
     },
     {
-      "id": 11,
+      "id": 9,
       "name": "Tugiti Likhitha",
       "team": "Design and Media Team, Events Team",
       "facebook": "None",
@@ -123,7 +101,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Likhitha%20Tugiti.jpeg?raw=true"
     },
     {
-      "id": 12,
+      "id": 10,
       "name": "Vraj Shah",
       "team": "Events Team",
       "facebook": "https://www.facebook.com/share/1AhzeQggRD/",
@@ -134,7 +112,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Vraj%20Shah.jpg?raw=true"
     },
     {
-      "id": 13,
+      "id": 11,
       "name": "Roshan Oza",
       "team": "Events Team",
       "facebook": "https://www.facebook.com/profile.php?id=61560865272154",
@@ -145,7 +123,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Roshan%20Oza.jpg?raw=true"
     },
     {
-      "id": 14,
+      "id": 12,
       "name": "Tanay Katyayan",
       "team": "Events Team",
       "facebook": "",

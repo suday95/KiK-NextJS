@@ -2,17 +2,6 @@
   [
     {
       "id": 1,
-      "name": "Abhishek Kumar",
-      "team": "Blockchain Team , Design and Media Team",
-      "facebook": "",
-      "mailid": "abhishekiitkgp007@gmail.com",
-      "instagram": "https://www.instagram.com/abhishek_19_28?igsh=dWUzZHozYzlzYnl4",
-      "linkedin": "https://www.linkedin.com/in/abhishek-kumar-97a99631b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      "github": "https://github.com/abhishek007-git",
-      "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/AbhishekKumar.jpg?raw=true"
-    },
-    {
-      "id": 2,
       "name": "Aditya Bhide",
       "team": "Blockchain Team, Design and Media Team",
       "facebook": "https://www.facebook.com/share/1CKefJtbRP/",
@@ -23,7 +12,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Aditya_Bhide.jpg?raw=true"
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "Kothagundla Reshmitha",
       "team": "AI & Metaverse, Blockchain Team",
       "facebook": "None",
@@ -34,7 +23,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Reshmitha.jpeg?raw=true"
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "Rupesh Vinayak",
       "team": "Blockchain Team, Events Team",
       "facebook": "https://www.facebook.com/share/1FbpKWuV8P/",
@@ -45,7 +34,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Rupesh%20Vinayak.jpg?raw=true"
     },
     {
-      "id": 5,
+      "id": 4,
       "name": "Sathvika RK",
       "team": "Blockchain Team, Events team ",
       "facebook": "https://www.facebook.com/share/18JAZenhXc/",
@@ -56,7 +45,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/SATHVIKA_RK.jpg?raw=true"
     },
     {
-      "id": 6,
+      "id": 5,
       "name": "Tanush Badonia",
       "team": "AI & Metaverse, Blockchain Team",
       "facebook": "https://www.facebook.com/share/16cWEAs6eM/?mibextid=wwXIfr",
@@ -67,7 +56,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Tanush_Badonia.jpg?raw=true"
     },
     {
-      "id": 7,
+      "id": 6,
       "name": "Shivam Kumar",
       "team": "Blockchain Team, Design and Media Team",
       "facebook": "",
@@ -78,7 +67,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Shivam%20kumar_24AR10034.jpg?raw=true"
     },
     {
-      "id": 8,
+      "id": 7,
       "name": "Kavish Sureka",
       "team": "Blockchain Team",
       "facebook": "https://www.facebook.com/kavish.sureka",
@@ -89,7 +78,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/KavishSureka.jpg?raw=true"
     },
     {
-      "id": 9,
+      "id": 8,
       "name": "Sandeep Saikia",
       "team": "Blockchain Team",
       "facebook": "",
@@ -100,7 +89,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Sandeep_Saikia.jpg?raw=true"
     },
     {
-      "id": 10,
+      "id": 9,
       "name": "Shatakshi Shukla",
       "team": "",
       "facebook": "",
@@ -111,7 +100,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Shatakshi_Shukla.jpg?raw=true"
     },
     {
-      "id": 11,
+      "id": 10,
       "name": "Shashikant",
       "team": "Blockchain Team",
       "facebook": "",

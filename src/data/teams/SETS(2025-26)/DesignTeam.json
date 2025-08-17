@@ -2,17 +2,6 @@
   [
     {
       "id": 1,
-      "name": "Abhishek Kumar",
-      "team": "Blockchain Team , Design and Media Team",
-      "facebook": "",
-      "mailid": "abhishekiitkgp007@gmail.com",
-      "instagram": "https://www.instagram.com/abhishek_19_28?igsh=dWUzZHozYzlzYnl4",
-      "linkedin": "https://www.linkedin.com/in/abhishek-kumar-97a99631b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      "github": "https://github.com/abhishek007-git",
-      "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/AbhishekKumar.jpg?raw=true"
-    },
-    {
-      "id": 2,
       "name": "Aditya Bhide",
       "team": "Blockchain Team, Design and Media Team",
       "facebook": "https://www.facebook.com/share/1CKefJtbRP/",
@@ -23,7 +12,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Aditya_Bhide.jpg?raw=true"
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "B. Vritant",
       "team": "AI & Metaverse, Design and Media Team",
       "facebook": "",
@@ -34,7 +23,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/B.%20Vritant.jpg?raw=true"
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "Richa Singh",
       "team": "Design and Media Team",
       "facebook": "",
@@ -45,7 +34,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Richa%20Singh.jpg?raw=true"
     },
     {
-      "id": 5,
+      "id": 4,
       "name": "Tejas Bramhe",
       "team": "Design and Media Team",
       "facebook": "https://www.facebook.com/tejas.bramhe.2025",
@@ -56,7 +45,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Tejas%20Bramhe.jpg?raw=true"
     },
     {
-      "id": 6,
+      "id": 5,
       "name": "Tugiti Likhitha",
       "team": "Design and Media Team, Events Team",
       "facebook": "None",
@@ -67,7 +56,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Likhitha%20Tugiti.jpeg?raw=true"
     },
     {
-      "id": 7,
+      "id": 6,
       "name": "Shivam Kumar",
       "team": "Blockchain Team, Design and Media Team",
       "facebook": "",
@@ -78,7 +67,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Shivam%20kumar_24AR10034.jpg?raw=true"
     },
     {
-      "id": 8,
+      "id": 7,
       "name": "Parvathini Sri Karthikeya Chowdary",
       "team": "Design and Media Team",
       "facebook": "https://www.facebook.com/share/15b5CNsHdo/",

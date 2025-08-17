@@ -11,21 +11,8 @@
       "github": "https://www.github.com/Furor860",
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/AkshatSemwal.jpg?raw=true"
     },
-
     {
       "id": 2,
-      "name": "Anshumaan Mishra",
-      "Team": "AI & Metaverse and Events Team",
-      "facebook": "",
-      "mailid": "anshumaanmishra.24@kgpian.iitkgp.ac.in",
-      "instagram": "https://www.instagram.com/anshumaan.mishra.02/#",
-      "linkedin": "www.linkedin.com/in/anshumaan-mishra-694016321",
-      "github": "https://github.com/AnshumaanMishra",
-      "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/AnshumaanMishra.jpg?raw=true"
-    },
-
-    {
-      "id": 3,
       "name": "Aryan Shah",
       "Team": "AI & Metaverse Team",
       "facebook": "",
@@ -36,7 +23,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/AryanShah.jpg?raw=true"
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "B. Vritant",
       "Team": "AI & Metaverse, Design and Media Team",
       "facebook": "",
@@ -48,7 +35,7 @@
     },
 
     {
-      "id": 5,
+      "id": 4,
       "name": "Gunda Gnanesh",
       "Team": "AI & Metaverse, Tech Team",
       "facebook": "https://www.facebook.com/profile.php?id=61572564645755",
@@ -59,7 +46,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Gnanesh.jpg?raw=true"
     },
     {
-      "id": 6,
+      "id": 5,
       "name": "Durga Sai",
       "Team": "AI & Metaverse",
       "facebook": "https://www.facebook.com/durgasai.gundubogula.1",
@@ -71,7 +58,7 @@
     },
 
     {
-      "id": 7,
+      "id": 6,
       "name": "Kothagundla Reshmitha",
       "Team": "AI & Metaverse, Blockchain Team",
       "facebook": "None",
@@ -82,7 +69,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Reshmitha.jpeg?raw=true"
     },
     {
-      "id": 8,
+      "id": 7,
       "name": "Kritya Anand",
       "Team": "AI & Metaverse, Tech Team",
       "facebook": "https://www.facebook.com/share/1CKAcwe3qJ/",
@@ -92,32 +79,8 @@
       "github": "https://github.com/kritya-anand",
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/KrityaAnand.jpg?raw=true"
     },
-
     {
-      "id": 9,
-      "name": "Sohan Choudhury",
-      "Team": "AI & Metaverse",
-      "facebook": "https://www.facebook.com/share/1Db6brZpWU/",
-      "mailid": "sohanchoudhury12@gmail.com",
-      "instagram": "",
-      "linkedin": "https://www.linkedin.com/in/sohan-choudhury-151b48315?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      "github": "https://github.com/spak1235",
-      "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Sohan_Choudhury.jpg?raw=true"
-    },
-    {
-      "id": 10,
-      "name": "Sounika Mandal",
-      "Team": "AI & Metaverse",
-      "facebook": "https://www.facebook.com/profile.php?id=61563854338164",
-      "mailid": "sounikamandal2006@gmail.com",
-      "instagram": "https://www.instagram.com/sounikamandal/",
-      "linkedin": "https://www.linkedin.com/in/sounika-mandal-357806261/?original_referer=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&originalSubdomain=in",
-      "github": "https://github.com/Megha06-byte",
-      "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/sounika%20mandal.jpg?raw=true"
-    },
-
-    {
-      "id": 11,
+      "id": 8,
       "name": "Suday Nandan reddy",
       "Team": "AI & Metaverse, Tech Team",
       "facebook": "",
@@ -128,7 +91,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Suday%20Nandan%20Reddy.JPG?raw=true"
     },
     {
-      "id": 12,
+      "id": 9,
       "name": "Tanush Badonia",
       "Team": "AI & Metaverse, Blockchain Team",
       "facebook": "https://www.facebook.com/share/16cWEAs6eM/?mibextid=wwXIfr",
@@ -140,7 +103,7 @@
     },
 
     {
-      "id": 13,
+      "id": 10,
       "name": "Mayank Goel",
       "Team": "AI & Metaverse",
       "facebook": "https://www.facebook.com/share/16Z1UDof7N/",
@@ -152,7 +115,7 @@
     },
 
     {
-      "id": 14,
+      "id": 11,
       "name": "Mohd Hammad Ansari",
       "Team": "AI & Metaverse",
       "facebook": "",
@@ -164,7 +127,7 @@
     },
 
     {
-      "id": 15,
+      "id": 12,
       "name": "Roshni Laha",
       "Team": "AI & Metaverse",
       "facebook": "",
@@ -176,7 +139,7 @@
     },
 
     {
-      "id": 16,
+      "id": 13,
       "name": "Mohit Varanasi",
       "Team": "AI & Metaverse",
       "facebook": "",
