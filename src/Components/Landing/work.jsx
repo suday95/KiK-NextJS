@@ -5,6 +5,9 @@ import Robot from "../../data/animations/Robo.json";
 import Lottie from "lottie-react";
 import WEBDEV from "../../data/animations/WEB.json";
 import Blockchain from "../../data/animations/Blockchain.json";
+import Web from "../../data/animations/newLanding/Web.json";
+import AI from "../../data/animations/newLanding/AI.json";
+import Block from "../../data/animations/newLanding/Block.json";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -96,7 +99,7 @@ export default function Teams() {
   }, []);
 
   return (
-    <div className={`relative ${montserrat.variable}`}>
+    <div className={`bg-[#00002C] relative ${montserrat.variable}`}>
       <h2
         id="recentHeader"
         className="my-8 bg-gradient-to-br from-[#11E3FB] via-[#5BE6FF] to-[#11E3FB] [background-clip:text] text-center text-[48px] font-bold text-transparent [-webkit-background-clip:text]"
@@ -109,7 +112,7 @@ export default function Teams() {
           className="mt-5 h-[40vw] rounded-[2.5vw] bg-[rgba(54,54,54,0.4)] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[20px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] max-[768px]:translate-x-0 max-[768px]:translate-y-0 md:absolute md:top-[10%] md:left-[40%] md:z-[2] md:w-[20vw] md:translate-x-[-50%] md:translate-y-[-50%] md:rotate-[-7deg] md:transition md:delay-[50ms]"
           ref={(el) => (cardRefs.current[1] = el)}
         >
-          <Lottie animationData={WEBDEV} height={10} />
+          <Lottie animationData={Web} height={10} />
           <p className="font-montserrat -webkit-bg-clip-text !mt-[1.5vw] !mb-[0.5vw] !bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text !text-center text-2xl !text-transparent max-[768px]:mt-[5vw] max-[768px]:text-[7vw]">
             Web
           </p>
@@ -122,7 +125,7 @@ export default function Teams() {
           className="mt-5 h-[40vw] rounded-[2.5vw] bg-[rgba(54,54,54,0.4)] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[20px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] max-[768px]:translate-x-0 max-[768px]:translate-y-0 md:absolute md:top-[10%] md:left-[40%] md:z-[1] md:mb-[16px] md:w-[20vw] md:translate-x-[-50%] md:translate-y-[-50%] md:rotate-[5deg] md:transition md:delay-[100ms]"
           ref={(el) => (cardRefs.current[0] = el)}
         >
-          <Lottie animationData={Robot} height={10} />
+          <Lottie animationData={AI} height={10} />
           <p className="font-montserrat -webkit-bg-clip-text !mt-[1.5vw] !mb-[0.5vw] !bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text !text-center text-2xl !text-transparent max-[768px]:mt-[5vw] max-[768px]:text-[7vw]">
             AI & Metaverse
           </p>
@@ -135,7 +138,7 @@ export default function Teams() {
           className="mt-5 h-[40vw] rounded-[2.5vw] bg-[rgba(54,54,54,0.4)] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:mb-[20px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] max-[768px]:translate-x-0 max-[768px]:translate-y-0 md:absolute md:top-[10%] md:left-[40%] md:z-[3] md:w-[20vw] md:translate-x-[-50%] md:translate-y-[-50%] md:rotate-[-2deg]"
           ref={(el) => (cardRefs.current[2] = el)}
         >
-          <Lottie animationData={Blockchain} height={10} />
+          <Lottie animationData={Block} height={10} />
           <p className="font-montserrat -webkit-bg-clip-text !mt-[1.5vw] !mb-[0.5vw] !bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text !text-center text-2xl !text-transparent max-[768px]:mt-[5vw] max-[768px]:text-[7vw]">
             Blockchain
           </p>

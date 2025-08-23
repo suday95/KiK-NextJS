@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Landing from "@/Components/Landing/landing";
 import Work from "@/Components/Landing/work";
+import Contribution from "@/Components/Landing/contribution";
 import Loader from "@/Components/utils/loader";
 
 const MainContent = () => {
@@ -19,6 +20,7 @@ const MainContent = () => {
     <div className="relative flex h-full w-full flex-col overflow-hidden bg-[rgb(1,1,27)]">
       {/* Content always rendered */}
       <Landing />
+      <Contribution />
       <Work />
 
       {/* Loader overlay */}
