@@ -25,77 +25,69 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Teams() {
   const cardRefs = useRef([]);
+  const lottieRefs = useRef([]);
 
   useEffect(() => {
-    const isDesktop = typeof window !== "undefined" && window.innerWidth > 768;
+    if (typeof window === "undefined") return;
+    
+    const left = cardRefs.current[0];
+    const center = cardRefs.current[1]; 
+    const right = cardRefs.current[2];
 
-    cardRefs.current.forEach((card, index) => {
-      if (!card) return;
+    // Guard if refs aren't available
+    if (!left || !center || !right) return;
 
-      if (isDesktop) {
-        const rotationInit = index === 0 ? -10 : index === 1 ? 0 : 10;
-        card.style.transform = `translateX(0) rotate(${rotationInit}deg) scale(1)`;
+    const isDesktop = window.innerWidth > 768;
 
-        let xOffset = index === 0 ? "-30vw" : index === 1 ? "0vw" : "30vw";
+    // Set initial states
+    gsap.set(left, { x: isDesktop ? -800 : -200, opacity: 0 });
+    gsap.set(right, { x: isDesktop ? 800 : 200, opacity: 0 }); 
+    gsap.set(center, { scale: isDesktop ? 0.9 : 0.95, opacity: 0 });
 
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: card,
-              start: "30% bottom",
-              end: "center center",
-              scrub: true,
-            },
-          })
-          .fromTo(
-            card,
-            { x: 0, rotation: rotationInit, scale: 1 },
-            { x: xOffset, rotation: 0, scale: 1.1 }
-          );
-      } else {
-        card.style.transform = "translateX(-300px)";
-        card.style.opacity = "0";
-
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: card,
-              start: "top bottom",
-              end: "top center",
-              scrub: true,
-              scroller: "body",
-              immediateRender: true,
-            },
-          })
-          .fromTo(
-            card,
-            { x: -300, opacity: 0 },
-            { x: 0, opacity: 1, stagger: 0.2, ease: "linear" }
-          );
+    // Create timeline with scroll trigger
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: left.parentElement,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse"
       }
-    });
+    })
+    .to([left, right], {
+      x: 0,
+      opacity: 1,
+      duration: 1.1,
+      ease: "power3.out"
+    }, 0)
+    .to(center, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.7,
+      ease: "back.out(1.6)"
+    }, 0.2);
 
+    // Poster animation
     const poster = document.querySelector(".pds-page-poster-wrapper");
     if (poster) {
-      poster.style.transform = "translateX(-300px)";
-      poster.style.opacity = "0";
-
-      gsap
-        .timeline({
+      gsap.fromTo(poster, 
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: poster,
-            start: "center bottom",
-            end: "center center",
-            scrub: 1,
-            scroller: "body",
-          },
-        })
-        .fromTo(
-          poster,
-          { x: -300, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.5, stagger: 0.2 }
-        );
+            start: "top 90%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
     }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   return (
@@ -107,45 +99,80 @@ export default function Teams() {
         Our Expertise
       </h2>
 
-      <div className="!mb-[20vw] max-[768px]:relative max-[768px]:mb-[5vh] max-[768px]:flex max-[768px]:max-h-fit max-[768px]:flex-col max-[768px]:items-center md:relative md:h-[30vw] md:pb-[40vw]">
+      <div className="!mb-[20vw] max-[768px]:relative max-[768px]:mb-[5vh] max-[768px]:flex max-[768px]:max-h-fit max-[768px]:flex-col max-[768px]:items-center md:flex md:flex-row md:justify-center md:items-center md:gap-[6vw] md:h-auto md:pb-0">
         <div
-          className="mt-5 h-[40vw] rounded-[2.5vw] bg-[rgba(54,54,54,0.4)] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[20px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] max-[768px]:translate-x-0 max-[768px]:translate-y-0 md:absolute md:top-[10%] md:left-[40%] md:z-[2] md:w-[20vw] md:translate-x-[-50%] md:translate-y-[-50%] md:rotate-[-7deg] md:transition md:delay-[50ms]"
-          ref={(el) => (cardRefs.current[1] = el)}
-        >
-          <Lottie animationData={Web} height={10} />
-          <p className="font-montserrat -webkit-bg-clip-text !mt-[1.5vw] !mb-[0.5vw] !bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text !text-center text-2xl !text-transparent max-[768px]:mt-[5vw] max-[768px]:text-[7vw]">
-            Web
-          </p>
-          <p className="font-montserrat !px-5 !py-2.5 !text-center">
-            Crafting dynamic, responsive websites that deliver exceptional user
-            experiences across all devices.
-          </p>
-        </div>
-        <div
-          className="mt-5 h-[40vw] rounded-[2.5vw] bg-[rgba(54,54,54,0.4)] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[20px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] max-[768px]:translate-x-0 max-[768px]:translate-y-0 md:absolute md:top-[10%] md:left-[40%] md:z-[1] md:mb-[16px] md:w-[20vw] md:translate-x-[-50%] md:translate-y-[-50%] md:rotate-[5deg] md:transition md:delay-[100ms]"
+          className="mt-2 h-[40vw] rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:w-[26%] md:h-[32vw] relative overflow-hidden group"
           ref={(el) => (cardRefs.current[0] = el)}
         >
-          <Lottie animationData={AI} height={10} />
-          <p className="font-montserrat -webkit-bg-clip-text !mt-[1.5vw] !mb-[0.5vw] !bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text !text-center text-2xl !text-transparent max-[768px]:mt-[5vw] max-[768px]:text-[7vw]">
-            AI & Metaverse
-          </p>
-          <p className="font-montserrat !px-5 !py-2.5 !text-center">
-            Enter a realm where AI drives immersive Metaverse encounters,
-            pushing boundaries of what&apos;s possible.
-          </p>
+          <div className="lottie-wrapper absolute inset-0 flex justify-center items-center z-10">
+            <Lottie 
+              animationData={AI} 
+              height={10} 
+              lottieRef={(ref) => (lottieRefs.current[0] = ref)}
+              autoplay={true}
+              loop={true}
+            />
+          </div>
+
+          <div className="overlay absolute inset-0 z-20 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-[rgba(54,54,54,0.9)] rounded-[2.5vw] flex flex-col justify-center items-center text-center px-5">
+            <p className="font-montserrat -webkit-bg-clip-text mb-4 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text text-2xl text-transparent max-[768px]:text-[7vw]">
+              AI & Metaverse
+            </p>
+            <p className="font-montserrat text-white text-center">
+              Enter a realm where AI drives immersive Metaverse encounters,
+              pushing boundaries of what&apos;s possible.
+            </p>
+          </div>
         </div>
+
         <div
-          className="mt-5 h-[40vw] rounded-[2.5vw] bg-[rgba(54,54,54,0.4)] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:mb-[20px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] max-[768px]:translate-x-0 max-[768px]:translate-y-0 md:absolute md:top-[10%] md:left-[40%] md:z-[3] md:w-[20vw] md:translate-x-[-50%] md:translate-y-[-50%] md:rotate-[-2deg]"
+          className="mt-2 h-[40vw] rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:w-[26%] md:h-[32vw] relative overflow-hidden group"
+          ref={(el) => (cardRefs.current[1] = el)}
+        >
+          <div className="lottie-wrapper absolute inset-0 flex justify-center items-center z-10">
+            <Lottie 
+              animationData={Web} 
+              height={10} 
+              lottieRef={(ref) => (lottieRefs.current[1] = ref)}
+              autoplay={true}
+              loop={true}
+            />
+          </div>
+
+          <div className="overlay absolute inset-0 z-20 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-[rgba(54,54,54,0.9)] rounded-[2.5vw] flex flex-col justify-center items-center text-center px-5">
+            <p className="font-montserrat -webkit-bg-clip-text mb-4 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text text-2xl text-transparent max-[768px]:text-[7vw]">
+              Web
+            </p>
+            <p className="font-montserrat text-white text-center">
+              Crafting dynamic, responsive websites that deliver exceptional user
+              experiences across all devices.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="mt-2 h-[40vw] rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:w-[26%] md:h-[32vw] relative overflow-hidden group"
           ref={(el) => (cardRefs.current[2] = el)}
         >
-          <Lottie animationData={Block} height={10} />
-          <p className="font-montserrat -webkit-bg-clip-text !mt-[1.5vw] !mb-[0.5vw] !bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text !text-center text-2xl !text-transparent max-[768px]:mt-[5vw] max-[768px]:text-[7vw]">
-            Blockchain
-          </p>
-          <p className="font-montserrat !px-5 !py-2.5 !text-center">
-            Building the decentralized future with secure, transparent
-            blockchain solutions and smart contracts.
-          </p>
+          <div className="lottie-wrapper absolute inset-0 flex justify-center items-center z-10">
+            <Lottie 
+              animationData={Block} 
+              height={10} 
+              lottieRef={(ref) => (lottieRefs.current[2] = ref)}
+              autoplay={true}
+              loop={true}
+            />
+          </div>
+
+          <div className="overlay absolute inset-0 z-20 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-[rgba(54,54,54,0.9)] rounded-[2.5vw] flex flex-col justify-center items-center text-center px-5">
+            <p className="font-montserrat -webkit-bg-clip-text mb-4 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text text-2xl text-transparent max-[768px]:text-[7vw]">
+              Blockchain
+            </p>
+            <p className="font-montserrat text-white text-center">
+              Building the decentralized future with secure, transparent
+              blockchain solutions and smart contracts.
+            </p>
+          </div>
         </div>
       </div>
 
