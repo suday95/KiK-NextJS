@@ -16,7 +16,7 @@ const firebaseConfig = {
   projectId: "kodein-25831",
   storageBucket: "kodein-25831.firebasestorage.app",
   messagingSenderId: "290213904029",
-  appId: "1:290213904029:web:2dbb4c0e76602fe903de74"
+  appId: "1:290213904029:web:2dbb4c0e76602fe903de74",
 };
 
 // Initialize Firebase

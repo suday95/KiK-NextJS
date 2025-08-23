@@ -29,9 +29,9 @@ export default function Teams() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    
+
     const left = cardRefs.current[0];
-    const center = cardRefs.current[1]; 
+    const center = cardRefs.current[1];
     const right = cardRefs.current[2];
 
     // Guard if refs aren't available
@@ -41,35 +41,45 @@ export default function Teams() {
 
     // Set initial states
     gsap.set(left, { x: isDesktop ? -800 : -200, opacity: 0 });
-    gsap.set(right, { x: isDesktop ? 800 : 200, opacity: 0 }); 
+    gsap.set(right, { x: isDesktop ? 800 : 200, opacity: 0 });
     gsap.set(center, { scale: isDesktop ? 0.9 : 0.95, opacity: 0 });
 
     // Create timeline with scroll trigger
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: left.parentElement,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse"
-      }
-    })
-    .to([left, right], {
-      x: 0,
-      opacity: 1,
-      duration: 1.1,
-      ease: "power3.out"
-    }, 0)
-    .to(center, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.7,
-      ease: "back.out(1.6)"
-    }, 0.2);
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: left.parentElement,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      })
+      .to(
+        [left, right],
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.1,
+          ease: "power3.out",
+        },
+        0
+      )
+      .to(
+        center,
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.7,
+          ease: "back.out(1.6)",
+        },
+        0.2
+      );
 
     // Poster animation
     const poster = document.querySelector(".pds-page-poster-wrapper");
     if (poster) {
-      gsap.fromTo(poster, 
+      gsap.fromTo(
+        poster,
         { opacity: 0, y: 20 },
         {
           opacity: 1,
@@ -79,19 +89,19 @@ export default function Teams() {
           scrollTrigger: {
             trigger: poster,
             start: "top 90%",
-            toggleActions: "play none none reverse"
-          }
+            toggleActions: "play none none reverse",
+          },
         }
       );
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
   return (
-    <div className={`bg-[#00002C] relative ${montserrat.variable}`}>
+    <div className={`relative bg-[#00002C] ${montserrat.variable}`}>
       <h2
         id="recentHeader"
         className="my-8 bg-gradient-to-br from-[#11E3FB] via-[#5BE6FF] to-[#11E3FB] [background-clip:text] text-center text-[48px] font-bold text-transparent [-webkit-background-clip:text]"
@@ -99,26 +109,26 @@ export default function Teams() {
         Our Expertise
       </h2>
 
-      <div className="!mb-[20vw] max-[768px]:relative max-[768px]:mb-[5vh] max-[768px]:flex max-[768px]:max-h-fit max-[768px]:flex-col max-[768px]:items-center md:flex md:flex-row md:justify-center md:items-center md:gap-[6vw] md:h-auto md:pb-0">
+      <div className="!mb-[20vw] max-[768px]:relative max-[768px]:mb-[5vh] max-[768px]:flex max-[768px]:max-h-fit max-[768px]:flex-col max-[768px]:items-center md:flex md:h-auto md:flex-row md:items-center md:justify-center md:gap-[6vw] md:pb-0">
         <div
-          className="mt-2 h-[40vw] rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:w-[26%] md:h-[32vw] relative overflow-hidden group"
+          className="group relative mt-2 h-[40vw] overflow-hidden rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:h-[32vw] md:w-[26%]"
           ref={(el) => (cardRefs.current[0] = el)}
         >
-          <div className="lottie-wrapper absolute inset-0 flex justify-center items-center z-10">
-            <Lottie 
-              animationData={AI} 
-              height={10} 
+          <div className="lottie-wrapper absolute inset-0 z-10 flex items-center justify-center">
+            <Lottie
+              animationData={AI}
+              height={10}
               lottieRef={(ref) => (lottieRefs.current[0] = ref)}
               autoplay={true}
               loop={true}
             />
           </div>
 
-          <div className="overlay absolute inset-0 z-20 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-[rgba(54,54,54,0.9)] rounded-[2.5vw] flex flex-col justify-center items-center text-center px-5">
+          <div className="overlay absolute inset-0 z-20 flex -translate-y-full transform flex-col items-center justify-center rounded-[2.5vw] bg-[rgba(54,54,54,0.9)] px-5 text-center transition-transform duration-500 ease-out group-hover:translate-y-0">
             <p className="font-montserrat -webkit-bg-clip-text mb-4 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text text-2xl text-transparent max-[768px]:text-[7vw]">
               AI & Metaverse
             </p>
-            <p className="font-montserrat text-white text-center">
+            <p className="font-montserrat text-center text-white">
               Enter a realm where AI drives immersive Metaverse encounters,
               pushing boundaries of what&apos;s possible.
             </p>
@@ -126,49 +136,49 @@ export default function Teams() {
         </div>
 
         <div
-          className="mt-2 h-[40vw] rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:w-[26%] md:h-[32vw] relative overflow-hidden group"
+          className="group relative mt-2 h-[40vw] overflow-hidden rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:h-[32vw] md:w-[26%]"
           ref={(el) => (cardRefs.current[1] = el)}
         >
-          <div className="lottie-wrapper absolute inset-0 flex justify-center items-center z-10">
-            <Lottie 
-              animationData={Web} 
-              height={10} 
+          <div className="lottie-wrapper absolute inset-0 z-10 flex items-center justify-center">
+            <Lottie
+              animationData={Web}
+              height={10}
               lottieRef={(ref) => (lottieRefs.current[1] = ref)}
               autoplay={true}
               loop={true}
             />
           </div>
 
-          <div className="overlay absolute inset-0 z-20 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-[rgba(54,54,54,0.9)] rounded-[2.5vw] flex flex-col justify-center items-center text-center px-5">
+          <div className="overlay absolute inset-0 z-20 flex -translate-y-full transform flex-col items-center justify-center rounded-[2.5vw] bg-[rgba(54,54,54,0.9)] px-5 text-center transition-transform duration-500 ease-out group-hover:translate-y-0">
             <p className="font-montserrat -webkit-bg-clip-text mb-4 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text text-2xl text-transparent max-[768px]:text-[7vw]">
               Web
             </p>
-            <p className="font-montserrat text-white text-center">
-              Crafting dynamic, responsive websites that deliver exceptional user
-              experiences across all devices.
+            <p className="font-montserrat text-center text-white">
+              Crafting dynamic, responsive websites that deliver exceptional
+              user experiences across all devices.
             </p>
           </div>
         </div>
 
         <div
-          className="mt-2 h-[40vw] rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:w-[26%] md:h-[32vw] relative overflow-hidden group"
+          className="group relative mt-2 h-[40vw] overflow-hidden rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:h-[32vw] md:w-[26%]"
           ref={(el) => (cardRefs.current[2] = el)}
         >
-          <div className="lottie-wrapper absolute inset-0 flex justify-center items-center z-10">
-            <Lottie 
-              animationData={Block} 
-              height={10} 
+          <div className="lottie-wrapper absolute inset-0 z-10 flex items-center justify-center">
+            <Lottie
+              animationData={Block}
+              height={10}
               lottieRef={(ref) => (lottieRefs.current[2] = ref)}
               autoplay={true}
               loop={true}
             />
           </div>
 
-          <div className="overlay absolute inset-0 z-20 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-[rgba(54,54,54,0.9)] rounded-[2.5vw] flex flex-col justify-center items-center text-center px-5">
+          <div className="overlay absolute inset-0 z-20 flex -translate-y-full transform flex-col items-center justify-center rounded-[2.5vw] bg-[rgba(54,54,54,0.9)] px-5 text-center transition-transform duration-500 ease-out group-hover:translate-y-0">
             <p className="font-montserrat -webkit-bg-clip-text mb-4 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text text-2xl text-transparent max-[768px]:text-[7vw]">
               Blockchain
             </p>
-            <p className="font-montserrat text-white text-center">
+            <p className="font-montserrat text-center text-white">
               Building the decentralized future with secure, transparent
               blockchain solutions and smart contracts.
             </p>
