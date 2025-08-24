@@ -1,17 +1,11 @@
 import React from "react";
 import { useRef, useEffect } from "react";
-import Link from "next/link";
-import Robot from "../../data/animations/Robo.json";
 import Lottie from "lottie-react";
-import WEBDEV from "../../data/animations/WEB.json";
-import Blockchain from "../../data/animations/Blockchain.json";
 import Web from "../../data/animations/newLanding/Web.json";
 import AI from "../../data/animations/newLanding/AI.json";
 import Block from "../../data/animations/newLanding/Block.json";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
-import programmer from "../../../public/programmer-image.png";
 import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
@@ -26,35 +20,36 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Teams() {
   const cardRefs = useRef([]);
   const lottieRefs = useRef([]);
+  const componentRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const left = cardRefs.current[0];
-    const center = cardRefs.current[1];
-    const right = cardRefs.current[2];
+    let ctx = gsap.context(() => {
+      const left = cardRefs.current[0];
+      const center = cardRefs.current[1];
+      const right = cardRefs.current[2];
 
-    // Guard if refs aren't available
-    if (!left || !center || !right) return;
+      if (!left || !center || !right) return;
 
-    const isDesktop = window.innerWidth > 768;
+      const isDesktop = window.innerWidth > 768;
 
-    // Set initial states
-    gsap.set(left, { x: isDesktop ? -800 : -200, opacity: 0 });
-    gsap.set(right, { x: isDesktop ? 800 : 200, opacity: 0 });
-    gsap.set(center, { scale: isDesktop ? 0.9 : 0.95, opacity: 0 });
+      gsap.set(left, { x: isDesktop ? -800 : -200, opacity: 0 });
+      gsap.set(right, { x: isDesktop ? 800 : 200, opacity: 0 });
+      gsap.set(center, { scale: isDesktop ? 0.9 : 0.95, opacity: 0 });
 
-    // Create timeline with scroll trigger
-    gsap
-      .timeline({
+      gsap.set(".text-content", { y: "-100%", opacity: 0.8, zIndex: -2 });
+
+      const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: left.parentElement,
-          start: "top 80%",
+          trigger: componentRef.current,
+          start: "top 70%",
           end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          toggleActions: "restart none none reverse",
         },
-      })
-      .to(
+      });
+
+      tl.to(
         [left, right],
         {
           x: 0,
@@ -64,71 +59,63 @@ export default function Teams() {
         },
         0
       )
-      .to(
-        center,
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.7,
-          ease: "back.out(1.6)",
-        },
-        0.2
-      );
-
-    // Poster animation
-    const poster = document.querySelector(".pds-page-poster-wrapper");
-    if (poster) {
-      gsap.fromTo(
-        poster,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: poster,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
+        .to(
+          center,
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.7,
+            ease: "back.out(1.6)",
           },
-        }
-      );
-    }
+          0.2
+        )
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+        .to(
+          ".text-content",
+          {
+            y: "0%",
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: 0.2,
+          },
+          0.6
+        );
+    }, componentRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div className={`relative bg-[#00002C] ${montserrat.variable}`}>
+    <div
+      ref={componentRef}
+      className={`relative bg-[#00002C] ${montserrat.variable} py-16`}
+    >
       <h2
         id="recentHeader"
-        className="my-8 bg-gradient-to-br from-[#11E3FB] via-[#5BE6FF] to-[#11E3FB] [background-clip:text] text-center text-[48px] font-bold text-transparent [-webkit-background-clip:text]"
+        className="mb-16 bg-gradient-to-br from-[#11E3FB] via-[#5BE6FF] to-[#11E3FB] [background-clip:text] text-center text-4xl font-bold text-transparent [-webkit-background-clip:text] md:text-5xl"
       >
         Our Expertise
       </h2>
 
-      <div className="!mb-[20vw] max-[768px]:relative max-[768px]:mb-[5vh] max-[768px]:flex max-[768px]:max-h-fit max-[768px]:flex-col max-[768px]:items-center md:flex md:h-auto md:flex-row md:items-center md:justify-center md:gap-[6vw] md:pb-0">
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-8 px-4 md:flex-row md:items-stretch md:gap-8">
         <div
-          className="group relative mt-2 h-[40vw] overflow-hidden rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:h-[32vw] md:w-[26%]"
+          className="flex h-fit w-[320px] flex-col overflow-hidden rounded-3xl bg-[#0a0a3a] shadow-lg min-[480px]:w-[360px] min-[640px]:w-[400px] min-[768px]:w-[360px]"
           ref={(el) => (cardRefs.current[0] = el)}
         >
-          <div className="lottie-wrapper absolute inset-0 z-10 flex items-center justify-center">
+          <div className="lottie-wrapper flex h-fit w-full items-center justify-center">
             <Lottie
               animationData={AI}
-              height={10}
               lottieRef={(ref) => (lottieRefs.current[0] = ref)}
               autoplay={true}
               loop={true}
             />
           </div>
-
-          <div className="overlay absolute inset-0 z-20 flex -translate-y-full transform flex-col items-center justify-center rounded-[2.5vw] bg-[rgba(54,54,54,0.9)] px-5 text-center transition-transform duration-500 ease-out group-hover:translate-y-0">
-            <p className="font-montserrat -webkit-bg-clip-text mb-4 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text text-2xl text-transparent max-[768px]:text-[7vw]">
+          <div className="text-content flex h-fit flex-col items-center justify-center bg-[#101045] p-10 text-center">
+            <p className="font-montserrat -webkit-bg-clip-text mb-2 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(17,227,251,1))] bg-clip-text text-xl font-semibold text-transparent md:text-2xl">
               AI & Metaverse
             </p>
-            <p className="font-montserrat text-center text-white">
+            <p className="font-montserrat text-sm text-white/80 md:text-base">
               Enter a realm where AI drives immersive Metaverse encounters,
               pushing boundaries of what&apos;s possible.
             </p>
@@ -136,24 +123,22 @@ export default function Teams() {
         </div>
 
         <div
-          className="group relative mt-2 h-[40vw] overflow-hidden rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:!mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:h-[32vw] md:w-[26%]"
+          className="flex h-fit w-[320px] flex-col overflow-hidden rounded-3xl bg-[#0a0a3a] shadow-lg min-[480px]:w-[360px] min-[640px]:w-[400px] min-[768px]:w-[360px]"
           ref={(el) => (cardRefs.current[1] = el)}
         >
-          <div className="lottie-wrapper absolute inset-0 z-10 flex items-center justify-center">
+          <div className="lottie-wrapper flex h-fit w-full items-center justify-center">
             <Lottie
               animationData={Web}
-              height={10}
               lottieRef={(ref) => (lottieRefs.current[1] = ref)}
               autoplay={true}
               loop={true}
             />
           </div>
-
-          <div className="overlay absolute inset-0 z-20 flex -translate-y-full transform flex-col items-center justify-center rounded-[2.5vw] bg-[rgba(54,54,54,0.9)] px-5 text-center transition-transform duration-500 ease-out group-hover:translate-y-0">
-            <p className="font-montserrat -webkit-bg-clip-text mb-4 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text text-2xl text-transparent max-[768px]:text-[7vw]">
-              Web
+          <div className="text-content flex h-fit flex-col items-center justify-center bg-[#101045] p-10 text-center">
+            <p className="font-montserrat -webkit-bg-clip-text mb-2 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(17,227,251,1))] bg-clip-text text-xl font-semibold text-transparent md:text-2xl">
+              Web Development
             </p>
-            <p className="font-montserrat text-center text-white">
+            <p className="font-montserrat text-sm text-white/80 md:text-base">
               Crafting dynamic, responsive websites that deliver exceptional
               user experiences across all devices.
             </p>
@@ -161,53 +146,27 @@ export default function Teams() {
         </div>
 
         <div
-          className="group relative mt-2 h-[40vw] overflow-hidden rounded-[2.5vw] p-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.63,0.15,0.03,1.12)] max-[768px]:relative max-[768px]:top-0 max-[768px]:left-0 max-[768px]:mb-[10px] max-[768px]:h-[130vw] max-[768px]:w-[70vw] md:relative md:h-[32vw] md:w-[26%]"
+          className="flex h-fit w-[320px] flex-col overflow-hidden rounded-3xl bg-[#0a0a3a] shadow-lg min-[480px]:w-[360px] min-[640px]:w-[400px] min-[768px]:w-[360px]"
           ref={(el) => (cardRefs.current[2] = el)}
         >
-          <div className="lottie-wrapper absolute inset-0 z-10 flex items-center justify-center">
+          <div className="lottie-wrapper flex h-fit w-full items-center justify-center">
             <Lottie
               animationData={Block}
-              height={10}
               lottieRef={(ref) => (lottieRefs.current[2] = ref)}
               autoplay={true}
               loop={true}
             />
           </div>
-
-          <div className="overlay absolute inset-0 z-20 flex -translate-y-full transform flex-col items-center justify-center rounded-[2.5vw] bg-[rgba(54,54,54,0.9)] px-5 text-center transition-transform duration-500 ease-out group-hover:translate-y-0">
-            <p className="font-montserrat -webkit-bg-clip-text mb-4 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(181,246,253,1),rgba(17,227,251,1))] bg-clip-text text-2xl text-transparent max-[768px]:text-[7vw]">
+          <div className="text-content flex h-fit flex-col items-center justify-center bg-[#101045] p-[38px] text-center">
+            <p className="font-montserrat -webkit-bg-clip-text mb-2 bg-[linear-gradient(to_bottom_right,rgba(17,227,251,1),rgba(91,230,255,1),rgba(17,227,251,1))] bg-clip-text text-xl font-semibold text-transparent md:text-2xl">
               Blockchain
             </p>
-            <p className="font-montserrat text-center text-white">
+            <p className="font-montserrat text-sm text-white/80 md:text-base">
               Building the decentralized future with secure, transparent
               blockchain solutions and smart contracts.
             </p>
           </div>
         </div>
-      </div>
-
-      <div className="mx-auto my-5 h-px w-[80%] bg-gradient-to-r from-transparent via-white/50 to-transparent md:hidden"></div>
-
-      <div className="pds-page-poster-wrapper mb-[50px] flex items-center justify-center no-underline">
-        <Link href="/pds" style={{ textDecoration: "none" }}>
-          <div className="pds-page-poster flex w-[85vw] items-center justify-center rounded-[30px] bg-[rgba(70,69,69,0.2)] no-underline max-md:mt-[20px] max-md:w-[70vw] max-md:flex-col max-md:px-[10px] max-md:pt-[30px] max-md:pb-[30px]">
-            <div className="pds-page-poster-left w-[45vw] font-extrabold no-underline max-md:w-[70vw] max-md:px-[50px]">
-              <h1 className="font-montserrat bg-gradient-to-br from-[#11e3fb] via-[#5be6ff] to-[#11e3fb] bg-clip-text py-[10px] text-[3vw] text-transparent no-underline max-md:py-[10px] max-md:text-center max-md:text-[4vw]">
-                Still Getting Stuck in PDS?
-              </h1>
-              <h2 className="font-montserrat py-[10px] text-[1.5vw] text-[aliceblue] max-md:py-[10px] max-md:text-center max-md:text-[3vw]">
-                Our curated PDS Problems set works right for you...
-              </h2>
-            </div>
-            <div className="pds-page-poster-right mb-[25px] ml-[10px] flex items-center justify-center max-md:m-[20px]">
-              <Image
-                className="w-[35vw] max-md:w-[60vw]"
-                src={programmer}
-                alt="img"
-              />
-            </div>
-          </div>
-        </Link>
       </div>
     </div>
   );

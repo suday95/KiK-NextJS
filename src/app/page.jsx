@@ -20,8 +20,9 @@ const MainContent = () => {
     <div className="relative flex h-full w-full flex-col overflow-hidden bg-[rgb(1,1,27)]">
       {/* Content always rendered */}
       <Landing />
-      <Contribution />
       <Work />
+      <Contribution />
+      
 
       {/* Loader overlay */}
       <div

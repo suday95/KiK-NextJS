@@ -59,6 +59,27 @@ export default function TeamsCombined() {
         }
       );
     }
+    const poster = document.querySelector(".pds-page-poster-wrapper");
+    if (poster) {
+      poster.style.transform = "translateX(-300px)";
+      poster.style.opacity = "0";
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: poster,
+            start: "center bottom",
+            end: "center center",
+            scrub: 1,
+            scroller: "body",
+          },
+        })
+        .fromTo(
+          poster,
+          { x: -300, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.5, stagger: 0.2 }
+        );
+    }
   }, []);
 
   useEffect(() => {
@@ -79,7 +100,7 @@ export default function TeamsCombined() {
   return (
     <div
       ref={componentRef}
-      className={`${montserrat.variable} relative flex min-h-screen w-full flex-col items-center justify-center gap-20 overflow-x-hidden bg-[#00002C] py-10 md:gap-20 md:py-5`}
+      className={`${montserrat.variable} relative flex min-h-screen w-full flex-col items-center justify-center gap-20 overflow-x-hidden bg-[#00002C] py-10 md:gap-25 md:py-5`}
     >
       <h2
         id="recentHeader"
@@ -101,6 +122,8 @@ export default function TeamsCombined() {
           let zIndex = 0;
           let opacity = 1;
 
+          let filterStyle = "brightness(1)";
+
           if (position === 0) {
             if (isMobile) {
               transformStyle = "translateX(-100%) scale(0.8)";
@@ -111,9 +134,10 @@ export default function TeamsCombined() {
               transformStyle =
                 "translateX(-380px) translateY(-20px) translateZ(120px) rotateY(-30deg) scale(0.85)";
             }
-
             zIndex = isMobile ? 1 : 2;
             opacity = isMobile ? 0 : 1;
+
+            filterStyle = "brightness(0.8)";
           } else if (position === 1) {
             transformStyle = isMobile
               ? "translateX(0) scale(1)"
@@ -130,13 +154,15 @@ export default function TeamsCombined() {
               transformStyle =
                 "translateX(380px) translateY(-20px) translateZ(120px) rotateY(30deg) scale(0.85)";
             }
-
             zIndex = isMobile ? 1 : 2;
             opacity = isMobile ? 0 : 1;
+
+            filterStyle = "brightness(0.8)";
           } else {
             transformStyle = "scale(0.5)";
             opacity = 0;
             zIndex = 0;
+            filterStyle = "brightness(0.5)";
           }
 
           return (
@@ -148,6 +174,8 @@ export default function TeamsCombined() {
                 zIndex,
                 opacity,
                 transformStyle: "preserve-3d",
+
+                filter: filterStyle,
               }}
             >
               <Image
@@ -176,6 +204,28 @@ export default function TeamsCombined() {
         >
           <MdArrowForwardIos />
         </button>
+      </div>
+
+      <div className="pds-page-poster-wrapper mb-[50px] flex items-center justify-center no-underline">
+        <Link href="/pds" style={{ textDecoration: "none" }}>
+          <div className="pds-page-poster flex w-[85vw] items-center justify-center rounded-[30px] bg-[rgba(70,69,69,0.2)] no-underline max-md:mt-[20px] max-md:w-[70vw] max-md:flex-col max-md:px-[10px] max-md:pt-[30px] max-md:pb-[30px]">
+            <div className="pds-page-poster-left w-[45vw] font-extrabold no-underline max-md:w-[70vw] max-md:px-[50px]">
+              <h1 className="font-montserrat bg-gradient-to-br from-[#11e3fb] via-[#5be6ff] to-[#11e3fb] bg-clip-text py-[10px] text-[3vw] text-transparent no-underline max-md:py-[10px] max-md:text-center max-md:text-[4vw]">
+                Still Getting Stuck in PDS?
+              </h1>
+              <h2 className="font-montserrat py-[10px] text-[1.5vw] text-[aliceblue] max-md:py-[10px] max-md:text-center max-md:text-[3vw]">
+                Our curated PDS Problems set works right for you...
+              </h2>
+            </div>
+            <div className="pds-page-poster-right mb-[25px] ml-[10px] flex items-center justify-center max-md:m-[20px]">
+              <Image
+                className="w-[35vw] max-md:w-[60vw]"
+                src={programmer}
+                alt="img"
+              />
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );

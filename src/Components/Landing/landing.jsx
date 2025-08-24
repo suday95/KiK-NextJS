@@ -114,7 +114,7 @@ export default function Landing() {
 
   return (
     <div className="flex w-full flex-col overflow-hidden bg-[#00002C]">
-      <div className="flex flex-col items-center justify-between p-5 md:flex-row md:p-10">
+      <div className="flex flex-col items-center justify-between p-5 min-[660px]:px-10 min-[940px]:px-20 md:flex-row">
         <div className="flex w-full flex-col items-center space-y-6 text-center md:w-1/2 md:items-start md:space-y-10 md:text-left">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -135,7 +135,7 @@ export default function Landing() {
                 transition: { delayChildren: 0.8, staggerChildren: 0.1 },
               },
             }}
-            className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl"
+            className="text-5xl font-extrabold tracking-tight min-[660px]:text-6xl min-[870px]:text-7xl"
           >
             {"KodeinKGP".split("").map((ch, i) => (
               <motion.span
@@ -187,12 +187,17 @@ export default function Landing() {
             ))}
           </motion.h2>
 
-          <div className="mt-8 w-full rounded-2xl border-2 border-blue-500/30 bg-[#0B0E2A] p-5 shadow-lg sm:mt-12 sm:p-6 md:max-w-md">
-            <ul className="space-y-6 text-left sm:space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 2 }}
+            className="mt-8 w-full rounded-2xl border border-blue-500/40 bg-[#0B0E2A]/80 p-5 shadow-lg shadow-blue-900/40 backdrop-blur-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-blue-500/40 sm:mt-12 sm:p-6 md:max-w-md"
+          >
+            <ul className="space-y-8 text-left sm:space-y-8">
               <li className="flex items-center gap-4 sm:gap-6">
                 <FaPaperPlane className="text-xl text-blue-400 sm:text-2xl" />
                 <Link
-                  href="#web3"
+                  href="/articles"
                   className="text-base break-words text-white transition-colors duration-200 hover:text-blue-400 sm:text-lg"
                 >
                   Web 3.0 & AI Innovation
@@ -201,7 +206,7 @@ export default function Landing() {
               <li className="flex items-center gap-4 sm:gap-6">
                 <FaLink className="text-xl text-blue-400 sm:text-2xl" />
                 <Link
-                  href="#blockchain"
+                  href="/articles"
                   className="text-base break-words text-white transition-colors duration-200 hover:text-blue-400 sm:text-lg"
                 >
                   Blockchain Development
@@ -217,10 +222,10 @@ export default function Landing() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mb-8 flex w-full flex-col items-center justify-center space-y-6 md:mb-0 md:w-1/2 md:space-y-10">
+        <div className="my-4 flex w-full flex-col items-center justify-center space-y-6 md:mb-0 md:w-1/2 md:space-y-10">
           <Lottie
             loop={false}
             animationData={logo}
