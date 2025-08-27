@@ -10,10 +10,11 @@ import { Montserrat } from "next/font/google";
 gsap.registerPlugin(ScrollTrigger);
 
 const images = [
-  "/newLandingImage/8.png",
-  "/newLandingImage/7.png",
-  "/newLandingImage/9.png",
+  { src: "/newLandingImage/9.png", link: "/pds" },
+  { src: "/newLandingImage/8.png", link: "/articles" },
+  { src: "/newLandingImage/7.png", link: "/events" },
 ];
+
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -114,29 +115,23 @@ export default function TeamsCombined() {
         className="cards-wrapper relative flex h-[420px] w-full max-w-7xl items-center justify-center"
         style={{ perspective: isMobile ? "none" : "1600px" }}
       >
-        {images.map((src, index) => {
+        {images.map((item, index) => {
           const position =
             (index - currentIndex + images.length) % images.length;
 
           let transformStyle = "";
           let zIndex = 0;
           let opacity = 1;
-
           let filterStyle = "brightness(1)";
 
           if (position === 0) {
-            if (isMobile) {
-              transformStyle = "translateX(-100%) scale(0.8)";
-            } else if (useSmallCardSize) {
-              transformStyle =
-                "translateX(-280px) translateY(-20px) translateZ(120px) rotateY(-30deg) scale(0.85)";
-            } else {
-              transformStyle =
-                "translateX(-380px) translateY(-20px) translateZ(120px) rotateY(-30deg) scale(0.85)";
-            }
+            transformStyle = isMobile
+              ? "translateX(-100%) scale(0.8)"
+              : useSmallCardSize
+                ? "translateX(-280px) translateY(-20px) translateZ(120px) rotateY(-30deg) scale(0.85)"
+                : "translateX(-380px) translateY(-20px) translateZ(120px) rotateY(-30deg) scale(0.85)";
             zIndex = isMobile ? 1 : 2;
             opacity = isMobile ? 0 : 1;
-
             filterStyle = "brightness(0.8)";
           } else if (position === 1) {
             transformStyle = isMobile
@@ -145,18 +140,13 @@ export default function TeamsCombined() {
             zIndex = 4;
             opacity = 1;
           } else if (position === 2) {
-            if (isMobile) {
-              transformStyle = "translateX(100%) scale(0.8)";
-            } else if (useSmallCardSize) {
-              transformStyle =
-                "translateX(280px) translateY(-20px) translateZ(120px) rotateY(30deg) scale(0.85)";
-            } else {
-              transformStyle =
-                "translateX(380px) translateY(-20px) translateZ(120px) rotateY(30deg) scale(0.85)";
-            }
+            transformStyle = isMobile
+              ? "translateX(100%) scale(0.8)"
+              : useSmallCardSize
+                ? "translateX(280px) translateY(-20px) translateZ(120px) rotateY(30deg) scale(0.85)"
+                : "translateX(380px) translateY(-20px) translateZ(120px) rotateY(30deg) scale(0.85)";
             zIndex = isMobile ? 1 : 2;
             opacity = isMobile ? 0 : 1;
-
             filterStyle = "brightness(0.8)";
           } else {
             transformStyle = "scale(0.5)";
@@ -164,6 +154,19 @@ export default function TeamsCombined() {
             zIndex = 0;
             filterStyle = "brightness(0.5)";
           }
+
+          const cardContent = (
+            <Image
+              src={item.src}
+              alt={`Card ${index}`}
+              width={useSmallCardSize ? 240 : 300}
+              height={useSmallCardSize ? 320 : 400}
+              className="rounded-2xl"
+              style={{
+                boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.5)",
+              }}
+            />
+          );
 
           return (
             <div
@@ -174,20 +177,15 @@ export default function TeamsCombined() {
                 zIndex,
                 opacity,
                 transformStyle: "preserve-3d",
-
                 filter: filterStyle,
+                cursor: position === 1 ? "pointer" : "default", 
               }}
             >
-              <Image
-                src={src}
-                alt={`Card ${index}`}
-                width={useSmallCardSize ? 240 : 300}
-                height={useSmallCardSize ? 320 : 400}
-                className="rounded-2xl"
-                style={{
-                  boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.5)",
-                }}
-              />
+              {position === 1 ? (
+                <Link href={item.link}>{cardContent}</Link>
+              ) : (
+                cardContent
+              )}
             </div>
           );
         })}

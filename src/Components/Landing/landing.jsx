@@ -114,8 +114,8 @@ export default function Landing() {
 
   return (
     <div className="flex w-full flex-col overflow-hidden bg-[#00002C]">
-      <div className="flex flex-col items-center justify-between p-5 min-[660px]:px-10 min-[940px]:px-20 md:flex-row">
-        <div className="flex w-full flex-col items-center space-y-6 text-center md:w-1/2 md:items-start md:space-y-10 md:text-left">
+      <div className="flex flex-col items-center justify-between p-5 min-[660px]:px-10 min-[940px]:px-20 md:flex-row md:items-start">
+        <div className="flex w-full flex-col items-center space-y-6 text-center md:w-1/2 md:items-start  md:text-left md:pt-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -191,7 +191,7 @@ export default function Landing() {
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 2 }}
-            className="mt-8 w-full rounded-2xl border border-blue-500/40 bg-[#0B0E2A]/80 p-5 shadow-lg shadow-blue-900/40 backdrop-blur-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-blue-500/40 sm:mt-12 sm:p-6 md:max-w-md"
+            className="mt-8 w-full rounded-2xl border border-blue-500/40 bg-[#0B0E2A]/80 p-5 shadow-lg shadow-blue-900/40 backdrop-blur-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-blue-500/40 md:mt-32 sm:p-6 md:max-w-md"
           >
             <ul className="space-y-8 text-left sm:space-y-8">
               <li className="flex items-center gap-4 sm:gap-6">
@@ -229,7 +229,7 @@ export default function Landing() {
           <Lottie
             loop={false}
             animationData={logo}
-            className="w-[70%] max-w-[500px] sm:w-[60%] md:w-full"
+            className="w-[50%] max-w-[400px] sm:w-[40%] md:w-full"
           />
           <Lottie
             loop={false}
