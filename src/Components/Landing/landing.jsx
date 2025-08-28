@@ -1,36 +1,45 @@
 "use client";
 
 import { useEffect } from "react";
+import main from "../../data/animations/main.json";
 import Lottie from "lottie-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
+import Card from "../utils/Card";
 import Link from "next/link";
-import { FaPaperPlane, FaLink, FaBolt } from "react-icons/fa";
-
-import logo from "../../data/animations/newLanding/logofull.json";
-import robo from "../../data/animations/newLanding/robo.json";
 
 export default function Landing() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const tl = gsap.timeline();
+    var tl = gsap.timeline();
 
     tl.fromTo(
       ".navbar .logoo",
-      { x: -30, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.5, delay: 1, ease: "power2.out" }
+      {
+        x: -30,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        delay: 2,
+        ease: "power2.out",
+      }
     );
 
     tl.fromTo(
       ".navbar .MainPartNavBar li",
-      { y: -30, opacity: 0 },
+      {
+        y: -30,
+        opacity: 0,
+      },
       {
         y: 0,
         opacity: 1,
         duration: 0.5,
-        delay: 1,
+        delay: 2,
         stagger: 0.15,
         ease: "power2.out",
       },
@@ -39,40 +48,83 @@ export default function Landing() {
 
     tl.fromTo(
       ".right .Welcome",
-      { x: -100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.5, delay: 0.5, ease: "power2.out" },
+      {
+        x: -100,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        delay: 1,
+        ease: "power2.out",
+      },
       "-=1.5"
     );
 
     tl.fromTo(
       ".right span",
-      { x: 0, opacity: 0 },
-      { x: 100, opacity: 1, duration: 0.5, delay: 0.5, ease: "power2.out" },
+      {
+        x: 0,
+        opacity: 0,
+      },
+      {
+        x: 100,
+        opacity: 1,
+        duration: 0.5,
+        delay: 1,
+        ease: "power2.out",
+      },
       "-=1.5"
     );
 
     tl.fromTo(
       ".right .vision",
-      { x: -100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.5, delay: 0.5, ease: "power2.out" },
+      {
+        x: -100,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        delay: 1,
+        ease: "power2.out",
+      },
       "-=1.5"
     );
 
     tl.fromTo(
       ".right .vision-depth",
-      { x: -100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.5, delay: 0.5, ease: "power2.out" },
+      {
+        x: -100,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        delay: 1,
+        ease: "power2.out",
+      },
       "-=1"
     );
 
     tl.fromTo(
       ".left",
-      { opacity: 0 },
-      { opacity: 1, duration: 1, delay: 0.5, ease: "power2.out" },
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        duration: 1,
+        delay: 1,
+        ease: "power2.out",
+      },
       "-=1.2"
     );
 
-    const t2 = gsap.timeline({
+    var t2 = gsap.timeline({
       scrollTrigger: {
         trigger: ".bottom-bar .text",
         start: "top 90%",
@@ -84,18 +136,21 @@ export default function Landing() {
 
     t2.fromTo(
       ".bottom-bar .text",
-      { y: 30, opacity: 0 },
+      {
+        y: 30,
+        opacity: 0,
+      },
       {
         y: 0,
         opacity: 1,
         duration: 0.5,
-        delay: 0.5,
+        delay: 1,
         stagger: 0.2,
         ease: "power2.out",
       }
     );
 
-    const t3 = gsap.timeline({
+    var t3 = gsap.timeline({
       scrollTrigger: {
         trigger: "#recentHeader",
         start: "top 90%",
@@ -107,138 +162,75 @@ export default function Landing() {
 
     t3.fromTo(
       "#recentHeader",
-      { x: -300, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.5, stagger: 0.2, ease: "power2.out" }
+      {
+        x: -300,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.2,
+        ease: "power2.out",
+      }
     );
   }, []);
 
   return (
-    <div className="flex w-full flex-col overflow-hidden bg-[#00002C]">
-      <div className="flex flex-col items-center justify-between p-5 min-[660px]:px-10 min-[940px]:px-20 md:flex-row md:items-start">
-        <div className="flex w-full flex-col items-center space-y-6 text-center md:w-1/2 md:items-start  md:text-left md:pt-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-            className="text-3xl font-semibold text-[#EAF2FF] sm:text-4xl md:text-5xl"
-          >
-            Welcome to
-          </motion.div>
-
-          <motion.h1
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 1 },
-              visible: {
-                opacity: 1,
-                transition: { delayChildren: 0.8, staggerChildren: 0.1 },
-              },
-            }}
-            className="text-5xl font-extrabold tracking-tight min-[660px]:text-6xl min-[870px]:text-7xl"
-          >
-            {"KodeinKGP".split("").map((ch, i) => (
-              <motion.span
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 60 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="inline-block"
-                style={{
-                  background:
-                    i < 6
-                      ? "linear-gradient(90deg, #79D7FF 0%, #4FB0FF 48%, #3E8EFF 100%)"
-                      : "linear-gradient(90deg, #566CFF 0%, #6A58FF 40%, #7C37FF 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                {ch}
-              </motion.span>
-            ))}
-          </motion.h1>
-
-          <motion.h2
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 1 },
-              visible: {
-                opacity: 1,
-                transition: { delayChildren: 1.5, staggerChildren: 0.08 },
-              },
-            }}
-            className="text-xl font-medium text-white sm:text-2xl md:text-3xl"
-          >
-            {"TECH | WEB 3.O".split("").map((ch, i) => (
-              <motion.span
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 60 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="inline-block"
-              >
-                {ch === " " ? "\u00A0" : ch}
-              </motion.span>
-            ))}
-          </motion.h2>
-
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 2 }}
-            className="mt-8 w-full rounded-2xl border border-blue-500/40 bg-[#0B0E2A]/80 p-5 shadow-lg shadow-blue-900/40 backdrop-blur-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-blue-500/40 md:mt-32 sm:p-6 md:max-w-md"
-          >
-            <ul className="space-y-8 text-left sm:space-y-8">
-              <li className="flex items-center gap-4 sm:gap-6">
-                <FaPaperPlane className="text-xl text-blue-400 sm:text-2xl" />
-                <Link
-                  href="/articles"
-                  className="text-base break-words text-white transition-colors duration-200 hover:text-blue-400 sm:text-lg"
-                >
-                  Web 3.0 & AI Innovation
-                </Link>
-              </li>
-              <li className="flex items-center gap-4 sm:gap-6">
-                <FaLink className="text-xl text-blue-400 sm:text-2xl" />
-                <Link
-                  href="/articles"
-                  className="text-base break-words text-white transition-colors duration-200 hover:text-blue-400 sm:text-lg"
-                >
-                  Blockchain Development
-                </Link>
-              </li>
-              <li className="flex items-center gap-4 sm:gap-6">
-                <FaBolt className="text-xl text-blue-400 sm:text-2xl" />
-                <Link
-                  href="/events"
-                  className="text-base break-words text-white transition-colors duration-200 hover:text-blue-400 sm:text-lg"
-                >
-                  Real-world Hackathons & Workshops
-                </Link>
-              </li>
-            </ul>
-          </motion.div>
+    <div className="flex h-full w-full flex-col overflow-hidden bg-[#01011b]">
+      <div className="flex flex-col justify-between p-3 md:flex-row md:pl-10">
+        {/* text only */}
+        <div className="p-3 text-center text-lg md:w-1/2 md:p-8 md:text-left">
+          <h1 className="text-left font-[Arial] font-semibold text-white">
+            <div className="mb-[-30px] text-[55px] md:text-[65px]">
+              Welcome to
+            </div>
+            <span className="bg-gradient-to-br from-[#11E3FB] via-[#5BE6FF] to-[#B5F6FD] bg-clip-text text-center text-[65px] font-bold text-transparent md:text-[75px]">
+              KodeinKGP
+            </span>
+          </h1>
+          <p className="font-poppins pt-5 pb-5 text-left text-lg leading-loose font-normal text-[#979898]">
+            "The Web as I envisaged it, we have not seen it yet. The future is
+            still so much bigger than the past"
+          </p>
+          <p className="font-poppins text-left text-sm leading-loose font-normal text-white">
+            A student-run society that aims to spread awareness and educate
+            students about the potential of Web 3.0 and future technologies. We
+            host workshops and hackathons to give students hands-on experience
+            with Blockchain Development and Artificial Intelligence.
+            Additionally, we use our skills in web development and blockchain to
+            work on real-world problems faced by the student community at IIT
+            Kharagpur and beyond. By joining KodeinKGP, students can gain
+            valuable technical skills and contribute to solving important
+            problems while learning about one of the most exciting and
+            rapidly-evolving technologies of our time.
+          </p>
         </div>
 
-        <div className="my-4 flex w-full flex-col items-center justify-center space-y-6 md:mb-0 md:w-1/2 md:space-y-10">
+        <div className="mt-10 mb-10 flex flex-col items-center justify-center md:mt-0 md:mb-0 md:w-1/2">
           <Lottie
-            loop={false}
-            animationData={logo}
-            className="w-[50%] max-w-[400px] sm:w-[40%] md:w-full"
+            animationData={main}
+            className="w-[80%] md:w-full max-w-[500px]"
           />
-          <Lottie
-            loop={false}
-            animationData={robo}
-            className="w-[90%] max-w-[500px] sm:w-[80%] md:w-full"
-          />
+
+          {/* enlarge Card to roughly match Lottie size */}
+
+          {/* <div className="mx-auto w-[90%] max-w-[600px] px-4 md:w-full md:px-0">
+            <Link href="/auth">
+              <Card />
+            </Link>
+          </div>
+          <h2 className="mx-auto mt-5 bg-gradient-to-r from-[#00EAFF] via-[#4DD9FF] to-[#AAF0FF] bg-clip-text text-lg font-bold text-transparent md:text-4xl">
+            Conquer The Arena
+            <br />
+            Join{" "}
+            <span className="bg-gradient-to-r from-[#00ffd9] via-[#00eaff] to-[#00ffd9] bg-clip-text text-lg font-bold text-transparent md:text-4xl">
+              dekodeX
+            </span>{" "}
+            Now
+          </h2>*/}
         </div>
       </div>
-
       <div className="bottom-bar flex flex-col items-start justify-between gap-8 px-8 pb-[60px] text-left md:flex-row md:gap-16 md:px-[60px]">
         <div className="text text-3xl font-semibold text-white">
           260+{" "}

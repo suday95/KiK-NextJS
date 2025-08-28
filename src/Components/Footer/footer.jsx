@@ -4,7 +4,6 @@ import Image from "next/image";
 import Logo from "../../../public/KIK_logo-removebg.png";
 import { Poppins } from "next/font/google";
 import IonIcon from "../utils/ionicon";
-import { usePathname } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,15 +12,11 @@ const poppins = Poppins({
   display: "swap",
 });
 
-export default function Footer({ isHomePage = false }) {
-  const pathname = usePathname();
-  const isHomePagePath = pathname === '/';
-  const footerBgClass = isHomePagePath ? "bg-[#00002C]" : "bg-transparent";
-  
+export default function Footer() {
   return (
     <div
       id="footer"
-      className={`flex flex-wrap items-center justify-between ${footerBgClass} text-left text-white ${poppins.variable} border border-[#01011b] border-t-[#3f3e45]`}
+      className={`mt-8 flex flex-wrap items-center justify-between bg-transparent text-left text-white ${poppins.variable} border border-[#01011b] border-t-[#3f3e45]`}
     >
       <div className="mx-10 my-4 px-8 py-3 sm:mx-4" id="footerItem1">
         <div className="mb-2 flex flex-col justify-center">

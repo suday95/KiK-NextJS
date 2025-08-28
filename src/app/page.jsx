@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Landing from "@/Components/Landing/landing";
 import Work from "@/Components/Landing/work";
-import Contribution from "@/Components/Landing/contribution";
 import Loader from "@/Components/utils/loader";
 
 const MainContent = () => {
@@ -17,16 +16,14 @@ const MainContent = () => {
   }, []);
 
   return (
-    <div className="relative flex h-full w-full flex-col overflow-hidden bg-[#00002C]">
+    <div className="relative flex h-full w-full flex-col overflow-hidden bg-[rgb(1,1,27)]">
       {/* Content always rendered */}
       <Landing />
       <Work />
-      <Contribution />
-      
 
       {/* Loader overlay */}
       <div
-        className={`absolute top-0 left-0 flex h-full w-full items-center justify-center bg-[#00002C] transition-opacity duration-500 ease-in-out ${loading ? "z-50 opacity-100" : "pointer-events-none z-0 opacity-0"}`}
+        className={`absolute top-0 left-0 flex h-full w-full items-center justify-center bg-[rgb(1,1,27)] transition-opacity duration-500 ease-in-out ${loading ? "z-50 opacity-100" : "pointer-events-none z-0 opacity-0"}`}
       >
         <Loader />
       </div>
