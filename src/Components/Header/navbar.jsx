@@ -85,17 +85,17 @@ function Navbar() {
                 <Link
                   className="relative bg-gradient-to-br from-cyan-100 via-cyan-200 to-blue-100 bg-clip-text pb-[15px] tracking-wide text-transparent no-underline transition-all duration-500 hover:from-cyan-50 hover:via-cyan-100 hover:to-blue-50"
                   href="/dekodeX"
-                  style={{
-                    textShadow: "0 0 10px rgba(34, 211, 238, 0.4)",
-                    filter: "drop-shadow(0 0 5px rgba(34, 211, 238, 0.5))",
-                  }}
+                  // style={{
+                  //   textShadow: "0 0 10px rgba(34, 211, 238, 0.4)",
+                  //   filter: "drop-shadow(0 0 5px rgba(34, 211, 238, 0.5))",
+                  // }}
                 >
                   dekodeX
                 </Link>
                 {/* Data flow indicators */}
-                <span className="absolute top-0 left-1/4 h-1 w-1 animate-ping rounded-full bg-cyan-400 opacity-100 transition-opacity duration-300"></span>
+                {/* <span className="absolute top-0 left-1/4 h-1 w-1 animate-ping rounded-full bg-cyan-400 opacity-100 transition-opacity duration-300"></span>
                 <span className="absolute top-1 right-1/4 h-0.5 w-0.5 animate-ping rounded-full bg-blue-400 opacity-100 transition-opacity duration-500"></span>
-                <span className="absolute bottom-3 left-0 h-[2px] w-full origin-left scale-x-0 bg-[#11e3fb] transition-transform duration-300 group-hover:scale-x-100"></span>
+                <span className="absolute bottom-3 left-0 h-[2px] w-full origin-left scale-x-0 bg-[#11e3fb] transition-transform duration-300 group-hover:scale-x-100"></span> */}
               </span>
             </li>
 
@@ -167,24 +167,30 @@ function Navbar() {
               </span>
             </li>
 
-            {/* <li
+             <li
               className="cursor-pointer list-none"
               onClick={() => {
                 if (isOpen) toggleMenu();
               }}
             >
               <span className="group relative mx-[25px] flex flex-col items-center text-[1.2rem]">
+                {/* Main link with enhanced tech styling */}
                 <Link
-                  className="bg-gradient-to-br pb-[15px] tracking-wide text-white no-underline transition-colors duration-300"
+                  className="relative bg-gradient-to-br from-cyan-100 via-cyan-200 to-blue-100 bg-clip-text pb-[15px] tracking-wide text-transparent no-underline transition-all duration-500 hover:from-cyan-50 hover:via-cyan-100 hover:to-blue-50"
                   href="/regform"
+                  style={{
+                    textShadow: "0 0 10px rgba(34, 211, 238, 0.4)",
+                    filter: "drop-shadow(0 0 5px rgba(34, 211, 238, 0.5))",
+                  }}
                 >
-                  Registration Form
+                  Fresher's Selection
                 </Link>
+                {/* Data flow indicators */}
+                <span className="absolute top-0 left-1/4 h-1 w-1 animate-ping rounded-full bg-cyan-400 opacity-100 transition-opacity duration-300"></span>
+                <span className="absolute top-1 right-1/4 h-0.5 w-0.5 animate-ping rounded-full bg-blue-400 opacity-100 transition-opacity duration-500"></span>
                 <span className="absolute bottom-3 left-0 h-[2px] w-full origin-left scale-x-0 bg-[#11e3fb] transition-transform duration-300 group-hover:scale-x-100"></span>
               </span>
-
-              {loggedIn && <SignOutButton />}
-            </li> */}
+            </li>
           </div>
         </div>
       </div>
