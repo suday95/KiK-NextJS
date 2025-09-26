@@ -83,7 +83,8 @@ function Navbar() {
               <span className="group relative mx-[25px] flex flex-col items-center text-[1.2rem]">
                 {/* Main link with enhanced tech styling */}
                 <Link
-                  className="relative bg-gradient-to-br from-cyan-100 via-cyan-200 to-blue-100 bg-clip-text pb-[15px] tracking-wide text-transparent no-underline transition-all duration-500 hover:from-cyan-50 hover:via-cyan-100 hover:to-blue-50"
+                  // className="relative bg-gradient-to-br from-cyan-100 via-cyan-200 to-blue-100 bg-clip-text pb-[15px] tracking-wide text-transparent no-underline transition-all duration-500 hover:from-cyan-50 hover:via-cyan-100 hover:to-blue-50"
+                  className="bg-gradient-to-br pb-[15px] font-bold tracking-wide text-white no-underline transition-colors duration-300"
                   href="/dekodeX"
                   // style={{
                   //   textShadow: "0 0 10px rgba(34, 211, 238, 0.4)",
