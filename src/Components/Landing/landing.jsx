@@ -210,7 +210,7 @@ export default function Landing() {
         <div className="mt-10 mb-10 flex flex-col items-center justify-center md:mt-0 md:mb-0 md:w-1/2">
           <Lottie
             animationData={main}
-            className="w-[80%] md:w-full max-w-[500px]"
+            className="w-[80%] max-w-[500px] md:w-full"
           />
 
           {/* enlarge Card to roughly match Lottie size */}

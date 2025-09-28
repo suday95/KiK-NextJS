@@ -168,7 +168,7 @@ function Navbar() {
               </span>
             </li>
 
-             <li
+            <li
               className="cursor-pointer list-none"
               onClick={() => {
                 if (isOpen) toggleMenu();

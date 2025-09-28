@@ -27,8 +27,14 @@ const RegForm = () => {
 
   const teamOptions = [
     { value: "Trainee Developer", label: "Trainee Developer" },
-    { value: "Associate Events Coordinator", label: "Associate Events Coordinator" },
-    { value: "Associate Design Coordinator", label: "Associate Design Coordinator" },
+    {
+      value: "Associate Events Coordinator",
+      label: "Associate Events Coordinator",
+    },
+    {
+      value: "Associate Design Coordinator",
+      label: "Associate Design Coordinator",
+    },
   ];
 
   useEffect(() => {
@@ -65,14 +71,16 @@ const RegForm = () => {
     e.preventDefault();
     setIsLoad(true);
 
+    const trimmedRoll = rollNumber.trim().toUpperCase();
+    const trimmedInstiMail = instituteEmail.trim();
     // Validate again before submit
-    if (!rollRegex.test(rollNumber)) {
+    if (!rollRegex.test(trimmedRoll)) {
       setAlertMsg("Roll number Invalid");
       setAlertShown(true);
       setIsLoad(false);
       return;
     }
-    if (!instiMailRegex.test(instituteEmail)) {
+    if (!instiMailRegex.test(trimmedInstiMail)) {
       setAlertMsg("Institute email must end with .iitkgp.ac.in");
       setAlertShown(true);
       setIsLoad(false);
@@ -85,7 +93,7 @@ const RegForm = () => {
       rollNumber.trim() === "" ||
       personalEmail.trim() === "" ||
       instituteEmail.trim() === "" ||
-      contactNumber.trim() === "" 
+      contactNumber.trim() === ""
     ) {
       setAlertMsg("Please fill all the fields and select at least one team");
       setAlertShown(true);
@@ -96,11 +104,11 @@ const RegForm = () => {
     try {
       await addDoc(collection(db, "registrations"), {
         name: nme,
-        rollNumber,
-        personalEmail,
-        instituteEmail,
-        contactNumber,
-        otherInvolvements,
+        rollNumber: trimmedRoll,
+        personalEmail: personalEmail.trim(),
+        instituteEmail: trimmedInstiMail,
+        contactNumber: contactNumber.trim(),
+        otherInvolvements: otherInvolvements.trim(),
         selTeams,
         timestamp: new Date(),
       });
