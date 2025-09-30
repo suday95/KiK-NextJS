@@ -144,8 +144,29 @@ const RegForm = () => {
           <Image src={aiimg} alt="AI" className="aiimgreg" />
         </div>
         <div className="regbox">
-          <h5 className="reg-header">Registration Form</h5>
-          <form onSubmit={handleSubmit} className="regformtag">
+          {/* <h5 className="reg-header">Registration Form</h5> */}
+          <div
+            style={{
+              background:
+                "linear-gradient(to bottom right, rgb(17, 227, 251), rgb(91, 230, 255), rgb(181, 246, 253), rgb(17, 227, 251))",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+              fontSize: "7vh",
+              fontWeight: "bold",
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "20vh",
+              marginBottom: "20px",
+              marginLeft: "20px",
+              marginRight: "20px",
+            }}
+          >
+            Registrations Are Closed For Now
+          </div>
+          {/* <form onSubmit={handleSubmit} className="regformtag">
             <input
               type="text"
               id="name"
@@ -164,7 +185,6 @@ const RegForm = () => {
               placeholder="Roll Number"
               required
             />
-            {/* {rollError && <p className="error-message">{rollError}</p>} */}
             <input
               type="email"
               id="personal-email"
@@ -183,7 +203,6 @@ const RegForm = () => {
               placeholder="Institute E-mail"
               required
             />
-            {/* {instiMailError && <p className="error-message">{instiMailError}</p>} */}
             <input
               type="tel"
               id="contact-number"
@@ -239,7 +258,7 @@ const RegForm = () => {
               )}
               {!isLoad && <div>Register</div>}
             </button>
-          </div>
+          </div> */}
           <div
             style={{
               color: "white",
@@ -248,7 +267,7 @@ const RegForm = () => {
               justifyContent: "center",
               flexDirection: "column",
               alignItems: "center",
-              marginTop: "1rem",
+              marginTop: "0rem",
             }}
           >
             <span>You can check out our Tasks</span>
@@ -276,7 +295,7 @@ const RegForm = () => {
             </Link>
           </div>
         </div>
-        {alertShown && (
+        {/* {alertShown && (
           <AlertComponent
             type={"warning"}
             title={"Error registering for selections"}
@@ -289,29 +308,7 @@ const RegForm = () => {
             title={"Successfully registered for selections"}
             message={"Thank you for participating in selection"}
           />
-        )}
-
-        {/* <div
-          style={{
-            background:
-              "linear-gradient(to bottom right, rgb(17, 227, 251), rgb(91, 230, 255), rgb(181, 246, 253), rgb(17, 227, 251))",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-            fontSize: "7vh",
-            fontWeight: "bold",
-            textAlign: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "30vh",
-            marginBottom: "20px",
-            marginLeft: "20px",
-            marginRight: "20px",
-          }}
-        >
-          Registrations Are Closed For Now
-        </div>*/}
+        )} */}
       </div>
     </>
   );
