@@ -2,17 +2,6 @@
   [
     {
       "id": 1,
-      "name": "Akshat Semwal",
-      "Team": "AI & Metaverse",
-      "facebook": "https://www.facebook.com/share/16dYgeWFNW/",
-      "mailid": "akshatsemwal1610.24@kgpian.iitkgp.ac.in",
-      "instagram": "https://www.instagram.com/semwahl/",
-      "linkedin": "https://www.linkedin.com/authwall?trk=gf&trkInfo=AQFgA-OVgk62JAAAAZeHGw84NBtIEe_KgSPXeRCRLuLHtNLxnCC-U6pNxnDkD0qScjs7GeWkMzLJo4gOrNQpoiMbC74P7z_pkhBj3EoUEVS-Mq5IDwJtskFsCGbnuXuq87qlEmQ=&original_referer=https://l.instagram.com/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fakshat-semwal-141829319%3Futm_source%3Dshare%26utm_campaign%3Dshare_via%26utm_content%3Dprofile%26utm_medium%3Dandroid_app%26fbclid%3DPAZXh0bgNhZW0CMTEAAactxJ7t8ErSYuOko_XN7pldcNLX40x5-SVtHJaX_OfTuZHCj5xk6QDReI5Qww_aem_IqSyaaKdNhsMsKltxzbQaw&fbclid=PAQ0xDSwLAnIdleHRuA2FlbQIxMAABp4ltmbC1q06FEbRmRBgdZehroPJcoTYOh6A3uS2Z12ZYUO_I-IkR2B09wEvW_aem_xmVeSKzUoC-0XQo8ue5CpA",
-      "github": "https://www.github.com/Furor860",
-      "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/AkshatSemwal.jpg?raw=true"
-    },
-    {
-      "id": 2,
       "name": "Aryan Shah",
       "Team": "AI & Metaverse Team",
       "facebook": "",
@@ -23,7 +12,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/AryanShah.jpg?raw=true"
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "B. Vritant",
       "Team": "AI & Metaverse, Design and Media Team",
       "facebook": "",
@@ -35,7 +24,7 @@
     },
 
     {
-      "id": 4,
+      "id": 3,
       "name": "Gunda Gnanesh",
       "Team": "AI & Metaverse, Tech Team",
       "facebook": "https://www.facebook.com/profile.php?id=61572564645755",
@@ -45,20 +34,9 @@
       "github": "https://github.com/gnaneshgunda",
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Gnanesh.jpg?raw=true"
     },
-    {
-      "id": 5,
-      "name": "Durga Sai",
-      "Team": "AI & Metaverse",
-      "facebook": "https://www.facebook.com/durgasai.gundubogula.1",
-      "mailid": "dsainvg.20.12@gmail.com",
-      "instagram": "https://www.instagram.com/nvdsai.20.12/profilecard/?igsh=MW0zbjN3dWE3ZDVzaA==",
-      "linkedin": "https://www.linkedin.com/in/durga-sai-gundubogula?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      "github": "https://github.com/dsainvg",
-      "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Durga_Sai.jpg?raw=true"
-    },
 
     {
-      "id": 6,
+      "id": 4,
       "name": "Kothagundla Reshmitha",
       "Team": "AI & Metaverse, Blockchain Team",
       "facebook": "None",
@@ -69,7 +47,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Reshmitha.jpeg?raw=true"
     },
     {
-      "id": 7,
+      "id": 5,
       "name": "Kritya Anand",
       "Team": "AI & Metaverse, Tech Team",
       "facebook": "https://www.facebook.com/share/1CKAcwe3qJ/",
@@ -80,7 +58,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/KrityaAnand.jpg?raw=true"
     },
     {
-      "id": 8,
+      "id": 6,
       "name": "Suday Nandan reddy",
       "Team": "AI & Metaverse, Tech Team",
       "facebook": "",
@@ -91,7 +69,7 @@
       "image_url": "https://github.com/KodeinKGP-Technology-Web-3-0-Society/Photos/blob/main/2025_SETS/Suday%20Nandan%20Reddy.JPG?raw=true"
     },
     {
-      "id": 9,
+      "id": 7,
       "name": "Tanush Badonia",
       "Team": "AI & Metaverse, Blockchain Team",
       "facebook": "https://www.facebook.com/share/16cWEAs6eM/?mibextid=wwXIfr",
@@ -103,7 +81,7 @@
     },
 
     {
-      "id": 10,
+      "id": 8,
       "name": "Mayank Goel",
       "Team": "AI & Metaverse",
       "facebook": "https://www.facebook.com/share/16Z1UDof7N/",
@@ -115,7 +93,7 @@
     },
 
     {
-      "id": 11,
+      "id": 9,
       "name": "Mohd Hammad Ansari",
       "Team": "AI & Metaverse",
       "facebook": "",
@@ -127,7 +105,7 @@
     },
 
     {
-      "id": 12,
+      "id": 10,
       "name": "Roshni Laha",
       "Team": "AI & Metaverse",
       "facebook": "",
@@ -139,7 +117,7 @@
     },
 
     {
-      "id": 13,
+      "id": 11,
       "name": "Mohit Varanasi",
       "Team": "AI & Metaverse",
       "facebook": "",
