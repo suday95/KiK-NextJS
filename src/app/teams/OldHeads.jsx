@@ -21,7 +21,7 @@ const OldHeads = () => {
             />
           </div>
 
-          <div className="flex w-[60%] justify-between opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div className="flex w-[60%] justify-between opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 group-hover:opacity-100">
             {head.facebook && (
               <a
                 href={head.facebook}

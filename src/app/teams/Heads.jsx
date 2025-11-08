@@ -24,7 +24,7 @@ const Heads = () => {
             />
           </div>
 
-          <div className="z-10 flex w-[60%] justify-around gap-4 opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100">
+          <div className="z-10 flex w-[60%] justify-around gap-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 ease-in-out group-hover:opacity-100">
             {head.facebook && (
               <a
                 href={head.facebook}
