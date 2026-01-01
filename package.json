@@ -23,7 +23,7 @@
     "ionicons": "^8.0.9",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.513.0",
-    "next": "15.3.3",
+    "next": "^15.1.6",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

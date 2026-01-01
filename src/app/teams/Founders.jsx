@@ -17,7 +17,7 @@ const Founders = () => {
             />
           </div>
 
-          <div className="flex w-[60%] justify-between opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 group-hover:opacity-100">
+          <div className="flex w-[60%] justify-between opacity-100 transition-opacity duration-300 group-hover:opacity-100 md:opacity-0 md:group-hover:opacity-100">
             <a
               href="https://www.facebook.com/profile.php?id=100057206746965"
               target="_blank"
@@ -84,7 +84,7 @@ const Founders = () => {
             />
           </div>
 
-          <div className="flex w-[60%] justify-between opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 group-hover:opacity-100">
+          <div className="flex w-[60%] justify-between opacity-100 transition-opacity duration-300 group-hover:opacity-100 md:opacity-0 md:group-hover:opacity-100">
             <a
               href="https://www.facebook.com/bhushan.nakade.984"
               target="_blank"
