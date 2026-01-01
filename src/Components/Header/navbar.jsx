@@ -88,7 +88,7 @@ function Navbar() {
                     filter: "drop-shadow(0 0 5px rgba(34, 211, 238, 0.5))",
                   }}
                 >
-                  Tech Triad
+                  TechTriad
                 </Link>
                 <span className="absolute bottom-3 left-0 h-[2px] w-full origin-left scale-x-0 bg-[#11e3fb] transition-transform duration-300 group-hover:scale-x-100"></span>
               </span>

@@ -30,7 +30,7 @@ const TechTriadPage = () => {
               filter: "drop-shadow(0 0 30px rgba(135, 206, 235, 0.4))",
             }}
           >
-            Tech Triad Hackathon
+            TechTriad Hackathon
           </h1>
 
           {/* Decorative Line */}
@@ -71,7 +71,7 @@ const TechTriadPage = () => {
                   backgroundClip: "text",
                 }}
               >
-                Registrations will open soon
+                Submissions will open soon
               </p>
             </div>
           </div>
