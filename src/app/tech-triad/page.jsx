@@ -57,7 +57,7 @@ const TechTriadPage = () => {
 
 
 
-          <div className="mt-8 inline-flex gap-10">
+          <div className="mt-8 ml-6 mr-5 flex flex-col gap-4 lg:flex-row lg:gap-10 lg:pl-25">
             <div className="inline-flex items-center gap-3 rounded-full border border-[#5ce1e6]/50 bg-[#0a0a2e]/60 px-8 py-4 backdrop-blur-sm">
               <span className="relative flex h-3 w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5ce1e6] opacity-75"></span>
@@ -77,6 +77,7 @@ const TechTriadPage = () => {
                 </Link>
               </p>
             </div>
+
             <div className="inline-flex items-center gap-3 rounded-full border border-[#5ce1e6]/50 bg-[#0a0a2e]/60 px-8 py-4 backdrop-blur-sm">
               <span className="relative flex h-3 w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5ce1e6] opacity-75"></span>
@@ -102,10 +103,10 @@ const TechTriadPage = () => {
           {/* Registration Notice */}
           <div className="mt-8">
             <div className="inline-flex items-center gap-3 rounded-full border border-[#5ce1e6]/50 bg-[#0a0a2e]/60 px-8 py-4 backdrop-blur-sm">
-              <span className="relative flex h-3 w-3">
+              {/* <span className="relative flex h-3 w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5ce1e6] opacity-75"></span>
                 <span className="relative inline-flex h-3 w-3 rounded-full bg-[#33bbcf]"></span>
-              </span>
+              </span> */}
               <p
                 className="font-[kanit] text-xl font-semibold tracking-wide md:text-2xl"
                 style={{
