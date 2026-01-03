@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-
+import Link from "next/link";
 const TechTriadPage = () => {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#01011b]">
@@ -54,6 +54,50 @@ const TechTriadPage = () => {
               </p>
             </div>
           </div>
+
+
+
+          <div className="mt-8 inline-flex gap-10">
+            <div className="inline-flex items-center gap-3 rounded-full border border-[#5ce1e6]/50 bg-[#0a0a2e]/60 px-8 py-4 backdrop-blur-sm">
+              <span className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5ce1e6] opacity-75"></span>
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-[#33bbcf]"></span>
+              </span>
+              <p
+                className="font-[kanit] text-xl font-semibold tracking-wide md:text-2xl"
+                style={{
+                  background: `linear-gradient(90deg, #87CEEB 0%, #5ce1e6 50%, #33bbcf 100%)`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                <Link href="https://www.ktj.in/events">
+                  Register Here
+                </Link>
+              </p>
+            </div>
+            <div className="inline-flex items-center gap-3 rounded-full border border-[#5ce1e6]/50 bg-[#0a0a2e]/60 px-8 py-4 backdrop-blur-sm">
+              <span className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5ce1e6] opacity-75"></span>
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-[#33bbcf]"></span>
+              </span>
+              <p
+                className="font-[kanit] text-xl font-semibold tracking-wide md:text-2xl"
+                style={{
+                  background: `linear-gradient(90deg, #87CEEB 0%, #5ce1e6 50%, #33bbcf 100%)`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                <Link href="https://drive.google.com/file/d/11KFMtEQy1_ITLdMYAMu2N-SjhrMFgHjT/view?usp=sharing" target="_blank">
+                  Checkout the PS
+                </Link>
+              </p>
+            </div>
+          </div>
+
 
           {/* Registration Notice */}
           <div className="mt-8">
