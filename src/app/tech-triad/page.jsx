@@ -92,8 +92,8 @@ const TechTriadPage = () => {
                   backgroundClip: "text",
                 }}
               >
-                <Link href="https://drive.google.com/file/d/1Du9f370izfMvwbqvAiyaevWLfB4oHXEY/view?usp=sharing" target="_blank">
-                  Checkout the PS
+                <Link href="https://drive.google.com/file/d/11KFMtEQy1_ITLdMYAMu2N-SjhrMFgHjT/view?usp=sharing" target="_blank">
+                  Checkout the PS 
                 </Link>
               </p>
             </div>
