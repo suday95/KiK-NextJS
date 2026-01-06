@@ -116,7 +116,9 @@ const TechTriadPage = () => {
                   backgroundClip: "text",
                 }}
               >
-                Submissions will open soon
+                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSfkyCaOo85DJdQTJkUJ-tt5RDHkkwoA4ShCweceFS0f0iYaSA/viewform?usp=dialog" target="_blank">
+                  Submit
+                </Link>
               </p>
             </div>
           </div>
