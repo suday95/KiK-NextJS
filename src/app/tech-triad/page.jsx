@@ -62,7 +62,7 @@ const TechTriadPage = () => {
             <div className="relative z-10">
               <p className="mb-1 font-[Poppins] text-lg leading-relaxed text-gray-300 md:text-xl">
 
-                Extended Round 1 Submission <span className="font-bold text-red-400">Deadline - 11th Jan 11 59 PM</span>
+                Extended Round 1 Submission <span className="font-bold text-red-400">Deadline - 11th Jan, 11:59 PM</span>
               </p>
 
             </div>
