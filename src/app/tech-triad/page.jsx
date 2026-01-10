@@ -54,7 +54,19 @@ const TechTriadPage = () => {
               </p>
             </div>
           </div>
+ <div className="mt-3 relative mx-auto max-w-3xl overflow-hidden rounded-2xl border-2 border-[#87CEEB]/40 bg-gradient-to-br from-[#0a0a2e]/80 to-[#01011b]/90 p-8 backdrop-blur-sm transition-all duration-500 hover:border-[#33bbcf]/60 hover:shadow-2xl hover:shadow-[#87CEEB]/20 md:p-3">
+            {/* Card glow effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#87CEEB]/5 via-[#33bbcf]/10 to-[#87CEEB]/5 opacity-50"></div>
 
+            {/* Content */}
+            <div className="relative z-10">
+              <p className="mb-1 font-[Poppins] text-lg leading-relaxed text-gray-300 md:text-xl">
+
+                Extended Round 1 Submission <span className="font-bold text-red-400">Deadline - 11th Jan 11 59 PM</span>
+              </p>
+
+            </div>
+          </div>
 
 
           <div className="mt-8 ml-6 mr-5 flex flex-col gap-4 lg:flex-row lg:gap-10 lg:pl-25">
