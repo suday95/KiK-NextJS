@@ -61,8 +61,7 @@ const TechTriadPage = () => {
             {/* Content */}
             <div className="relative z-10">
               <p className="mb-1 font-[Poppins] text-lg leading-relaxed text-gray-300 md:text-xl">
-
-                Extended Round 1 Submission <span className="font-bold text-red-400">Deadline - 11th Jan, 11:59 PM</span>
+                <span className="font-bold">Round 1</span> Submissions are now closed.
               </p>
 
             </div>
@@ -113,7 +112,7 @@ const TechTriadPage = () => {
 
 
           {/* Registration Notice */}
-          <div className="mt-8">
+          {/* <div className="mt-8">
             <div className="inline-flex items-center gap-3 rounded-full border border-[#5ce1e6]/50 bg-[#0a0a2e]/60 px-8 py-4 backdrop-blur-sm">
               <span className="relative flex h-3 w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5ce1e6] opacity-75"></span>
@@ -133,7 +132,7 @@ const TechTriadPage = () => {
                 </Link>
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Floating decorative elements */}
